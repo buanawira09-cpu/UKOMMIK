@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Latihan UKOM D4 MIK — Gede Wirabuana Putra</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0D2B4E;--nm:#1A3F6B;--blue:#2563A8;--sky:#5B9BD5;--sl:#A8CBE8;--sp:#E8F3FB;--gold:#C9A227;--gl:#E8C656;--gp:#FDF3D4;--white:#fff;--ow:#F7F9FC;--text:#1A2840;--muted:#5A718A;--border:#C8DDEF;--green:#16a34a;--red:#dc2626;--greenl:#dcfce7;--redl:#fee2e2;--greend:#166534;--redd:#991b1b;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);min-height:100vh;}
+.site-header{background:rgba(13,43,78,.97);border-bottom:1px solid rgba(201,162,39,.22);padding:14px 5%;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;}
+.site-header .logo{font-family:'Playfair Display',serif;color:var(--white);font-size:.95rem;}
+.site-header .logo em{color:var(--gold);font-style:normal;}
+.site-header .badge{margin-left:auto;background:rgba(201,162,39,.18);color:var(--gl);font-family:'DM Mono',monospace;font-size:.65rem;padding:4px 12px;border-radius:2px;letter-spacing:.1em;text-transform:uppercase;}
+.user-pill{display:none;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(168,203,232,.2);border-radius:20px;padding:4px 12px 4px 8px;cursor:pointer;}
+.user-pill.on{display:flex;}
+.user-pill .av{width:24px;height:24px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:600;color:var(--navy);}
+.user-pill .ul{font-size:.75rem;color:var(--sl);}
+.wrap{max-width:860px;margin:0 auto;padding:40px 5% 80px;}
+.screen{display:none;}.screen.on{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+/* LOGIN */
+.login-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,162,39,.3);border-radius:6px;padding:3rem 3.5rem;text-align:center;animation:fadeUp .5s ease;max-width:520px;margin:0 auto;}
+.login-icon{font-size:2.8rem;margin-bottom:1rem;}
+.login-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,4vw,2rem);color:var(--white);line-height:1.2;margin-bottom:.4rem;}
+.login-title em{color:var(--gl);font-style:italic;}
+.login-sub{font-size:.82rem;color:var(--sl);line-height:1.7;margin-bottom:2rem;}
+.divider{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;}
+.divider span{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(201,162,39,.2);}
+.form-group{margin-bottom:1rem;text-align:left;}
+.form-group label{display:block;font-size:.77rem;color:var(--sl);margin-bottom:6px;letter-spacing:.04em;}
+.form-group label span{color:#fca5a5;margin-left:2px;}
+.form-group input,.form-group select{width:100%;padding:10px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(168,203,232,.25);border-radius:4px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border .2s;}
+.form-group input:focus,.form-group select:focus{border-color:var(--gold);}
+.form-group input::placeholder{color:rgba(168,203,232,.35);}
+.form-group select{cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A8CBE8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
+.form-group select option{background:#1A3F6B;color:var(--white);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.btn-masuk{width:100%;padding:13px;background:var(--gold);color:var(--navy);border:none;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;letter-spacing:.06em;transition:background .2s,transform .1s;margin-top:.4rem;}
+.btn-masuk:hover{background:var(--gl);}.btn-masuk:active{transform:scale(.98);}
+.login-note{margin-top:1.1rem;font-size:.73rem;color:var(--muted);line-height:1.6;}
+
+/* LANDING */
+.landing-hero{text-align:center;padding:2rem 0 1.8rem;animation:fadeUp .5s ease;}
+.landing-hero .hl{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.2rem);color:var(--white);line-height:1.2;margin-bottom:.5rem;}
+.landing-hero .hl em{color:var(--gl);font-style:italic;}
+.landing-hero .sub{font-size:.85rem;color:var(--sl);line-height:1.7;max-width:520px;margin:0 auto .8rem;}
+.peserta-strip{display:inline-flex;align-items:center;gap:8px;background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.25);border-radius:3px;padding:6px 16px;font-family:'DM Mono',monospace;font-size:.68rem;color:var(--gl);letter-spacing:.05em;margin-bottom:1.8rem;}
+.komp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:2rem;}
+.komp-card{background:rgba(255,255,255,.04);border:1px solid rgba(168,203,232,.15);border-radius:6px;padding:1.5rem 1.4rem;cursor:pointer;transition:all .2s;text-align:left;position:relative;overflow:hidden;}
+.komp-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);opacity:0;transition:opacity .2s;}
+.komp-card:hover{background:rgba(255,255,255,.07);border-color:rgba(201,162,39,.35);}
+.komp-card:hover::before{opacity:1;}
+.komp-card .kc-icon{font-size:1.8rem;margin-bottom:.8rem;}
+.komp-card .kc-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);margin-bottom:.3rem;line-height:1.3;}
+.komp-card .kc-meta{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;}
+.komp-card .kc-sub{font-size:.77rem;color:var(--sl);margin-top:.4rem;line-height:1.5;}
+.info-strip{background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.2);border-radius:4px;padding:.9rem 1.2rem;font-size:.8rem;color:var(--sl);line-height:1.65;text-align:center;}
+.info-strip strong{color:var(--gl);}
+
+/* LATIHAN */
+.lat-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.6rem;flex-wrap:wrap;gap:10px;}
+.lat-title-block .lt{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--white);}
+.lat-title-block .ls{font-size:.75rem;color:var(--sl);margin-top:2px;}
+.score-pill{display:flex;align-items:center;gap:18px;background:rgba(255,255,255,.05);border:1px solid rgba(168,203,232,.15);border-radius:4px;padding:8px 16px;}
+.sp-item{text-align:center;}
+.sp-item .sv{font-size:1.1rem;color:var(--gl);font-weight:500;font-family:'DM Mono',monospace;}
+.sp-item .sk{color:var(--sl);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;margin-top:2px;}
+.prog-wrap{background:rgba(255,255,255,.08);border-radius:2px;height:4px;margin-bottom:2rem;overflow:hidden;}
+.prog-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .4s ease;}
+.q-card{background:var(--white);border-radius:6px;padding:2rem 2.2rem;margin-bottom:1.2rem;animation:fadeUp .3s ease;}
+.q-badge{display:inline-flex;align-items:center;font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;padding:3px 10px;border-radius:2px;margin-bottom:1rem;background:var(--sp);color:var(--blue);border:1px solid var(--border);}
+.q-num{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);margin-bottom:.4rem;}
+.q-vignette{background:#F0F7FF;border-left:3px solid var(--sky);border-radius:0 4px 4px 0;padding:.85rem 1.1rem;font-size:.82rem;color:var(--text);line-height:1.7;margin-bottom:1rem;font-style:italic;}
+.q-text{font-size:.95rem;color:var(--text);line-height:1.7;font-weight:500;margin-bottom:1.4rem;}
+.mc-options{display:flex;flex-direction:column;gap:9px;}
+.mc-opt{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border:1.5px solid var(--border);border-radius:4px;cursor:pointer;transition:all .2s;background:var(--ow);}
+.mc-opt:hover:not(.locked){border-color:var(--blue);background:var(--sp);}
+.mc-opt.locked{cursor:default;}
+.mc-opt.correct{border-color:var(--green);background:var(--greenl);}
+.mc-opt.wrong{border-color:var(--red);background:var(--redl);}
+.mc-opt .opt-key{font-family:'DM Mono',monospace;font-size:.75rem;font-weight:500;background:var(--sp);border:1px solid var(--border);border-radius:2px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s;color:var(--blue);}
+.mc-opt.correct .opt-key{background:var(--green);color:var(--white);border-color:var(--green);}
+.mc-opt.wrong .opt-key{background:var(--red);color:var(--white);border-color:var(--red);}
+.mc-opt .opt-text{font-size:.86rem;color:var(--text);line-height:1.5;flex:1;}
+.pembahasan-box{margin-top:1.2rem;border-radius:4px;overflow:hidden;animation:fadeUp .3s ease;}
+.pb-header{display:flex;align-items:center;gap:8px;padding:.75rem 1rem;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;}
+.pb-header.correct-hd{background:var(--greenl);color:var(--greend);border:1px solid rgba(22,163,74,.3);border-bottom:none;}
+.pb-header.wrong-hd{background:var(--redl);color:var(--redd);border:1px solid rgba(220,38,38,.3);border-bottom:none;}
+.pb-body{padding:1rem 1.2rem;font-size:.84rem;color:var(--text);line-height:1.75;background:var(--ow);}
+.pb-body.correct-bd{border:1px solid rgba(22,163,74,.2);border-top:none;}
+.pb-body.wrong-bd{border:1px solid rgba(220,38,38,.2);border-top:none;}
+.pb-kunci{display:inline-flex;align-items:center;background:var(--greenl);color:var(--greend);border:1px solid rgba(22,163,74,.3);border-radius:3px;padding:3px 10px;font-family:'DM Mono',monospace;font-size:.68rem;margin-bottom:.7rem;font-weight:500;}
+.pb-ref{margin-top:.7rem;font-size:.75rem;color:var(--muted);border-top:1px solid var(--border);padding-top:.6rem;font-style:italic;}
+.nav-row{display:flex;gap:12px;justify-content:space-between;align-items:center;margin-top:1rem;}
+.btn-nav{padding:10px 28px;border:1px solid var(--border);border-radius:4px;background:var(--white);color:var(--navy);font-family:'DM Sans',sans-serif;font-size:.83rem;font-weight:500;cursor:pointer;transition:all .2s;}
+.btn-nav:hover{background:var(--navy);color:var(--white);}
+.btn-nav.primary{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:600;}
+.btn-nav.primary:hover{background:var(--gl);}
+.btn-nav:disabled{opacity:.35;cursor:not-allowed;}
+.btn-nav.ghost{background:transparent;color:var(--sl);border:1px solid rgba(168,203,232,.25);}
+.btn-nav.ghost:hover{border-color:var(--gold);color:var(--gold);background:transparent;}
+
+/* HASIL */
+.peserta-info-box{background:rgba(255,255,255,.04);border:1px solid rgba(168,203,232,.2);border-radius:4px;padding:1rem 1.4rem;margin-bottom:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;}
+.pi-row{font-size:.8rem;color:var(--sl);}
+.pi-row strong{color:var(--white);}
+.hasil-header{text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(201,162,39,.25);border-radius:6px;padding:2.5rem 2rem 2rem;margin-bottom:2rem;animation:fadeUp .4s ease;}
+.score-ring{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gl));display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1.2rem;box-shadow:0 4px 28px rgba(201,162,39,.4);}
+.score-ring .big{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--navy);font-weight:700;line-height:1;}
+.score-ring .sm{font-size:.55rem;color:var(--navy);font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
+.hasil-name{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--white);margin-bottom:.25rem;}
+.hasil-meta{font-size:.78rem;color:var(--sl);line-height:1.7;}
+.hasil-predikat{display:inline-block;margin-top:.8rem;padding:5px 18px;border-radius:2px;font-family:'DM Mono',monospace;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
+.pred-a{background:rgba(22,163,74,.2);color:#4ade80;border:1px solid rgba(22,163,74,.4);}
+.pred-b{background:rgba(201,162,39,.18);color:var(--gl);border:1px solid rgba(201,162,39,.35);}
+.pred-c{background:rgba(91,155,213,.18);color:var(--sl);border:1px solid rgba(91,155,213,.3);}
+.pred-d{background:rgba(220,38,38,.15);color:#fca5a5;border:1px solid rgba(220,38,38,.3);}
+.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:2rem;}
+.sum-box{background:rgba(255,255,255,.05);border:1px solid rgba(168,203,232,.12);border-radius:4px;padding:1rem;text-align:center;}
+.sum-box .sv{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gl);line-height:1;}
+.sum-box .sk{font-size:.68rem;color:var(--sl);margin-top:5px;}
+.rev-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid rgba(201,162,39,.2);}
+.rev-item{background:var(--white);border-radius:4px;padding:1.1rem 1.4rem;margin-bottom:8px;}
+.rev-row{display:flex;align-items:center;gap:10px;margin-bottom:.4rem;}
+.ri-num{font-family:'DM Mono',monospace;font-size:.67rem;color:var(--muted);}
+.ri-st{font-size:.68rem;font-weight:600;padding:2px 9px;border-radius:2px;}
+.ri-ok{background:var(--greenl);color:var(--green);}
+.ri-err{background:var(--redl);color:var(--red);}
+.ri-q{font-size:.82rem;color:var(--text);font-weight:500;line-height:1.5;}
+.ri-info{font-size:.78rem;color:var(--muted);margin-top:3px;}
+.ri-info strong{color:var(--text);}
+.ri-pembahasan{font-size:.78rem;color:var(--text);background:var(--ow);border:1px solid var(--border);border-radius:3px;padding:7px 10px;margin-top:6px;line-height:1.65;}
+.hasil-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:1.8rem;justify-content:center;}
+.btn-act{padding:11px 28px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:.83rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;}
+.btn-gold{background:var(--gold);color:var(--navy);}.btn-gold:hover{background:var(--gl);}
+.btn-ghost{background:transparent;color:var(--sl);border:1px solid rgba(168,203,232,.3);}.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+
+/* PRINT */
+@media print{
+  body{background:white !important;}
+  .site-header,.nav-row,.hasil-actions,.lat-header,.prog-wrap{display:none !important;}
+  .screen{display:none !important;}
+  #screen-hasil{display:block !important;}
+  .wrap{padding:10px 20px !important;}
+  .hasil-header{background:white !important;border:1px solid #ccc !important;}
+  .hasil-name,.rev-title{color:#1A2840 !important;}
+  .hasil-meta{color:#555 !important;}
+  .score-ring{box-shadow:none !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .score-ring .big,.score-ring .sm{color:#1A2840 !important;}
+  .sum-box{background:#f5f5f5 !important;border:1px solid #ccc !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .sum-box .sv{color:#1A2840 !important;}
+  .sum-box .sk{color:#555 !important;}
+  .peserta-info-box{background:#f9f9f9 !important;border:1px solid #ccc !important;}
+  .pi-row{color:#555 !important;}.pi-row strong{color:#1A2840 !important;}
+  .rev-item{break-inside:avoid;border:1px solid #ddd !important;}
+  .hasil-predikat{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .print-header{display:block !important;}
+  .ri-pembahasan{background:#f9f9f9 !important;border:1px solid #ddd !important;}
+}
+.print-header{display:none;text-align:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid #1A2840;}
+.ph-inst{font-size:.8rem;color:#555;margin-bottom:.25rem;}
+.ph-title{font-size:1.1rem;font-weight:700;color:#1A2840;margin-bottom:.25rem;}
+.ph-sub{font-size:.75rem;color:#777;}
+
+@media(max-width:560px){
+  .login-card{padding:2rem 1.4rem;}
+  .form-row{grid-template-columns:1fr;}
+  .komp-grid{grid-template-columns:1fr;}
+  .q-card{padding:1.5rem 1.2rem;}
+  .summary-grid{grid-template-columns:1fr 1fr;}
+  .score-pill{gap:10px;}
+  .peserta-info-box{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">Gede <em>Wirabuana Putra</em></div>
+  <div class="user-pill" id="user-pill" onclick="konfirmasiLogout()">
+    <div class="av" id="user-av">?</div>
+    <span class="ul" id="user-label">—</span>
+  </div>
+  <span class="badge">📚 UKOM MIK</span>
+</header>
+
+<div class="wrap">
+
+<!-- SCREEN 1: LOGIN -->
+<div id="screen-login" class="screen on">
+  <div class="login-card">
+    <div class="login-icon">🎓</div>
+    <div class="login-title">Portal Latihan <em>UKOM</em><br>D4 Manajemen Informasi Kesehatan</div>
+    <div class="login-sub">
+      Politeknik Kesehatan Kartini Bali<br>
+      Fasilitator: <strong style="color:var(--gl)">Gede Wirabuana Putra, S.KM, M.K.M, AIFO-P</strong>
+    </div>
+    <div class="divider"><span>Identitas Mahasiswa</span></div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nama Lengkap <span>*</span></label>
+        <input type="text" id="inp-nama" placeholder="Nama sesuai KTM" autocomplete="off"/>
+      </div>
+      <div class="form-group">
+        <label>NIM <span>*</span></label>
+        <input type="text" id="inp-nim" placeholder="Contoh: 2301234" autocomplete="off"/>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Kelas / Angkatan <span>*</span></label>
+        <input type="text" id="inp-kelas" placeholder="Contoh: MIK A — 2023" autocomplete="off"/>
+      </div>
+      <div class="form-group">
+        <label>Program Studi <span>*</span></label>
+        <input type="text" id="inp-prodi" placeholder="Contoh: D4 Manajemen Informasi Kesehatan" autocomplete="off"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email Aktif <span>*</span></label>
+      <input type="email" id="inp-email" placeholder="nama@email.com" autocomplete="off"/>
+    </div>
+    <button class="btn-masuk" onclick="doLogin()">Masuk ke Portal Latihan →</button>
+    <div class="login-note">Data identitas hanya digunakan untuk keperluan administrasi dan cetak hasil latihan. Tidak ada batas pengulangan.</div>
+  </div>
+</div>
+
+<!-- SCREEN 2: LANDING -->
+<div id="screen-landing" class="screen">
+  <div class="landing-hero">
+    <div class="hl">Pilih <em>Kompetensi</em><br>yang Ingin Dilatih</div>
+    <div class="sub">Setiap soal disertai pembahasan langsung. Ulangi latihan sebanyak yang dibutuhkan.</div>
+    <div class="peserta-strip" id="peserta-strip">👤 —</div>
+  </div>
+  <div class="komp-grid" id="komp-grid"></div>
+  <div class="info-strip">
+    <strong>Cara Latihan:</strong> Pilih kompetensi → Jawab soal → Pembahasan tampil langsung → Lihat &amp; cetak hasil akhir.
+    Dibuat oleh <strong>Gede Wirabuana Putra, S.KM, M.K.M, AIFO-P</strong> · Poltekkes Kartini Bali.
+  </div>
+</div>
+
+<!-- SCREEN 3: LATIHAN -->
+<div id="screen-latihan" class="screen">
+  <div class="lat-header">
+    <div class="lat-title-block">
+      <div class="lt" id="lat-komp-name">—</div>
+      <div class="ls" id="lat-sub">Soal 1 dari 5</div>
+    </div>
+    <div class="score-pill">
+      <div class="sp-item"><div class="sv" id="sc-benar">0</div><div class="sk">Benar</div></div>
+      <div class="sp-item"><div class="sv" id="sc-salah">0</div><div class="sk">Salah</div></div>
+      <div class="sp-item"><div class="sv" id="sc-sisa">5</div><div class="sk">Sisa</div></div>
+    </div>
+  </div>
+  <div class="prog-wrap"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  <div id="q-container"></div>
+  <div class="nav-row">
+    <button class="btn-nav ghost" onclick="backToLanding()">← Ganti Kompetensi</button>
+    <button class="btn-nav primary" id="btn-lanjut" disabled>Lanjut →</button>
+  </div>
+</div>
+
+<!-- SCREEN 4: HASIL -->
+<div id="screen-hasil" class="screen">
+  <div class="print-header">
+    <div class="ph-inst">Politeknik Kesehatan Kartini Bali</div>
+    <div class="ph-title">Hasil Latihan UKOM D4 Manajemen Informasi Kesehatan</div>
+    <div class="ph-sub">Fasilitator: Gede Wirabuana Putra, S.KM, M.K.M, AIFO-P</div>
+  </div>
+
+  <div class="peserta-info-box">
+    <div class="pi-row">Nama: <strong id="pi-nama">—</strong></div>
+    <div class="pi-row">NIM: <strong id="pi-nim">—</strong></div>
+    <div class="pi-row">Kelas / Angkatan: <strong id="pi-kelas">—</strong></div>
+    <div class="pi-row">Program Studi: <strong id="pi-prodi">—</strong></div>
+    <div class="pi-row">Email: <strong id="pi-email">—</strong></div>
+    <div class="pi-row">Tanggal & Waktu: <strong id="pi-tgl">—</strong></div>
+  </div>
+
+  <div class="hasil-header">
+    <div class="score-ring">
+      <span class="big" id="h-persen">0%</span>
+      <span class="sm">skor</span>
+    </div>
+    <div class="hasil-name" id="h-komp">—</div>
+    <div class="hasil-meta" id="h-meta">—</div>
+    <div class="hasil-predikat" id="h-pred">—</div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="sum-box"><div class="sv" id="h-benar">0</div><div class="sk">Jawaban Benar</div></div>
+    <div class="sum-box"><div class="sv" id="h-salah">0</div><div class="sk">Jawaban Salah</div></div>
+    <div class="sum-box"><div class="sv" id="h-total">0</div><div class="sk">Total Soal</div></div>
+  </div>
+
+  <div class="rev-title">📋 Tinjauan Semua Jawaban &amp; Pembahasan</div>
+  <div id="review-list"></div>
+
+  <div class="hasil-actions">
+    <button class="btn-act btn-gold" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
+    <button class="btn-act btn-ghost" onclick="ulangiLatihan()">↺ Ulangi Paket Ini</button>
+    <button class="btn-act btn-ghost" onclick="backToLanding()">← Pilih Kompetensi Lain</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+const BANK={
+  rekam_medis:{icon:"🗂️",label:"Rekam Medis & Informasi Kesehatan",kode:"RMIK-01",deskripsi:"Pengelolaan rekam medis, KLPCM, assembling, filing, retensi & pemusnahan.",soal:[
+    {id:1,vignette:"Seorang petugas rekam medis di RSU X menemukan berkas rekam medis pasien yang telah melewati masa retensi 5 tahun dan DPJP telah memberi persetujuan untuk dimusnahkan.",text:"Dokumen apa yang WAJIB dipertahankan dan tidak boleh dimusnahkan meskipun rekam medis sudah melewati masa retensi?",opsi:["A. Lembar resume medis dan informed consent","B. Lembar anamnesis dan pemeriksaan fisik","C. Lembar grafik tanda-tanda vital","D. Lembar order dokter harian","E. Seluruh lembar rawat inap"],kunci:"A",pembahasan:"Berdasarkan Permenkes No. 269/MENKES/PER/III/2008, dokumen yang wajib dipertahankan adalah ringkasan masuk-keluar, resume medis, dan lembar informed consent karena memiliki nilai hukum dan historis jangka panjang. Lembar grafik vital dan order dokter harian bersifat administratif operasional dan dapat dimusnahkan setelah masa retensi.",referensi:"Permenkes No. 269/MENKES/PER/III/2008 Pasal 8 & 9"},
+    {id:2,text:"Sistem penyimpanan rekam medis yang menempatkan seluruh berkas rekam medis seorang pasien dari semua kunjungan dalam satu map/folder yang sama disebut...",opsi:["A. Unit Record System","B. Serial Record System","C. Serial Unit Record System","D. Family Record System","E. Numeric Record System"],kunci:"A",pembahasan:"Unit Record System adalah sistem di mana setiap pasien hanya memiliki SATU nomor rekam medis sepanjang hidupnya, dan seluruh berkas dari semua kunjungan disimpan dalam satu folder. Serial Record System: tiap kunjungan mendapat nomor baru. Serial Unit Record System: nomor baru tiap kunjungan tapi berkas disatukan ke nomor terakhir.",referensi:"Huffman EK. Health Information Management, 10th ed."},
+    {id:3,vignette:"Di IGD sebuah rumah sakit, seorang pasien datang dalam kondisi tidak sadar dan tidak membawa identitas apapun.",text:"Nomor rekam medis sementara yang lazim diberikan kepada pasien tidak dikenal (NN/No Name) adalah...",opsi:["A. Nomor urut IGD tanpa prefix","B. Nomor rekam medis dimulai dengan kode NN atau X","C. Nomor rekam medis kosong, diisi setelah pasien sadar","D. Nomor rekam medis pinjam dari pasien lain","E. Tidak diberikan nomor rekam medis sampai identitas diketahui"],kunci:"B",pembahasan:"Pasien tidak dikenal tetap HARUS diberikan nomor rekam medis segera agar pelayanan terdokumentasi. Standar umum menggunakan prefix khusus seperti NN-001 atau X001. Setelah identitas diketahui, berkas digabungkan ke nomor rekam medis permanen.",referensi:"Standar Akreditasi KARS - SNARS Edisi 1"},
+    {id:4,text:"Kegiatan memeriksa kelengkapan dan ketepatan pengisian rekam medis setelah pasien pulang oleh petugas rekam medis disebut...",opsi:["A. Quantitative analysis","B. Qualitative analysis","C. KLPCM","D. Audit rekam medis","E. Assembling"],kunci:"A",pembahasan:"Quantitative analysis adalah pemeriksaan kelengkapan secara numerik: memastikan semua formulir yang seharusnya ada sudah ada dan terisi. Qualitative analysis menilai kebenaran konten secara klinis. KLPCM adalah laporan ketidaklengkapan. Assembling adalah kegiatan merakit urutan formulir rekam medis.",referensi:"Budi SC. Manajemen Unit Kerja Rekam Medis, 2011"},
+    {id:5,vignette:"RS Tipe B memiliki kapasitas 300 tempat tidur. Rata-rata lama rawat inap pasien adalah 5 hari dan BOR sebesar 70%.",text:"Berapa perkiraan jumlah pasien rawat inap yang dilayani per tahun?",opsi:["A. 13.000 pasien/tahun","B. 15.330 pasien/tahun","C. 18.000 pasien/tahun","D. 7.665 pasien/tahun","E. 21.000 pasien/tahun"],kunci:"B",pembahasan:"Rumus: Pasien/tahun = (Kapasitas TT x BOR x 365) / ALOS = (300 x 0.70 x 365) / 5 = 76.650 / 5 = 15.330 pasien per tahun.",referensi:"Depkes RI. Pedoman Pengelolaan Rekam Medis Rumah Sakit"}
+  ]},
+  koding:{icon:"🔢",label:"Koding & Klasifikasi Penyakit",kode:"KODING-02",deskripsi:"ICD-10, ICD-9-CM, koding morbiditas, mortalitas, dan prosedur tindakan.",soal:[
+    {id:1,vignette:"Seorang pasien perempuan, 45 tahun, dirawat dengan diagnosis Diabetes Mellitus Tipe 2 dengan Neuropati Perifer.",text:"Kode ICD-10 yang paling tepat untuk kondisi di atas adalah...",opsi:["A. E11.40 - DM Tipe 2 dengan neuropati diabetik (kode kombinasi)","B. E11 + G63.2 - dua kode terpisah wajib","C. E14.40 - DM tidak spesifik dengan komplikasi","D. G63.2 sebagai diagnosis utama, E11 sebagai underlying cause","E. E10.40 - DM Tipe 1 dengan neuropati"],kunci:"A",pembahasan:"ICD-10 menyediakan kode kombinasi untuk DM dengan komplikasi. Untuk DM Tipe 2 dengan neuropati perifer, kode E11.40 adalah kode kombinasi yang tepat sehingga tidak perlu kode terpisah untuk neuropatinya. G63.2 dapat digunakan sebagai kode tambahan opsional, bukan sebagai diagnosis utama.",referensi:"WHO ICD-10 Volume 1 & 2, Chapter IV Endocrine diseases"},
+    {id:2,text:"Dalam ICD-10, dagger symbol dan asterisk symbol menunjukkan...",opsi:["A. Dagger untuk manifestasi, asterisk untuk underlying cause","B. Dagger untuk underlying cause, asterisk untuk manifestasi","C. Keduanya digunakan untuk kode optional","D. Dagger untuk diagnosis primer, asterisk untuk sekunder","E. Dagger untuk penyakit kronis, asterisk untuk penyakit akut"],kunci:"B",pembahasan:"Sistem dagger-asterisk: Kode DAGGER = penyebab dasar (underlying cause/etiology). Kode ASTERISK = manifestasi klinis. Contoh: TB Meningitis: A17.0 dagger (underlying cause TB) + G01 asterisk (manifestasi meningitis). Aturan: kode dagger selalu dikode pertama.",referensi:"WHO ICD-10 Volume 2, Section on dual coding"},
+    {id:3,vignette:"Pasien laki-laki 67 tahun meninggal. Sertifikat kematian: Immediate cause: Gagal napas. Antecedent cause: Pneumonia. Underlying cause: PPOK.",text:"Kode apa yang dipilih sebagai underlying cause of death untuk statistik mortalitas?",opsi:["A. Gagal napas (J96)","B. Pneumonia (J18.9)","C. PPOK (J44.1)","D. Kode gabungan gagal napas + PPOK","E. Pneumonia karena PPOK - kode spesifik"],kunci:"C",pembahasan:"Untuk statistik mortalitas, underlying cause of death (UCOD) adalah PENYEBAB DASAR yang memulai rantai kejadian yaitu PPOK (J44.1). WHO menetapkan UCOD adalah penyakit yang mengawali rangkaian kejadian yang langsung mengarah ke kematian. Gagal napas = immediate cause; Pneumonia = antecedent cause.",referensi:"WHO ICD-10 Volume 2, Rules for mortality coding"},
+    {id:4,text:"Z-codes (Chapter XXI ICD-10, Z00-Z99) digunakan untuk...",opsi:["A. Cedera dan keracunan","B. Faktor yang mempengaruhi status kesehatan dan kontak dengan pelayanan kesehatan","C. Neoplasma","D. Penyebab luar morbiditas dan mortalitas","E. Malformasi kongenital"],kunci:"B",pembahasan:"Z-codes digunakan untuk kondisi/faktor yang mempengaruhi kesehatan tapi bukan penyakit itu sendiri, atau ketika seseorang yang bukan pasien sakit melakukan kontak dengan layanan kesehatan. Contoh: Z00 (general examination), Z34 (pengawasan kehamilan normal). Cedera = Chapter XIX; Neoplasma = Chapter II; Penyebab luar = Chapter XX.",referensi:"WHO ICD-10 Volume 1, Chapter XXI"},
+    {id:5,vignette:"Pasien menjalani operasi appendectomy laparoskopik karena appendisitis akut.",text:"Dalam ICD-9-CM (koding prosedur), kode untuk laparoscopic appendectomy adalah...",opsi:["A. 47.0 - Appendectomy (kode induk)","B. 47.01 - Laparoscopic appendectomy","C. 47.09 - Other appendectomy","D. 47.1 - Incidental appendectomy","E. 54.21 - Laparoscopy diagnostik"],kunci:"B",pembahasan:"Dalam ICD-9-CM Volume 3, kode 47.01 secara spesifik mengacu pada Laparoscopic appendectomy. Kode 47.0 adalah kode induk yang tidak digunakan sendiri jika sub-kode tersedia. Prinsip koding: selalu pilih kode yang PALING SPESIFIK. Kode 54.21 adalah laparoscopy diagnostik, bukan terapeutik.",referensi:"ICD-9-CM Volume 3, Section 47"}
+  ]},
+  simrs:{icon:"💻",label:"SIMRS & Sistem Informasi Kesehatan",kode:"SIMRS-03",deskripsi:"Perancangan SIMRS, database kesehatan, standar HL7/FHIR, interoperabilitas.",soal:[
+    {id:1,text:"Standar internasional untuk pertukaran data klinis antar sistem informasi kesehatan yang dikembangkan oleh Health Level Seven International adalah...",opsi:["A. HL7 FHIR (Fast Healthcare Interoperability Resources)","B. DICOM (Digital Imaging and Communications in Medicine)","C. SNOMED-CT","D. LOINC (Logical Observation Identifiers Names and Codes)","E. ICD-10"],kunci:"A",pembahasan:"HL7 FHIR adalah standar pertukaran data kesehatan elektronik menggunakan teknologi web modern (RESTful API, JSON, XML). DICOM adalah standar untuk data imaging/radiologi. SNOMED-CT dan LOINC adalah sistem terminologi klinis, bukan standar pertukaran data. ICD-10 adalah sistem klasifikasi penyakit.",referensi:"HL7 International, HL7 FHIR R4 Specification"},
+    {id:2,vignette:"Manajemen RS sedang merencanakan pembangunan SIMRS baru. Tahap awal adalah mendefinisikan semua proses bisnis dan kebutuhan data yang harus diakomodasi sistem.",text:"Dokumen formal yang mendefinisikan kebutuhan fungsional dan non-fungsional sebuah sistem informasi disebut...",opsi:["A. System Design Document (SDD)","B. Software Requirements Specification (SRS)","C. Data Flow Diagram (DFD)","D. Entity Relationship Diagram (ERD)","E. Use Case Diagram"],kunci:"B",pembahasan:"SRS mendefinisikan KEBUTUHAN sistem: apa yang harus dilakukan (fungsional) dan standar kinerja (non-fungsional: keamanan, ketersediaan, performa). SDD dibuat SETELAH SRS dan menjelaskan BAGAIMANA sistem dibangun. DFD dan ERD adalah alat pemodelan, bukan dokumen kebutuhan.",referensi:"IEEE Std 830-1998, Software Requirements Specifications"},
+    {id:3,text:"Dalam perancangan database RS, relasi antara tabel PASIEN dan tabel KUNJUNGAN di mana satu pasien dapat memiliki banyak kunjungan disebut relasi...",opsi:["A. One-to-One (1:1)","B. One-to-Many (1:N)","C. Many-to-Many (M:N)","D. Many-to-One (N:1)","E. Self-referencing"],kunci:"B",pembahasan:"Relasi One-to-Many (1:N): satu record di tabel A berelasi dengan banyak record di tabel B, tapi satu record di tabel B hanya berelasi dengan satu record di tabel A. Contoh: 1 pasien bisa punya banyak kunjungan, tapi 1 kunjungan hanya milik 1 pasien. Diimplementasikan dengan foreign key (NoRM) di tabel KUNJUNGAN.",referensi:"Ramakrishnan & Gehrke. Database Management Systems, 3rd ed."},
+    {id:4,vignette:"RS ingin memastikan data pasien yang sama tidak dimasukkan dua kali ketika mendaftar di berbagai unit pelayanan.",text:"Fitur SIMRS yang bertanggung jawab mendeteksi dan mencegah duplikasi rekam medis pasien disebut...",opsi:["A. Master Patient Index (MPI)","B. Electronic Medical Record (EMR)","C. Clinical Decision Support System (CDSS)","D. Picture Archiving and Communication System (PACS)","E. Health Information Exchange (HIE)"],kunci:"A",pembahasan:"Master Patient Index (MPI) adalah komponen kritis SIMRS sebagai indeks sentral untuk mengidentifikasi dan mengelola identitas unik setiap pasien. MPI mencegah duplikasi dengan matching algorithm berdasarkan nama, tanggal lahir, NIK, dll.",referensi:"AHIMA. Master Patient Index (MPI) - Practice Brief"},
+    {id:5,text:"Regulasi Indonesia yang mewajibkan penyelenggaraan rekam medis elektronik (RME) di fasilitas kesehatan adalah...",opsi:["A. Permenkes No. 269/2008 tentang Rekam Medis","B. Permenkes No. 24 Tahun 2022 tentang Rekam Medis","C. UU No. 44 Tahun 2009 tentang Rumah Sakit","D. Permenkes No. 82 Tahun 2013 tentang SIMRS","E. UU No. 11 Tahun 2008 tentang ITE"],kunci:"B",pembahasan:"Permenkes No. 24 Tahun 2022 tentang Rekam Medis adalah regulasi terbaru yang mengatur penyelenggaraan rekam medis elektronik di fasilitas kesehatan Indonesia, menggantikan Permenkes 269/2008. Regulasi ini mewajibkan implementasi RME secara bertahap.",referensi:"Permenkes No. 24 Tahun 2022 tentang Rekam Medis"}
+  ]},
+  statistik_umum:{icon:"📊",label:"Statistik & Pelaporan Kesehatan",kode:"STAT-04",deskripsi:"Indikator RS, BOR/LOS/TOI/BTO, pelaporan RL, statistik morbiditas & mortalitas.",soal:[
+    {id:1,vignette:"RS Pratama memiliki 50 tempat tidur. Dalam bulan April (30 hari), jumlah hari perawatan tercatat 1.050 hari.",text:"Berapa nilai BOR (Bed Occupancy Rate) RS tersebut?",opsi:["A. 60%","B. 65%","C. 70%","D. 75%","E. 80%"],kunci:"C",pembahasan:"BOR = (Jumlah Hari Perawatan / (Kapasitas TT x Jumlah Hari)) x 100% = (1.050 / (50 x 30)) x 100% = 70%. Nilai BOR ideal menurut Depkes RI adalah 60-85%.",referensi:"Depkes RI. Indikator Kinerja Rumah Sakit, 2005"},
+    {id:2,text:"Indikator yang menunjukkan rata-rata jumlah hari tempat tidur tidak terisi antara satu pasien pulang dan pasien berikutnya masuk disebut...",opsi:["A. BOR (Bed Occupancy Rate)","B. LOS (Length of Stay)","C. TOI (Turn Over Interval)","D. BTO (Bed Turn Over)","E. GDR (Gross Death Rate)"],kunci:"C",pembahasan:"TOI (Turn Over Interval) = rata-rata jumlah hari suatu tempat tidur kosong antara pasien satu dan berikutnya. Rumus: TOI = ((Kapasitas TT x Hari) - Hari Perawatan) / Jumlah Pasien Keluar. Nilai ideal 1-3 hari.",referensi:"Depkes RI. Indikator Kinerja Rumah Sakit, 2005"},
+    {id:3,vignette:"Dari 200 pasien yang dirawat di RS X, 4 pasien meninggal dalam 48 jam pertama dan 6 pasien meninggal setelah 48 jam.",text:"Berapa nilai NDR (Net Death Rate) rumah sakit tersebut?",opsi:["A. 20 per mil","B. 30 per mil","C. 50 per mil","D. 5%","E. 2%"],kunci:"B",pembahasan:"NDR hanya menghitung kematian SETELAH 48 jam perawatan. NDR = (6 / 200) x 1000 = 30 per mil. GDR menghitung semua kematian: GDR = (10/200) x 1000 = 50 per mil. Nilai NDR standar kurang dari atau sama dengan 25 per mil.",referensi:"Depkes RI. Indikator Kinerja Rumah Sakit, 2005"},
+    {id:4,text:"Dalam pelaporan SIRS Online ke Kemenkes, laporan yang berisi data kegiatan rawat jalan dan rawat inap adalah...",opsi:["A. RL 1 - Data Dasar RS","B. RL 2 - Ketenagaan","C. RL 3 - Kegiatan Pelayanan RS","D. RL 4 - Morbiditas & Mortalitas","E. RL 5 - Data Bulanan"],kunci:"C",pembahasan:"RL 3 (Kegiatan Pelayanan RS) mencakup data kegiatan pelayanan: rawat inap, rawat jalan, IGD, kamar operasi, persalinan, radiologi, laboratorium, farmasi, dan lainnya.",referensi:"Permenkes No. 1171/MENKES/PER/VI/2011 tentang SIRS"},
+    {id:5,vignette:"Petugas MIK diminta membuat laporan 10 besar penyakit rawat inap periode Januari-Desember.",text:"Sumber data utama yang digunakan untuk membuat laporan 10 besar penyakit rawat inap adalah...",opsi:["A. Buku register rawat jalan","B. Resume medis dan lembar kode diagnosis (koding)","C. Catatan operasi","D. Lembar permintaan laboratorium","E. Rekap kunjungan IGD"],kunci:"B",pembahasan:"Laporan 10 besar penyakit rawat inap dihasilkan dari rekapitulasi kode diagnosis (ICD-10) yang tercatat pada resume medis/discharge summary pasien rawat inap.",referensi:"Budi SC. Manajemen Unit Kerja Rekam Medis & Statistik RS, 2011"}
+  ]},
+  mutu_hukum:{icon:"⚖️",label:"Manajemen Mutu & Hukum Kesehatan",kode:"MUTU-05",deskripsi:"Akreditasi RS, kerahasiaan rekam medis, aspek hukum, informed consent.",soal:[
+    {id:1,text:"Prinsip etika dan hukum yang menyatakan bahwa informasi rekam medis bersifat rahasia dan hanya dapat dibuka kepada pihak yang berkepentingan secara hukum disebut prinsip...",opsi:["A. Confidentiality","B. Privacy","C. Autonomy","D. Beneficence","E. Non-maleficence"],kunci:"A",pembahasan:"Confidentiality adalah prinsip bahwa informasi yang dipercayakan pasien kepada tenaga kesehatan harus dijaga kerahasiaannya. Privacy adalah hak individu mengontrol informasi tentang dirinya. Autonomy = hak memutuskan sendiri. Beneficence = berbuat baik. Non-maleficence = tidak membahayakan.",referensi:"Permenkes No. 269/2008 Pasal 10 & 11"},
+    {id:2,vignette:"Seorang pengacara datang ke bagian rekam medis RS meminta salinan rekam medis kliennya untuk keperluan pengadilan.",text:"Berdasarkan regulasi, kondisi yang membolehkan pembukaan isi rekam medis kepada pihak ketiga adalah...",opsi:["A. Hanya atas perintah direktur RS","B. Atas persetujuan tertulis pasien atau perintah pengadilan/hakim","C. Cukup menunjukkan kartu identitas pengacara","D. Otomatis dibolehkan karena untuk keperluan hukum","E. Dibolehkan jika pasien tidak hadir saat permintaan"],kunci:"B",pembahasan:"Permenkes 269/2008 Pasal 10: rekam medis bersifat rahasia. Pembukaan hanya diperbolehkan atas: (1) PERSETUJUAN TERTULIS pasien, atau (2) PERINTAH PENGADILAN. Keperluan hukum saja tidak cukup tanpa salah satu dari keduanya.",referensi:"Permenkes No. 269/MENKES/PER/III/2008 Pasal 10, 11, 13"},
+    {id:3,text:"Dalam akreditasi RS oleh KARS, kelompok standar yang mengatur hak pasien dan keluarga, informed consent, serta kerahasiaan informasi adalah...",opsi:["A. APK (Akses ke Pelayanan dan Kontinuitas)","B. HPK (Hak Pasien dan Keluarga)","C. PP (Pelayanan Pasien)","D. PAB (Pelayanan Anestesi dan Bedah)","E. MKI (Manajemen Komunikasi dan Informasi)"],kunci:"B",pembahasan:"HPK (Hak Pasien dan Keluarga) adalah kelompok standar SNARS yang mengatur hak dan kewajiban pasien, informed consent, privasi, kerahasiaan informasi, dan perlindungan pasien. MKI mengatur sistem informasi dan rekam medis.",referensi:"KARS. SNARS Edisi 1.1, 2019"},
+    {id:4,vignette:"Dokter akan melakukan tindakan operasi pada pasien. Pasien menolak menandatangani informed consent karena mengaku tidak memahami penjelasan dokter.",text:"Tindakan yang tepat dilakukan dalam situasi ini adalah...",opsi:["A. Tetap lakukan operasi karena sudah urgent","B. Minta keluarga pasien menandatangani saja","C. Berikan penjelasan ulang yang lebih mudah dipahami, beri kesempatan bertanya, dan hormati keputusan pasien","D. Dokumentasikan penolakan dan batalkan semua rencana tindakan","E. Minta perawat menjelaskan sebagai pengganti dokter"],kunci:"C",pembahasan:"Informed consent yang sah mensyaratkan pasien MEMAHAMI informasi sebelum menyetujui. Kewajiban tenaga kesehatan adalah memberikan penjelasan ulang dengan bahasa yang dimengerti dan menghormati keputusan akhir pasien (prinsip otonomi).",referensi:"Permenkes No. 290/MENKES/PER/III/2008"},
+    {id:5,text:"Siklus Plan-Do-Check-Act (PDCA) dalam peningkatan mutu rekam medis digunakan untuk...",opsi:["A. Merancang sistem penggajian staf rekam medis","B. Melakukan perbaikan berkelanjutan terhadap masalah mutu yang teridentifikasi","C. Menyusun anggaran tahunan unit rekam medis","D. Menentukan kebijakan retensi dan pemusnahan rekam medis","E. Melatih staf baru rekam medis"],kunci:"B",pembahasan:"PDCA adalah siklus perbaikan mutu berkelanjutan: PLAN = identifikasi masalah & rencana. DO = implementasi. CHECK = evaluasi hasil vs target. ACT = standarisasi atau modifikasi. Contoh: meningkatkan kelengkapan pengisian RM.",referensi:"Juran JM. Quality Control Handbook; KARS SNARS Bab PMKP"}
+  ]},
+  statistik_faskes:{icon:"🏥",label:"Statistik Fasilitas Pelayanan Kesehatan",kode:"STAT-FASKES-06",deskripsi:"Indikator efisiensi RS, sensus pasien, BOR, AvLOS, TOI, BTO, NDR, GDR, Grafik Barber Johnson.",soal:[
+    {id:1,vignette:"RSU Mitra Husada Tipe B memiliki 300 tempat tidur tersedia. Pada bulan Maret 2026, total hari perawatan yang tercatat dalam SIMRS adalah 6.750 hari selama 31 hari.",text:"Berapakah nilai BOR RSU Mitra Husada pada bulan Maret 2026, dan bagaimana interpretasinya berdasarkan standar Depkes RI?",opsi:["A. BOR = 72,6% - di bawah standar ideal, kapasitas masih banyak terbuang","B. BOR = 75,0% - tepat di batas bawah standar ideal Depkes RI (75-85%)","C. BOR = 72,6% - termasuk standar ideal karena di atas 70%","D. BOR = 80,0% - sudah melampaui standar dan perlu penambahan tempat tidur","E. BOR = 67,5% - di bawah standar, efisiensi sangat rendah"],kunci:"A",pembahasan:"BOR = (Total Hari Perawatan / (TT Tersedia x Jumlah Hari)) x 100% = (6.750 / (300 x 31)) x 100% = (6.750 / 9.300) x 100% = 72,6%. Standar Depkes RI/WHO untuk BOR ideal adalah 75-85%. BOR 72,6% berada tepat di bawah batas bawah standar. Opsi B (BOR = 75%) adalah pengecoh; perhitungan yang benar menghasilkan 72,6%.",referensi:"Depkes RI. Petunjuk Teknis SIRS; Hatta G. Pedoman MIK. UI Press"},
+    {id:2,vignette:"RS Pratama Sehat bulan Februari 2026 mencatat: jumlah pasien keluar = 480 pasien; total hari perawatan individual = 2.160 hari.",text:"Berapakah Average Length of Stay (AvLOS) RS Pratama Sehat pada bulan Februari 2026, dan apa makna klinisnya?",opsi:["A. AvLOS = 4,5 hari - di bawah standar Depkes 6-9 hari, mengindikasikan risiko readmisi atau pasien dipulangkan terlalu cepat","B. AvLOS = 3,0 hari - terlalu singkat, kemungkinan pasien dipulangkan terlalu cepat","C. AvLOS = 4,5 hari - efisiensi baik, sesuai standar Depkes 6-9 hari","D. AvLOS = 5,5 hari - normal dan tidak perlu evaluasi lebih lanjut","E. AvLOS = 4,5 hari - sudah optimal karena di bawah rata-rata"],kunci:"A",pembahasan:"AvLOS = IP Bed Days of Care / Jumlah Pasien Keluar = 2.160 / 480 = 4,5 hari. Standar Depkes RI untuk AvLOS adalah 6-9 hari. AvLOS 4,5 hari secara teknis di bawah standar, yang dapat mengindikasikan: efisiensi tinggi jika kualitas outcome baik; atau risiko pasien dipulangkan terlalu dini yang berpotensi meningkatkan readmisi 30 hari.",referensi:"Depkes RI. Indikator Kinerja Rumah Sakit 2005; Kemenkes RI. Standar Pelayanan Minimal RS"},
+    {id:3,vignette:"RSU Bali Medika Tipe C pada triwulan I 2026 (90 hari): kapasitas 150 tempat tidur; total hari perawatan = 9.450 hari; jumlah pasien keluar = 1.050 pasien.",text:"Berapakah nilai Turn Over Interval (TOI) RSU Bali Medika pada triwulan I 2026, dan bagaimana interpretasinya?",opsi:["A. TOI = 1,5 hari - ideal karena di bawah 3 hari","B. TOI = 0,5 hari - terlalu cepat, berisiko infeksi nosokomial","C. TOI = 4,5 hari - di atas standar, berarti terdapat inefisiensi","D. TOI = 2,0 hari - dalam rentang ideal, tidak ada masalah signifikan","E. TOI = 3,0 hari - tepat di batas atas standar ideal Depkes RI (1-3 hari)"],kunci:"E",pembahasan:"TOI = ((TT Tersedia x Periode) - Total Hari Perawatan) / Jumlah Pasien Keluar = ((150 x 90) - 9.450) / 1.050 = (13.500 - 9.450) / 1.050 = 4.050 / 1.050 = 3,857 hari. Nilai ini berada tepat di batas atas atau sedikit melampaui standar Depkes 1-3 hari.",referensi:"Depkes RI. Petunjuk Teknis Statistik Rumah Sakit; Huffman EK. Health Information Management"},
+    {id:4,vignette:"RS Permata Bunda Tipe B: tersedia 200 tempat tidur fungsional; jumlah pasien keluar selama 6 bulan (180 hari) = 2.200 pasien.",text:"Berapakah nilai Bed Turn Over (BTO) RS Permata Bunda pada semester I 2026, dan bagaimana penilaiannya terhadap standar Depkes RI?",opsi:["A. BTO = 11 kali - di bawah standar 40-50 kali/tahun, produktivitas sangat rendah","B. BTO = 12,2 kali - dalam kategori normal karena mendekati rata-rata nasional","C. BTO = 22 kali per semester - melebihi standar","D. BTO = 11 kali - sudah memenuhi standar 10-12 kali per semester","E. BTO = 11 kali - jika disetahunkan menjadi 22 kali/tahun, jauh di bawah standar 40-50 kali/tahun"],kunci:"E",pembahasan:"BTO = Jumlah Pasien Keluar / TT Tersedia = 2.200 / 200 = 11 kali per semester. Disetahunkan: 11 x 2 = 22 kali/tahun. Standar Depkes RI untuk BTO adalah 40-50 kali per tahun. Nilai 22 kali/tahun jauh di bawah standar, menunjukkan produktivitas tempat tidur yang rendah.",referensi:"Hatta G. Pedoman MIK. UI Press; Depkes RI. Indikator Kinerja RS"},
+    {id:5,vignette:"RS Digital Nusantara tahun 2025: BOR = 88%, AvLOS = 10 hari, TOI = 1,5 hari, BTO = 32 kali/tahun. Tim PMKP akan mengevaluasi posisi RS dalam Grafik Barber Johnson.",text:"Berdasarkan data RS Digital Nusantara, di zona manakah RS ini berada dalam Grafik Barber Johnson?",opsi:["A. Zona efisiensi optimal - semua parameter memenuhi standar","B. Zona overloaded (kelebihan beban) - BOR terlalu tinggi dan AvLOS panjang mengindikasikan kapasitas tidak memadai","C. Zona underutilized - BOR rendah, RS perlu meningkatkan promosi layanan","D. Zona ideal karena BTO masih di atas 30","E. Zona kritis - semua parameter di luar batas"],kunci:"B",pembahasan:"Grafik Barber Johnson memvisualisasikan hubungan BOR, AvLOS, TOI, dan BTO. Zona ideal: BOR 75-85%, AvLOS 6-9 hari, TOI 1-3 hari. BOR 88% melebihi batas atas ideal (>85%) dikombinasikan dengan AvLOS 10 hari (di atas standar) menempatkan RS di zona overloaded.",referensi:"Barber B & Johnson D. BMJ; Hatta G. Pedoman MIK; Depkes RI. Grafik Barber Johnson"},
+    {id:6,vignette:"RS Harapan Bangsa bulan April 2026: jumlah pasien keluar = 600 pasien; jumlah pasien meninggal keseluruhan = 24 pasien; jumlah pasien meninggal kurang dari 48 jam = 9 pasien.",text:"Berapakah nilai NDR dan GDR RS Harapan Bangsa bulan April 2026?",opsi:["A. NDR = 4,0 per mil; GDR = 40 per mil - kedua indikator di atas standar","B. NDR = 25,0 per mil; GDR = 40,0 per mil - NDR melebihi standar maksimum Depkes RI","C. NDR = 25,0 per mil; GDR = 40,0 per mil - keduanya dalam batas standar normal","D. NDR = 15,0 per mil; GDR = 25,0 per mil - NDR dalam batas standar, GDR melebihi","E. NDR = 15,0 per mil; GDR = 40,0 per mil - NDR normal, GDR perlu dikaji"],kunci:"B",pembahasan:"NDR = (Pasien meninggal >= 48 jam / Pasien keluar) x 1000 = ((24-9)/600) x 1000 = (15/600) x 1000 = 25,0 per mil. GDR = (24/600) x 1000 = 40,0 per mil. Standar Depkes: NDR kurang dari 25 per mil dan GDR kurang dari 45 per mil. NDR 25,0 per mil tepat di batas maksimum.",referensi:"Depkes RI. Indikator Kinerja RS; Hatta G. Pedoman MIK"},
+    {id:7,vignette:"Bangsal Anak RS Kasih Ibu tanggal 1 Mei 2026: sisa tengah malam 30 April = 35 pasien; pasien masuk = 12; transfer masuk = 3; pasien dipulangkan = 8; pasien meninggal = 1; transfer keluar ke ICU = 2; one-day patient = 4.",text:"Berapakah nilai Census Hari Perawatan (CHP) bangsal Anak pada tanggal 1 Mei 2026?",opsi:["A. 54 pasien (35 + 12 + 3 + 4)","B. 54 pasien (semua pasien masuk ditambah sisa malam)","C. 50 pasien (sisa tengah malam + admission + transfer masuk + one-day patient)","D. 43 pasien (hanya sisa tengah malam dan admission)","E. 46 pasien (35 + 12 - 1)"],kunci:"A",pembahasan:"CHP / IP Service Days = Sisa Tengah Malam + Semua Pasien Masuk Dalam Hari Itu = Sisa TM + Admission + Transfer Masuk + One-Day Patient = 35 + 12 + 3 + 4 = 54 pasien. One-day patient dihitung karena mereka menempati tempat tidur pada hari yang dihitung. Pasien pulang, meninggal, dan transfer keluar tidak dikurangi.",referensi:"Huffman EK. Health Information Management; Depkes RI. Sensus Harian Pasien Rawat Inap"},
+    {id:8,vignette:"RSU Sejahtera Medika bulan Januari 2026 (31 hari) mencatat total IP Service Days = 7.750 hari.",text:"Berapakah Average Daily Census (ADC) RSU Sejahtera Medika pada bulan Januari 2026?",opsi:["A. 240 pasien per hari","B. 250 pasien per hari","C. 248 pasien per hari","D. 260 pasien per hari","E. 245 pasien per hari"],kunci:"B",pembahasan:"ADC = Total IP Service Days / Jumlah Hari Periode = 7.750 / 31 = 250 pasien per hari. ADC merupakan rata-rata jumlah pasien yang dirawat setiap harinya, digunakan sebagai pembanding dengan kapasitas tempat tidur untuk menghitung BOR.",referensi:"Kemenkes RI. Juknis SIRS; Huffman EK. Health Information Management"},
+    {id:9,vignette:"Sebagai kepala unit rekam medis RS Kartini Husada yang baru diakreditasi paripurna SNARS 2025, Anda diminta menyusun dashboard KPI statistik fasyankes berbasis SIMRS yang terintegrasi dengan Satu Sehat HIE.",text:"Komponen indikator yang PALING KOMPREHENSIF untuk dashboard KPI statistik fasyankes RS terintegrasi Satu Sehat HIE adalah?",opsi:["A. Hanya BOR dan AvLOS sudah cukup mewakili efisiensi RS","B. Tambahkan saja GDR karena hanya indikator kematian yang penting untuk akreditasi","C. Dashboard mencakup: efisiensi (BOR, AvLOS, TOI, BTO, ADC dengan visualisasi Barber Johnson); kematian (NDR, GDR tren 12 bulan); mutu (readmisi 30 hari, HCAI rate, LOS per diagnosis INA-CBG); FHIR-compliant export ke Satu Sehat; alert otomatis jika BOR lebih dari 85% atau NDR lebih dari 25 per mil","D. Dashboard cukup dengan 3 indikator utama: BOR, GDR, dan jumlah kunjungan","E. Sistem manual mingguan sudah memadai, tidak perlu real-time dashboard"],kunci:"C",pembahasan:"Dashboard KPI statistik fasyankes yang efektif harus mencakup semua dimensi kinerja RS: efisiensi, keamanan (NDR, GDR), mutu klinis (readmisi, HCAI, LOS per DRG), dan terintegrasi dengan ekosistem digital nasional. Alert otomatis berbasis threshold memungkinkan tindakan preventif. FHIR-compliant adalah persyaratan wajib Kemenkes 2024.",referensi:"Kemenkes RI. Peta Jalan Transformasi Digital Kesehatan 2024; HL7 FHIR R4; Permenkes 24/2022"},
+    {id:10,vignette:"Kemenkes RI mewajibkan seluruh RS melaporkan data melalui SIRS berbasis web. RS Bakti Husada menemukan bahwa data BOR SIMRS internal berbeda dengan formula SIRS Online Kemenkes.",text:"Perbedaan formula BOR antara SIMRS internal dan SIRS Kemenkes paling sering disebabkan oleh faktor apa, dan bagaimana solusi terbaik?",opsi:["A. Perbedaan perangkat lunak saja, tidak ada perbedaan substansial dalam formula","B. Perbedaan definisi tempat tidur tersedia - SIRS menggunakan tempat tidur terdaftar, bukan fungsional aktif; solusi: standarisasi definisi sesuai Petunjuk Teknis SIRS Kemenkes terbaru","C. Kesalahan input data oleh petugas, cukup koreksi angka saja","D. SIMRS internal lebih akurat dari SIRS Kemenkes, gunakan data internal","E. Perbedaan periode pelaporan saja, tidak ada implikasi pada keputusan manajemen"],kunci:"B",pembahasan:"Perbedaan BOR antara SIMRS dan SIRS sering terjadi karena perbedaan definisi operasional tempat tidur tersedia. SIRS Kemenkes menggunakan definisi berdasarkan izin operasional atau registrasi, sementara SIMRS internal mungkin menggunakan tempat tidur yang benar-benar aktif/fungsional. Standarisasi wajib mengacu pada Petunjuk Teknis SIRS Kemenkes terbaru.",referensi:"Kemenkes RI. Petunjuk Teknis SIRS Online; PMK No. 1171/2011 tentang SIRS"}
+  ]},
+  analisis_pelaporan:{icon:"📋",label:"Analisis dan Pelaporan",kode:"ANLAP-07",deskripsi:"Morbiditas, mortalitas, formulir RL, SIRS, pelaporan Kemenkes, visualisasi data.",soal:[
+    {id:1,vignette:"Petugas rekam medis RS Bunda Mulia menerima rekam medis pasien Ny. Sari, 54 tahun, dengan diagnosis: Diabetes Mellitus tipe 2 dengan nefropati diabetik stadium 4, hipertensi stage 2, dan riwayat stroke iskemik 6 bulan lalu. Pasien dirawat terutama karena kontrol glikemik yang buruk.",text:"Berdasarkan prinsip penetapan diagnosis utama untuk pelaporan morbiditas, kode ICD-10 yang PALING TEPAT sebagai diagnosis utama Ny. Sari adalah?",opsi:["A. E11.65 (Type 2 diabetes mellitus with hyperglycemia) - kondisi yang paling bertanggung jawab atas perawatan saat ini","B. I63.9 (Cerebral infarction, unspecified) - riwayat stroke harus selalu menjadi diagnosis utama","C. I10 (Essential hypertension) - hipertensi adalah kondisi yang paling mengancam nyawa","D. N18.4 (Chronic kidney disease, stage 4) - komplikasi berat harus didahulukan","E. Z96.0 (Status post stroke) - kondisi historis paling relevan"],kunci:"A",pembahasan:"Berdasarkan prinsip ICD-10 dan Pedoman Koding Indonesia, diagnosis utama adalah kondisi yang setelah studi dan evaluasi paling bertanggung jawab atas episode perawatan saat ini. Ny. Sari dirawat karena kontrol glikemik yang buruk, sehingga DM tipe 2 dengan hiperglikemia (E11.65) adalah diagnosis utama. Hipertensi dan riwayat stroke adalah diagnosis sekunder/komorbiditas.",referensi:"WHO. ICD-10 vol. 2 Instruction Manual; Kemenkes RI. Pedoman Koding Indonesia"},
+    {id:2,vignette:"Tim rekam medis Puskesmas Mekar Sari diminta menganalisis 10 besar penyakit rawat jalan tahun 2025 untuk penyusunan RUK 2027. Data: ISPA 1.245 kasus (22%), Hipertensi 980 kasus (17%), DM tipe 2 756 kasus (13%), Diare akut 598 kasus (11%), dan lainnya. Total 5.354 kasus.",text:"Berdasarkan data 10 besar penyakit di atas, program intervensi yang paling strategis dan berbasis bukti untuk diusulkan dalam RUK 2027 adalah?",opsi:["A. Fokus pada TB Paru karena merupakan program nasional prioritas Kemenkes","B. Perkuat program ISPA saja karena jumlah kasusnya tertinggi","C. Tambah dokter spesialis untuk menangani kasus kompleks di Puskesmas","D. Intervensi terpadu: (a) Prolanis untuk Hipertensi dan DM (30% beban kasus); (b) Edukasi PHBS untuk ISPA dan Diare (33% kasus, dapat dicegah); (c) Skrinning PTM massal; (d) Integrasi dengan aplikasi ASIK untuk monitoring","E. Rujuk semua kasus hipertensi dan DM ke RS untuk penanganan lebih baik"],kunci:"D",pembahasan:"Analisis 10 besar penyakit untuk RUK harus berbasis bukti: Hipertensi (17%) + DM (13%) = 30% beban kasus PTM dengan biaya tinggi dan risiko komplikasi serius; ISPA (22%) + Diare (11%) = 33% kasus penyakit yang dapat dicegah dengan PHBS. Pendekatan terpadu Prolanis + PHBS + ASIK paling cost-effective.",referensi:"Kemenkes RI. Pedoman Penyusunan RUK; PMK No. 44/2016 Puskesmas"},
+    {id:3,vignette:"Pasien Tn. Ahmad, 68 tahun, meninggal di RS setelah dirawat 5 hari. Rangkaian penyebab kematian: Gagal napas akut (kondisi langsung), Pneumonia berat (anteseden), PPOK eksaserbasi (anteseden), Merokok kronis 40 tahun (kondisi dasar).",text:"Berdasarkan prinsip WHO tentang underlying cause of death, kode ICD-10 yang harus dilaporkan untuk statistik mortalitas adalah?",opsi:["A. J96.0 (Acute respiratory failure) - kondisi langsung penyebab kematian","B. J18.9 (Pneumonia, unspecified) - penyebab yang paling dapat diobati","C. U07.1 (COVID-19) - semua kematian 2026 harus dipertimbangkan COVID","D. Z87.891 (Personal history of nicotine dependence) - penyebab paling dasar","E. J44.1 (COPD with acute exacerbation) - underlying disease yang menjadi akar rantai penyakit"],kunci:"E",pembahasan:"WHO mendefinisikan underlying cause of death sebagai penyakit/cedera yang mengawali rantai kejadian yang langsung menyebabkan kematian. Rantai: Merokok, PPOK eksaserbasi, Pneumonia berat, Gagal napas, Meninggal. Underlying cause = PPOK (J44.1) bukan gagal napas (kondisi langsung).",referensi:"WHO. ICD-10 Vol. 2, Chapter 4 Rules for Cause of Death; Kemenkes RI. Pedoman Koding"},
+    {id:4,vignette:"RS Nusantara Medika baru terakreditasi dan diwajibkan melaporkan data kepada Kemenkes melalui SIRS Online. Petugas rekam medis baru belum familiar dengan struktur pelaporan formulir RL.",text:"Pengelompokan formulir pelaporan RS (RL) dalam SIRS Kemenkes yang PALING TEPAT adalah?",opsi:["A. RL 1 berisi data kunjungan rawat jalan dan rawat inap secara gabungan","B. RL 1 (data dasar RS), RL 2 (ketenagaan), RL 3 (peralatan), RL 4 (morbiditas/mortalitas rawat inap dan rawat jalan), RL 5 (data khusus: infeksi nosokomial, obat, pengunjung, dan penyuluhan)","C. Semua data RS hanya dilaporkan dalam satu formulir RL terpadu","D. RL 4 berisi data keuangan RS, RL 5 berisi data mutu klinis","E. Pelaporan SIRS tidak menggunakan formulir RL, hanya upload data SIMRS"],kunci:"B",pembahasan:"RL (Rekapitulasi Laporan) dalam SIRS Kemenkes terbagi: RL 1 = data dasar RS; RL 2 = data ketenagaan; RL 3 = data kegiatan RS; RL 4 = data morbiditas/mortalitas rawat inap dan rawat jalan; RL 5 = data khusus (infeksi nosokomial, penggunaan antibiotik, pengunjung, penyuluhan). Struktur ini sesuai PMK 1171/2011.",referensi:"PMK No. 1171/MENKES/PER/VI/2011 tentang SIRS; Kemenkes RI. Petunjuk Teknis SIRS Online"},
+    {id:5,vignette:"Direktur RS meminta analisis epidemiologi RS tahun 2023-2025. Data: rawat inap 2023: 18.450 pasien; 2024: 20.120 pasien; 2025: 22.800 pasien. 10 besar penyakit bergeser dari penyakit infeksi ke PTM kompleks. BOR meningkat dari 72% ke 85%.",text:"Analisis dan rekomendasi strategis yang PALING TEPAT berdasarkan tren data epidemiologi RS tersebut adalah?",opsi:["A. Tambah tempat tidur sebanyak 50% untuk mengantisipasi lonjakan pasien","B. Kurangi pemasaran RS karena BOR sudah mendekati batas atas","C. Analisis menunjukkan transisi epidemiologi ke PTM kompleks: rekomendasi (1) kembangkan layanan unggulan PTM; (2) perkuat casemix management untuk kontrol LOS pada PTM komorbid; (3) ekspansi kapasitas terukur berdasarkan proyeksi demand; (4) program preventif kolaborasi BPJS","D. Fokus pada peningkatan rawat jalan untuk mengurangi beban rawat inap","E. Data 3 tahun belum cukup untuk membuat rekomendasi strategis"],kunci:"C",pembahasan:"Tren data menunjukkan peningkatan volume pasien sekitar 24% dalam 3 tahun ditambah transisi epidemiologi ke PTM kompleks ditambah BOR mendekati batas atas. Ini mengindikasikan perlunya strategi komprehensif: bukan sekadar tambah tempat tidur tetapi transformasi model pelayanan.",referensi:"Kemenkes RI. Renstra 2020-2024; Riskesdas 2024; RPJMN Kesehatan 2025-2029"},
+    {id:6,vignette:"Petugas rekam medis Puskesmas Kuta Selatan sedang melakukan validasi data bulanan untuk pelaporan SP2TP melalui aplikasi ASIK versi 2026. Ditemukan inkonsistensi: data kunjungan di register harian = 1.245 kunjungan, sedangkan di ASIK tercatat 1.198 kunjungan.",text:"Langkah manajemen data yang PALING TEPAT untuk menyelesaikan inkonsistensi pelaporan tersebut adalah?",opsi:["A. Lakukan rekonsiliasi data: audit dokumen sumber (register harian) sebagai gold standard; identifikasi entri ganda atau data tidak terinput di ASIK; koreksi data berdasarkan bukti; buat audit trail perubahan; laporkan temuan ke kepala puskesmas dan Dinas Kesehatan","B. Gunakan data register manual (1.245) dan abaikan ASIK karena sering error","C. Gunakan data ASIK (1.198) karena sistem digital selalu lebih akurat dari register manual","D. Laporkan data rata-rata sebagai kompromi","E. Tunda pelaporan hingga sistem ASIK diperbaiki oleh Kemenkes"],kunci:"A",pembahasan:"Rekonsiliasi data adalah prosedur standar manajemen data kesehatan. Register manual bidan/dokter adalah dokumen sumber (source document) yang merupakan gold standard karena mencatat secara langsung. Langkah rekonsiliasi: audit dokumen, identifikasi diskrepansi, koreksi berbasis bukti, audit trail, laporan.",referensi:"Kemenkes RI. Pedoman SP2TP; Aplikasi ASIK 2024; AHIMA. Data Quality Management Model"},
+    {id:7,vignette:"Dinas Kesehatan Kabupaten X mencatat data tahun 2025: jumlah kelahiran hidup = 8.500; kematian bayi (0-12 bulan total) = 136; kematian ibu maternal = 12. Target RPJMN 2025: AKB kurang dari atau sama dengan 16/1.000 KH; AKI kurang dari atau sama dengan 183/100.000 KH.",text:"Berdasarkan data Kabupaten X tahun 2025, bagaimana pencapaian AKB dan AKI dibandingkan target RPJMN 2025?",opsi:["A. AKB = 8,0 per mil (memenuhi target); AKI = 141,2/100.000 KH (memenuhi target) - prestasi sangat baik","B. AKB = 16,0 per mil (tepat di target); AKI = 141,2/100.000 KH (memenuhi target)","C. AKB = 10,0 per mil (melampaui target); AKI = 200/100.000 KH (tidak mencapai target)","D. AKB = 16,0 per mil (tepat di batas target RPJMN); AKI = 141,2/100.000 KH (sudah melampaui target lebih baik dari RPJMN)","E. AKB = 16,0 per mil (tidak memenuhi target); AKI = 141,2/100.000 KH (tidak memenuhi target)"],kunci:"D",pembahasan:"AKB = (136/8.500) x 1.000 = 16,0/1.000 KH - tepat di batas target RPJMN kurang dari atau sama dengan 16. AKI = (12/8.500) x 100.000 = 141,2/100.000 KH - lebih baik dari target 183, menunjukkan pencapaian positif pada kesehatan ibu.",referensi:"RPJMN 2020-2024; Kemenkes RI. Profil Kesehatan Indonesia 2024"},
+    {id:8,vignette:"Kepala rekam medis RS diminta mempresentasikan tren kunjungan rawat jalan 12 bulan (Januari-Desember 2025) kepada Dewan Pengawas RS. Data menunjukkan fluktuasi musiman yang signifikan. Tim juga ingin menampilkan proporsi kunjungan per poli spesialisasi.",text:"Kombinasi jenis visualisasi data yang PALING TEPAT untuk menyajikan tren waktu dan proporsi per poli kepada Dewan Pengawas adalah?",opsi:["A. Dua tabel numerik terpisah - paling akurat dan mudah dibaca","B. Diagram lingkaran (pie chart) untuk keduanya","C. Histogram untuk semua data","D. Scatter plot untuk menampilkan korelasi antar poli","E. Line chart untuk tren 12 bulan (menampilkan pola musiman), dikombinasikan dengan stacked bar chart atau pie chart untuk proporsi per poli"],kunci:"E",pembahasan:"Untuk data dengan dua dimensi analisis berbeda: (1) Tren temporal: Line chart optimal karena memvisualisasikan perubahan waktu, pola musiman, dan kecenderungan. (2) Proporsi kategoris: Pie chart atau stacked bar chart memvisualisasikan proporsi per poli. Kombinasi keduanya memberikan narasi lengkap untuk pengambilan keputusan strategis.",referensi:"Tufte ER. The Visual Display of Quantitative Information; WHO. Health Statistics and Information Systems"},
+    {id:9,vignette:"Audit internal RS Bumi Husada 2026 menemukan: (1) 15% kode ICD-10 rawat inap tidak konsisten antar coder; (2) 8% data demografis pasien duplikat di SIMRS; (3) data BPJS yang disubmit berbeda 3,2% dengan data SIMRS internal.",text:"Dimensi kualitas data yang TERGANGGU dan strategi perbaikan yang PALING KOMPREHENSIF adalah?",opsi:["A. Hanya masalah validitas kode ICD-10 saja yang perlu diperbaiki","B. Masalah hanya pada sistem IT, cukup upgrade SIMRS","C. Dimensi terganggu: (1) Konsistensi - koding ICD-10 berbeda antar coder; (2) Akurasi/Integritas - duplikat data demografis; (3) Keandalan - perbedaan BPJS vs internal. Strategi: standardisasi protokol koding + audit berkala; deduplication algorithm di SIMRS; rekonsiliasi data BPJS vs SIMRS real-time; pembentukan Data Governance Committee","D. Tambah staf rekam medis untuk meningkatkan akurasi input manual","E. Perbedaan 3,2% masih dalam toleransi, tidak perlu tindakan signifikan"],kunci:"C",pembahasan:"Tiga masalah mewakili tiga dimensi kualitas data berbeda: (1) Inkonsistensi koding = dimensi konsistensi dan akurasi; (2) Duplikat data demografis = dimensi integritas/akurasi; (3) Perbedaan BPJS vs SIMRS = dimensi keandalan. Strategi komprehensif harus mengatasi root cause masing-masing dimensi secara simultan.",referensi:"AHIMA. Data Quality Management Model; DAMA International. DAMA-DMBOK; UU PDP No. 27/2022"},
+    {id:10,vignette:"Kemenkes RI melalui platform Satu Sehat HIE mulai 2024 mewajibkan RS untuk mengirimkan data klinis menggunakan standar HL7 FHIR R4. RS Kartini Denpasar sebagai RS Tipe B sedang mempersiapkan integrasi SIMRS-nya dengan Satu Sehat.",text:"Komponen teknis dan prosedural yang PALING ESENSIAL dalam rancangan integrasi SIMRS RS Kartini dengan platform Satu Sehat HIE berbasis FHIR R4 adalah?",opsi:["A. Rancangan integrasi mencakup: mapping data SIMRS ke FHIR Resources (Patient, Encounter, Condition, Observation); API RESTful endpoint dengan autentikasi OAuth2.0; validasi kode ICD-10, LOINC, dan SNOMED-CT; de-identifikasi sesuai UU PDP No. 27/2022; error handling dan audit log; testing sandbox Satu Sehat sebelum produksi","B. Ganti seluruh SIMRS dengan sistem baru yang sudah bersertifikat Satu Sehat","C. Cukup ekspor data CSV dari SIMRS dan upload manual ke portal Satu Sehat setiap hari","D. Hanya kirim data demografis pasien saja, data klinis bersifat rahasia","E. Integrasi cukup dilakukan oleh vendor SIMRS tanpa keterlibatan rekam medis"],kunci:"A",pembahasan:"Integrasi SIMRS dengan Satu Sehat HIE berbasis FHIR R4 memerlukan: mapping data ke FHIR Resources yang tepat; autentikasi aman (OAuth2.0); terminologi standar (ICD-10, LOINC, SNOMED-CT untuk interoperabilitas semantik); perlindungan data sesuai UU PDP 27/2022; dan testing sandbox sebelum produksi.",referensi:"Kemenkes RI. Satu Sehat Platform Developer Guide 2024; HL7 FHIR R4; UU PDP No. 27/2022; Permenkes 24/2022"}
+  ]},
+  manajemen_data:{icon:"🗄️",label:"Manajemen Data dan Informasi Kesehatan",kode:"MDIK-08",deskripsi:"Jenis data, SIMRS, kualitas data, UU PDP, Satu Sehat HIE, HL7 FHIR.",soal:[
+    {id:1,vignette:"Peneliti dari UGM sedang melakukan studi kohort tentang faktor risiko DM tipe 2 di Yogyakarta 2025-2026. Data yang dikumpulkan meliputi: (a) wawancara mendalam tentang pola makan dan aktivitas fisik; (b) pengukuran langsung BMI dan tekanan darah; (c) data rekam medis RS mitra; (d) data klaim BPJS; (e) laporan Dinas Kesehatan tahun 2020-2024.",text:"Dari sumber data yang disebutkan, manakah yang termasuk data PRIMER dalam penelitian tersebut?",opsi:["A. Data klaim BPJS dan laporan Dinas Kesehatan saja yang merupakan data primer","B. Data rekam medis RS mitra karena paling lengkap dan sudah terstruktur","C. Semua data adalah primer karena semua digunakan dalam satu penelitian yang sama","D. Wawancara mendalam dan pengukuran langsung BMI/tekanan darah - karena dikumpulkan langsung oleh peneliti dari sumber pertama untuk tujuan penelitian ini","E. Hanya data laboratorium yang dapat dikategorikan sebagai data primer"],kunci:"D",pembahasan:"Data primer adalah data yang dikumpulkan langsung oleh peneliti dari sumber pertama (primary source) untuk tujuan penelitian tersebut. Wawancara mendalam dan pengukuran langsung oleh peneliti adalah data primer. Data rekam medis, klaim BPJS, dan laporan Dinas Kesehatan adalah data sekunder karena sudah ada sebelum penelitian dimulai.",referensi:"Notoatmodjo S. Metodologi Penelitian Kesehatan. Rineka Cipta; Gordis L. Epidemiology"},
+    {id:2,vignette:"Mahasiswa MIK semester VI diminta mengklasifikasikan variabel penelitian: (1) Tekanan darah sistolik (mmHg); (2) Golongan darah (A/B/AB/O); (3) Tingkat pendidikan (SD/SMP/SMA/D3/S1).",text:"Klasifikasi skala data yang PALING TEPAT untuk variabel (1) tekanan darah sistolik, (2) golongan darah, dan (3) tingkat pendidikan secara berurutan adalah?",opsi:["A. Nominal, Ordinal, Ordinal","B. Rasio, Nominal, Ordinal - tekanan darah memiliki nol absolut bermakna","C. Interval, Interval, Interval - ketiganya bisa dirata-rata","D. Rasio, Ordinal, Nominal","E. Interval, Nominal, Ordinal - tekanan darah menggunakan skala interval tanpa nol absolut bermakna dalam konteks klinis; golongan darah nominal; pendidikan ordinal"],kunci:"E",pembahasan:"Tekanan darah sistolik: tidak memiliki nol absolut bermakna secara klinis (0 mmHg = kematian) maka skala interval. Golongan darah A/B/AB/O: kategori tanpa urutan maka nominal. Tingkat pendidikan SD/SMP/SMA/D3/S1: ada urutan hierarki tetapi jarak tidak sama maka ordinal.",referensi:"Sugiyono. Statistika untuk Penelitian; Stevens SS. Science, 1946; Notoatmodjo S. Metodologi Penelitian"},
+    {id:3,vignette:"RS Sanglah Bali sedang mengevaluasi SIMRS yang sudah 7 tahun digunakan. Keluhan: data tidak terintegrasi antar departemen; laporan manual masih diperlukan untuk BPJS dan Kemenkes; tidak ada akses real-time dari mobile; belum terhubung dengan Satu Sehat HIE.",text:"Kriteria teknis PALING KRITIS yang harus diprioritaskan dalam seleksi SIMRS baru RS Sanglah adalah?",opsi:["A. Harga paling murah dan mudah digunakan oleh staf non-teknis","B. Tampilan antarmuka yang menarik dan laporan otomatis sederhana","C. Interoperabilitas berbasis HL7 FHIR R4 untuk integrasi Satu Sehat; modul terintegrasi (rekam medis, farmasi, lab, billing, casemix); API terbuka untuk integrasi BPJS/Kemenkes; akses mobile responsif; audit trail keamanan sesuai UU PDP; skalabilitas cloud; dukungan teknis lokal bersertifikat","D. Cukup memiliki modul billing BPJS yang akurat, sisanya dapat dikustomisasi","E. Pilih SIMRS yang paling banyak digunakan RS lain tanpa mempertimbangkan kebutuhan spesifik"],kunci:"C",pembahasan:"SIMRS modern harus memiliki interoperabilitas berbasis standar (HL7 FHIR R4) sebagai persyaratan utama karena ini menentukan kemampuan integrasi jangka panjang dengan seluruh ekosistem digital kesehatan nasional. Modul terintegrasi menghilangkan silo data. Keamanan sesuai UU PDP adalah kewajiban hukum.",referensi:"Kemenkes RI. Satu Sehat Platform; Permenkes 24/2022; HL7 FHIR R4; HIMSS. Electronic Health Records"},
+    {id:4,vignette:"RS Kasih Bangsa menerima permintaan dari perusahaan asuransi swasta untuk mengakses data rekam medis 500 pasien rawat inap selama 3 tahun terakhir tanpa persetujuan pasien, dengan alasan keperluan analisis aktuaria dan deteksi fraud.",text:"Berdasarkan UU PDP No. 27 Tahun 2022 dan regulasi rekam medis di Indonesia, keputusan yang PALING TEPAT dari kepala rekam medis adalah?",opsi:["A. Berikan akses penuh karena perusahaan asuransi adalah mitra bisnis RS","B. Berikan data dengan syarat perusahaan menandatangani NDA saja","C. TOLAK permintaan karena: UU PDP mewajibkan consent eksplisit untuk data kesehatan sensitif; data harus de-identifikasi jika untuk analitik; perlu Data Use Agreement; memerlukan persetujuan Komite Etik RS; tanpa pemenuhan syarat ini, akses adalah pelanggaran hukum","D. Berikan data setelah mendapat persetujuan Direktur RS saja sudah cukup","E. Tidak ada regulasi spesifik di Indonesia yang mengatur hal ini"],kunci:"C",pembahasan:"UU PDP No. 27/2022 mengklasifikasikan data kesehatan sebagai data pribadi yang bersifat sensitif. Pemrosesan data sensitif wajib mendapat persetujuan eksplisit subjek data. Tanpa consent pasien, akses pihak ketiga termasuk asuransi untuk data identifiable adalah pelanggaran hukum.",referensi:"UU PDP No. 27/2022; PMK No. 269/2008 Rekam Medis; Kemenkes RI. Pedoman Kerahasiaan RM"},
+    {id:5,vignette:"Audit rekam medis RS Wijaya Kusuma menemukan: 23% berkas tidak memiliki diagnosis ICD-10 yang lengkap; 12% tanggal lahir pasien berbeda antara berkas RM dan SIMRS; 8% data kunjungan tahun 2024 baru bisa diakses di SIMRS setelah 3 bulan; lembar informed consent hanya ada di 67% berkas operasi.",text:"Pemetaan masalah terhadap dimensi kualitas data yang PALING TEPAT adalah?",opsi:["A. Semua masalah tersebut masuk dalam satu dimensi: akurasi data","B. Masalah koding ICD-10 = kelengkapan; tanggal lahir berbeda = konsistensi; data terlambat akses = ketepatan waktu (timeliness); informed consent kurang = kelengkapan - keempat dimensi berbeda terganggu secara bersamaan","C. Hanya masalah kelengkapan yang relevan, dimensi lain tidak signifikan","D. Masalah ini hanya terkait input human error, bukan dimensi kualitas data formal","E. Semua dimensi kualitas data dalam kondisi kritis, RS harus tutup sementara"],kunci:"B",pembahasan:"Pemetaan dimensi kualitas data: (1) kode ICD-10 tidak lengkap 23% = kelengkapan (completeness); (2) tanggal lahir berbeda antara RM dan SIMRS = konsistensi (consistency); (3) data 2024 baru bisa diakses setelah 3 bulan = ketepatan waktu (timeliness); (4) informed consent hanya 67% = kelengkapan. Keempat dimensi berbeda terganggu secara simultan.",referensi:"AHIMA. Data Quality Management Model; Hatta G. Pedoman MIK"},
+    {id:6,vignette:"Pemerintah melalui Permenkes No. 24 Tahun 2022 mewajibkan penyelenggaraan RME di seluruh fasilitas kesehatan secara bertahap mulai 2023. RS Pratama di daerah terpencil dengan internet terbatas sedang merencanakan transisi dari RM konvensional ke RME.",text:"Tantangan PALING KRITIS dan solusi teknis yang PALING REALISTIS untuk implementasi RME di RS terpencil dengan infrastruktur terbatas sesuai Permenkes 24/2022 adalah?",opsi:["A. Tantangan kritis: infrastruktur internet tidak stabil dan biaya. Solusi realistis: RME dengan mode offline-first (sinkronisasi saat koneksi tersedia); server lokal (on-premise) sebagai fallback; pemanfaatan jaringan Palapa Ring pemerintah; pelatihan SDM intensif; implementasi bertahap sesuai timeline Permenkes 24/2022","B. Tunda implementasi sampai internet stabil, tidak ada alternatif lain","C. Tidak perlu transisi ke RME karena Permenkes tidak berlaku untuk RS terpencil","D. Gunakan tablet biasa dengan spreadsheet Excel, sudah memenuhi syarat RME","E. Minta pengecualian permanent dari Kemenkes dengan alasan geografis"],kunci:"A",pembahasan:"Permenkes 24/2022 mewajibkan penyelenggaraan RME bertahap. Tantangan infrastruktur di daerah terpencil nyata tetapi tidak boleh menjadi alasan penolakan total. Solusi offline-first adalah pendekatan teknis yang terbukti efektif. Pemanfaatan Palapa Ring untuk daerah terpencil adalah kebijakan yang sudah ada.",referensi:"Permenkes No. 24/2022 tentang Rekam Medis; Kemenkes RI. Panduan Implementasi RME 2023"},
+    {id:7,vignette:"SIMRS RS Bhakti Medika menemukan 847 data pasien duplikat dalam 1 tahun terakhir akibat proses pendaftaran yang tidak konsisten. Pasien yang sama terdaftar dengan nomor rekam medis berbeda karena perbedaan penulisan nama, tanggal lahir, dan kesalahan input NIK.",text:"Strategi manajemen Master Patient Index (MPI) yang PALING EFEKTIF untuk menyelesaikan masalah duplikasi data dan mencegah kejadian serupa di masa depan adalah?",opsi:["A. Hapus semua nomor RM lama dan buat nomor baru untuk semua pasien","B. Biarkan duplikat karena sistem akan otomatis memperbaiki sendiri","C. Cukup tambah field NIK di formulir pendaftaran tanpa perubahan sistem","D. Implementasi Enterprise Master Patient Index (EMPI): algoritma probabilistic matching berdasarkan NIK, nama, tanggal lahir, alamat; merge & survive rules terstandar; validasi identitas wajib menggunakan NIK saat pendaftaran; integrasi dengan data kependudukan Dukcapil; audit trail setiap perubahan MPI; pelatihan petugas pendaftaran","E. Outsourcing ke vendor pihak ketiga untuk membersihkan data sekali saja"],kunci:"D",pembahasan:"Enterprise Master Patient Index (EMPI) adalah solusi standar untuk masalah duplikasi data pasien. Probabilistic matching menggunakan algoritma yang menghitung kemungkinan kecocokan berdasarkan kombinasi atribut dengan toleransi kesalahan penulisan. Validasi wajib NIK menggunakan data kependudukan Dukcapil adalah integrasi kritis.",referensi:"AHIMA. Master Patient Index Management; Kemenkes RI. Standar SIMRS; Permenkes 24/2022"},
+    {id:8,vignette:"Tim MIK Poltekkes Kartini Bali menyusun kamus data untuk penelitian multicenter tentang sepsis di 5 RS di Bali tahun 2026. Mereka perlu memastikan konsistensi definisi variabel seperti tanggal diagnosis sepsis, skor SOFA, dan lama rawat ICU agar data dari 5 RS dapat digabungkan.",text:"Komponen metadata yang PALING PENTING untuk distandarisasi dalam kamus data penelitian multicenter tersebut adalah?",opsi:["A. Hanya nama variabel dan tipe data yang perlu distandarisasi","B. Cukup standarkan format file Excel saja agar mudah digabung","C. Metadata tidak penting jika semua RS menggunakan formulir yang sama","D. Standar LOINC dan SNOMED-CT tidak relevan untuk penelitian lokal Indonesia","E. Metadata esensial mencakup: nama variabel; definisi operasional yang tepat; tipe data; format/satuan; nilai valid/range; cara pengukuran/sumber data; kode nilai hilang (missing value code); dan catatan khusus per RS - tanpa standarisasi ini, data dari 5 RS tidak valid untuk analisis gabungan"],kunci:"E",pembahasan:"Metadata dalam kamus data penelitian multicenter harus mencakup semua informasi yang diperlukan untuk memastikan konsistensi pengumpulan dan interpretasi data lintas situs. Definisi operasional yang tepat paling kritis karena tanggal diagnosis sepsis bisa berbeda interpretasinya antar RS. Tanpa standarisasi definisi, data gabungan tidak valid untuk analisis.",referensi:"CDISC. Clinical Data Interchange Standards; ISO 11179 Metadata Registries; AHIMA. Data Dictionary Guidelines"},
+    {id:9,vignette:"RS Inovasi Medika berencana mengimplementasikan sistem prediktif berbasis AI/ML untuk memprediksi risiko readmisi 30 hari pasien jantung menggunakan data rekam medis elektronik 5 tahun terakhir (250.000 episode rawat inap).",text:"Kerangka implementasi AI/ML untuk prediksi readmisi yang PALING KOMPREHENSIF dan memenuhi standar etika, hukum, dan teknis di Indonesia adalah?",opsi:["A. Kerangka komprehensif: Legal: de-identifikasi data sesuai UU PDP 27/2022 dan persetujuan Komite Etik; Teknis: data preprocessing, feature engineering, validasi model (AUC lebih dari 0.80), explainability (SHAP values); Etika: bias assessment antar kelompok demografis, mekanisme human-in-the-loop; Implementasi: pilot 1 bangsal, evaluasi outcome, gradual rollout; Monitoring: drift detection, update model berkala","B. Cukup minta persetujuan direktur RS dan mulai analisis","C. Langsung implementasi model open-source dari GitHub tanpa modifikasi","D. Gunakan hanya data 1 tahun terakhir agar lebih efisien","E. AI/ML tidak boleh digunakan di layanan kesehatan Indonesia karena belum ada regulasinya"],kunci:"A",pembahasan:"Implementasi AI/ML di layanan kesehatan Indonesia harus memenuhi: Legal: UU PDP 27/2022 wajib de-identifikasi data; persetujuan Komite Etik. Teknis: validasi model dengan AUC lebih dari 0,80; explainability (SHAP) penting untuk kepercayaan klinisi. Etika: bias assessment mencegah diskriminasi; human-in-the-loop menjaga supervisi klinisi.",referensi:"UU PDP No. 27/2022; WHO. Ethics and Governance of AI for Health 2021; Kemenkes RI. Roadmap AI Kesehatan"},
+    {id:10,vignette:"Indonesia mengakselerasi transformasi digital kesehatan melalui Peta Jalan SPBE Kesehatan 2024-2029, dengan Satu Sehat sebagai infrastruktur HIE nasional. Seorang kepala dinas kesehatan provinsi bertanya tentang implikasi strategis integrasi data puskesmas, RS daerah, dan program JKN ke dalam ekosistem Satu Sehat.",text:"Tantangan PALING STRATEGIS dalam integrasi data kesehatan daerah ke Satu Sehat dan rekomendasi kebijakan yang PALING TEPAT adalah?",opsi:["A. Tidak ada tantangan signifikan, tinggal upload data ke Satu Sehat","B. Tantangan hanya teknis, cukup upgrade internet di semua fasilitas","C. Tantangan strategis: heterogenitas sistem legacy (SIMPUS, SIMRS berbeda-beda); kesenjangan SDM teknis di daerah terpencil; kualitas data yang bervariasi; resistensi perubahan. Rekomendasi: roadmap integrasi bertahap berbasis kapasitas daerah; standarisasi sistem FHIR lokal; capacity building SDM MIK daerah; insentif pelaporan berkualitas; task force daerah lintas dinas untuk data governance","D. Serahkan sepenuhnya kepada vendor IT, pemerintah daerah cukup menyediakan anggaran","E. Tunda integrasi sampai infrastruktur nasional 100% siap"],kunci:"C",pembahasan:"Tantangan integrasi Satu Sehat di tingkat daerah bersifat multi-dimensi: teknis (heterogenitas sistem legacy), SDM (kesenjangan kapasitas), kualitas data (variasi kualitas), dan perubahan perilaku (resistensi). Roadmap bertahap berbasis kapasitas daerah adalah pendekatan realistis. Insentif pelaporan berkualitas lebih efektif daripada sanksi.",referensi:"Kemenkes RI. Satu Sehat Roadmap 2024-2029; SPBE Kesehatan 2024; PMK 24/2022"}
+  ]},
+  rekam_medis_hybrid:{icon:"🔄",label:"Manajemen Rekam Medis Hybrid",kode:"RMH-09",deskripsi:"RM kertas dan elektronik, retensi, kerahasiaan, Permenkes 24/2022, medikolegal.",soal:[
+    {id:1,vignette:"RS Pelita Husada sedang dalam masa transisi dari rekam medis berbasis kertas ke RME sesuai Permenkes 24/2022. Saat ini, sebagian data klinis masih dalam format fisik sementara pendaftaran dan billing sudah digital.",text:"Definisi dan karakteristik rekam medis hybrid yang PALING TEPAT adalah?",opsi:["A. Rekam medis hybrid berarti memiliki 2 sistem SIMRS yang berbeda secara bersamaan","B. Rekam medis hybrid adalah kondisi di mana fasilitas kesehatan memiliki dokumen rekam medis dalam dua format - sebagian masih kertas, sebagian sudah elektronik - dalam periode transisi menuju RME penuh, dengan tantangan utama pada interoperabilitas, keamanan akses, dan kesinambungan informasi klinis","C. Rekam medis hybrid hanya berlaku untuk RS swasta, RS pemerintah wajib full RME","D. Rekam medis hybrid adalah ketika data klinis di kertas tetapi billing elektronik, tidak perlu diintegrasikan","E. Rekam medis hybrid selalu lebih baik dari full RM kertas maupun full RME"],kunci:"B",pembahasan:"Rekam medis hybrid adalah kondisi transisional di mana satu fasilitas kesehatan mengelola rekam medis dalam dua format sekaligus: sebagian masih berbentuk kertas (rekam medis lama/historis) dan sebagian sudah elektronik (rekam medis baru/aktif). Kondisi ini umum terjadi saat fasilitas sedang dalam proses migrasi ke RME sesuai Permenkes 24/2022.",referensi:"Permenkes No. 24/2022 tentang Rekam Medis; AHIMA. Managing the Transition to EHR; Hatta G. Pedoman MIK"},
+    {id:2,vignette:"Unit rekam medis RSU Nusantara Raya sedang melakukan audit berkas. Dari 5.000 berkas aktif ditemukan: 340 berkas tidak dapat dilacak (missing files); 120 berkas rusak karena lembab; 89 berkas memiliki nomor RM yang sama (duplikat).",text:"Sistem manajemen berkas rekam medis yang PALING KOMPREHENSIF untuk menyelesaikan semua permasalahan di atas adalah?",opsi:["A. Tambah rak penyimpanan dan petugas filing saja sudah cukup","B. Scan semua berkas ke PDF tanpa sistem tracking tambahan","C. Digitalisasi hanya berkas yang sering dipinjam (20% paling aktif)","D. Implementasi sistem terpadu: barcode/RFID tracking untuk setiap berkas fisik; terminal file tracking di SIMRS; digitalisasi berkas rusak/kritis dengan scanner; audit MPI untuk eliminasi duplikat nomor RM; SOP peminjaman dan pengembalian berkas yang ketat; perbaikan kondisi ruang penyimpanan; program retensi dan pemusnahan sesuai regulasi","E. Outsourcing manajemen berkas ke vendor rekam medis tanpa perubahan sistem internal"],kunci:"D",pembahasan:"Manajemen berkas komprehensif memerlukan pendekatan sistemik: tracking berbasis teknologi (barcode/RFID) mengatasi missing files; kondisi ruang mengatasi kerusakan fisik; audit MPI mengatasi duplikat. Tanpa tracking elektronik, berkas akan terus hilang meskipun ditambah rak dan petugas.",referensi:"Permenkes 269/2008; AHIMA. Medical Record Management; Hatta G. Pedoman MIK"},
+    {id:3,vignette:"Pasien Tn. Budi, 45 tahun, meminta salinan rekam medisnya dari RS Sejahtera untuk keperluan second opinion. Di saat yang bersamaan, kuasa hukum dari perusahaan asuransi juga meminta data rekam medis Tn. Budi tanpa surat kuasa dari pasien.",text:"Tindakan yang PALING TEPAT dari kepala rekam medis berdasarkan regulasi rekam medis dan UU PDP di Indonesia adalah?",opsi:["A. Berikan salinan RM kepada keduanya karena keduanya memiliki kepentingan sah","B. Tolak kedua permintaan karena rekam medis bersifat rahasia mutlak","C. Minta pasien memilih salah satu, tidak bisa keduanya mendapat salinan","D. Berikan semua kepada kuasa hukum asuransi karena urusan hukum lebih prioritas","E. Berikan salinan RM kepada Tn. Budi (hak pasien atas datanya sendiri sesuai UU PDP dan Permenkes RM); TOLAK permintaan kuasa hukum asuransi karena tidak ada surat kuasa dari pasien - akses pihak ketiga hanya legal dengan consent tertulis pasien atau perintah pengadilan"],kunci:"E",pembahasan:"Pasien memiliki hak atas datanya sendiri berdasarkan UU PDP No. 27/2022 dan Permenkes Rekam Medis. Permintaan pasien untuk salinan rekam medisnya sendiri adalah hak hukum yang wajib dipenuhi. Permintaan pihak ketiga (asuransi) tanpa surat kuasa pasien adalah pelanggaran kerahasiaan RM dan UU PDP.",referensi:"UU PDP No. 27/2022; PMK No. 269/MENKES/PER/III/2008; UU Kesehatan No. 17/2023; Permenkes 24/2022"},
+    {id:4,vignette:"Gudang rekam medis RS Abdi Negara penuh dan kepala unit berencana memusnahkan berkas lama. Berkas yang tersedia: pasien dewasa terakhir berobat tahun 2015; berkas anak terakhir berobat tahun 2014 (kini berusia 24 tahun); berkas pasien jiwa terakhir berobat tahun 2010; berkas kasus medikolegal tahun 2018 yang sudah inkrah.",text:"Berdasarkan ketentuan retensi rekam medis di Indonesia, berkas mana yang sudah BOLEH dimusnahkan?",opsi:["A. Berkas pasien dewasa 2015 boleh dimusnahkan (sudah 10+ tahun melebihi masa retensi minimum 5 tahun aktif + inaktif); berkas anak 2014 BELUM boleh (retensi dihitung sampai pasien berusia 21 tahun + 5 tahun = minimal tahun 2027); berkas jiwa dan medikolegal memerlukan kajian khusus","B. Hanya berkas pasien jiwa tahun 2010 yang boleh dimusnahkan","C. Semua berkas boleh dimusnahkan karena sudah lebih dari 5 tahun","D. Semua berkas harus disimpan selamanya, tidak boleh ada yang dimusnahkan","E. Berkas medikolegal boleh langsung dimusnahkan karena putusan sudah inkrah"],kunci:"A",pembahasan:"Ketentuan retensi RM: (a) Rekam medis pasien dewasa: aktif 5 tahun + inaktif 5 tahun dari terakhir berobat. Berkas dewasa terakhir berobat 2015 = bisa dimusnahkan 2025; (b) Rekam medis anak: retensi sampai pasien mencapai usia 21 tahun + 5 tahun. Anak terakhir berobat 2014, kini berusia 24 tahun, retensi minimal s.d. 2027, BELUM boleh dimusnahkan.",referensi:"PMK No. 269/MENKES/PER/III/2008 tentang Rekam Medis; Permenkes 24/2022"},
+    {id:5,vignette:"RS Ciputra Healthcare akan memulai program digitalisasi 50.000 berkas rekam medis kertas (pasien aktif 5 tahun terakhir). Anggaran terbatas, waktu yang tersedia 6 bulan, dan staf yang dialokasikan 5 orang.",text:"Strategi prioritas digitalisasi berkas rekam medis yang PALING EFEKTIF dan realistis dalam kondisi tersebut adalah?",opsi:["A. Digitalisasi berurutan dari nomor RM terkecil hingga terbesar tanpa prioritas khusus","B. Scan semua berkas sekaligus menggunakan layanan outsourcing tercepat tanpa seleksi","C. Strategi berbasis risiko: prioritas pertama pasien dengan penyakit kronis/komorbiditas yang sering kontrol; kasus medikolegal dan berkas dokumen penting; berkas yang hampir habis masa retensi; gunakan scanner ADF high-speed; standar resolusi minimum 300 DPI; indeksing metadata otomatis; QC sampling 5% setiap batch","D. Prioritaskan berkas terbaru (2025) karena lebih relevan, berkas lama tidak perlu di-scan","E. Tunda program sampai anggaran tambahan tersedia"],kunci:"C",pembahasan:"Digitalisasi berbasis risiko adalah strategi paling efisien dengan sumber daya terbatas: prioritaskan berkas yang paling sering diakses (pasien kronis aktif) untuk manfaat langsung terbesar; kasus medikolegal karena nilai hukumnya; berkas yang hampir habis masa retensi. Standar resolusi 300 DPI minimum memastikan keterbacaan.",referensi:"AHIMA. Practice Brief: Scanning and Archiving; Kemenkes RI. Pedoman Digitalisasi RM; Permenkes 24/2022"},
+    {id:6,vignette:"Audit rekam medis RS Bagas Waras bulan Maret 2026 menemukan: dari 300 berkas rawat inap yang diperiksa, 90 berkas dikategorikan KLPCM. Jenis ketidaklengkapan: 45 berkas tanpa tanda tangan dokter; 30 berkas resume medis kosong; 15 berkas tidak ada diagnosis akhir.",text:"Nilai KLPCM RS Bagas Waras dan tindak lanjut yang PALING TEPAT berdasarkan standar akreditasi adalah?",opsi:["A. KLPCM = 30%, tidak melebihi standar 50%, tidak perlu tindak lanjut khusus","B. KLPCM = 30%, melebihi standar maksimum SNARS 2022 sebesar 10%; tindak lanjut: notifikasi dokter terkait dalam 24 jam, batas waktu penyelesaian 14 hari, eskalasi ke Komite Medik jika tidak dipenuhi, dan evaluasi sistem SIMRS untuk reminder otomatis","C. KLPCM = 30%, wajar terjadi di semua RS, tidak ada standar yang dilanggar","D. KLPCM tidak relevan karena RS sudah menggunakan SIMRS sebagai RM utama","E. Cukup minta petugas rekam medis mengisi sendiri bagian yang kosong"],kunci:"B",pembahasan:"KLPCM = (Jumlah berkas tidak lengkap / Total berkas diperiksa) x 100% = (90/300) x 100% = 30%. Standar SNARS Edisi 1.1 mensyaratkan KLPCM kurang dari atau sama dengan 10%. Nilai 30% jauh melampaui standar dan merupakan temuan kritis akreditasi. Tindak lanjut harus sistematis.",referensi:"SNARS Edisi 1.1 Standar MKI; Kemenkes RI. Pedoman KLPCM; KARS. Standar Akreditasi RS"},
+    {id:7,vignette:"RS Karya Husada menerima surat panggilan dari Pengadilan Negeri yang meminta salinan rekam medis pasien dalam kasus dugaan malapraktik (periode 2022-2024). Beberapa halaman rekam medis fisik rusak/tidak terbaca. Sebagian data juga tersimpan di SIMRS yang mengalami perubahan sistem pada tahun 2023.",text:"Tindakan yang PALING TEPAT dan sesuai prosedur hukum dari kepala rekam medis RS Karya Husada adalah?",opsi:["A. Tolak semua permintaan pengadilan karena RM bersifat rahasia","B. Berikan semua berkas yang diminta tanpa verifikasi keaslian dokumen","C. Rekonstruksi bagian RM yang rusak berdasarkan ingatan dokter yang merawat","D. Koordinasikan dengan direksi RS dan tim hukum RS; siapkan dokumen lengkap yang dapat diidentifikasi (berkas fisik + log SIMRS + audit trail); buat berita acara kondisi berkas rusak; penuhi perintah pengadilan melalui mekanisme legal resmi; pastikan chain of custody terdokumentasi; tidak memodifikasi apapun pada rekam medis yang diminta","E. Kirim hanya berkas digital SIMRS, berkas fisik tidak perlu disertakan"],kunci:"D",pembahasan:"Rekam medis sebagai alat bukti hukum memerlukan prosedur khusus: koordinasi tim hukum RS wajib sebelum menyerahkan apapun; pemenuhan perintah pengadilan dilakukan melalui mekanisme resmi; berita acara kondisi berkas rusak melindungi RS dari tuduhan manipulasi; chain of custody terdokumentasi memastikan keaslian bukti di pengadilan.",referensi:"PMK No. 269/2008; KUHAP; UU Kesehatan No. 17/2023; Hatta G. Aspek Medikolegal Rekam Medis; Permenkes 24/2022"},
+    {id:8,vignette:"RS Digital Prima tahun 2026 mulai mengimplementasikan informed consent elektronik menggunakan tanda tangan digital pada tablet. Beberapa dokter senior keberatan karena khawatir aspek hukum tanda tangan digital.",text:"Landasan hukum dan praktik terbaik implementasi informed consent elektronik di Indonesia adalah?",opsi:["A. Tanda tangan digital tidak sah di Indonesia, wajib menggunakan tanda tangan basah","B. Tanda tangan digital sepenuhnya menggantikan tanda tangan basah tanpa syarat apapun","C. Implementasi consent digital hanya untuk pasien di bawah 30 tahun yang familiar teknologi","D. Cukup screenshot tanda tangan dan disimpan di folder komputer biasa","E. UU ITE No. 11/2008 jo No. 19/2016 mengakui keabsahan tanda tangan elektronik tersertifikasi; Permenkes 24/2022 mengatur RME termasuk consent digital. Praktik terbaik: gunakan tanda tangan elektronik tersertifikasi (Kominfo/PSrE terakreditasi); audit trail identitas penandatangan; enkripsi dokumen; proses penjelasan verbal tetap dilakukan sebelum penandatanganan; pasien mendapat salinan digital"],kunci:"E",pembahasan:"UU ITE No. 11/2008 jo 19/2016 Pasal 11 mengakui keabsahan tanda tangan elektronik yang menggunakan sertifikat elektronik dari PSrE (Penyelenggara Sertifikasi Elektronik) terakreditasi Kominfo. Permenkes 24/2022 secara eksplisit mengatur penggunaan tanda tangan elektronik dalam RME. Proses penjelasan verbal tetap wajib karena informed consent bukan hanya soal tanda tangan.",referensi:"UU ITE No. 11/2008 jo 19/2016; Permenkes 24/2022; Hatta G. Medikolegal RM"},
+    {id:9,vignette:"RS Bunda Kasih melaporkan 3 insiden identifikasi pasien dalam satu bulan: pasien X mendapat obat yang diresepkan untuk pasien Y; pasien salah jalur di ruang operasi; dan pasien Z yang sudah meninggal masih aktif di SIMRS selama 2 hari.",text:"Sistem identifikasi pasien yang PALING KOMPREHENSIF untuk mencegah semua jenis insiden di atas sesuai standar JCI/SNARS adalah?",opsi:["A. Sistem identifikasi berlapis: minimal 2 identifikator wajib (nama + tanggal lahir atau nama + nomor RM); gelang identitas warna-coded (risiko alergi, jatuh, DNR); barcode gelang terhubung dengan SIMRS untuk verifikasi elektronik sebelum setiap tindakan; alert otomatis di SIMRS saat status pasien berubah (meninggal, pindah, pulang); pelatihan speak-up culture untuk semua staf","B. Gunakan foto pasien di SIMRS sebagai satu-satunya identifikasi","C. Cukup pastikan nama pasien ditulis dengan benar di gelang identitas","D. Pasien cukup menunjukkan KTP saat datang ke setiap layanan","E. Insiden identifikasi adalah human error biasa, tidak dapat dicegah dengan sistem"],kunci:"A",pembahasan:"Standar JCI dan SNARS mewajibkan minimal 2 identifikator untuk setiap verifikasi identitas pasien. Gelang identitas warna-coded meningkatkan keselamatan spesifik. Barcode yang terhubung SIMRS memungkinkan verifikasi elektronik real-time sebelum administrasi obat/tindakan. Alert otomatis saat status berubah mencegah insiden seperti kasus Z.",referensi:"JCI. International Patient Safety Goals; SNARS Edisi 1.1 SKP; PMK No. 1691/2011 tentang Keselamatan Pasien RS"},
+    {id:10,vignette:"RS Abdi Bangsa akan meluncurkan RME penuh (go-live) dalam 3 bulan ke depan. Survei internal: 65% dokter belum familiar dengan interface RME; 40% perawat khawatir alur kerja akan terganggu; 30% staf administrasi merasa tidak dilibatkan dalam proses transisi.",text:"Rencana change management yang PALING EFEKTIF untuk memastikan keberhasilan go-live RME RS Abdi Bangsa adalah?",opsi:["A. Langsung go-live tanpa persiapan khusus, staf akan belajar sendiri","B. Tunda go-live sampai semua staf merasa 100% siap","C. Cukup kirim manual penggunaan RME ke semua staf via WhatsApp","D. Change management komprehensif: pembentukan tim champion dari setiap profesi (dokter, perawat, admin); pelatihan bertahap berbasis role (bukan satu pelatihan massal); simulasi dan uji coba paralel (RME + RM kertas) 2 minggu sebelum go-live; super-user system (1 super-user per 10 staf); help-desk 24 jam saat go-live; komunikasi transparan tentang manfaat RME dan timeline; umpan balik terstruktur pasca implementasi","E. Hanya latih dokter spesialis, staf lain akan mengikuti secara otomatis"],kunci:"D",pembahasan:"Change management implementasi RME memerlukan pendekatan struktural berbasis metodologi Kotter atau PROSCI: pembentukan tim champion membangun ownership internal; pelatihan berbasis role menghindari overload informasi; run parallel sebagai safety net mengurangi resistensi; super-user system memastikan support berkelanjutan; help-desk 24 jam kritis pada masa go-live.",referensi:"Kotter JP. Leading Change; PROSCI ADKAR Model; Permenkes 24/2022; HIMSS. EHR Implementation Guide"}
+  ]},
+  statistik_epidemiologi:{icon:"🔬",label:"Aplikasi Statistik Kesehatan, Epidemiologi Dasar, dan Biomedik",kode:"STAT-EPI-10",deskripsi:"Incidence rate, desain studi, uji statistik, KLB, indikator kesmas, RPJMN.",soal:[
+    {id:1,vignette:"Dinas Kesehatan Kota Malang melaporkan data DBD tahun 2025: jumlah penduduk = 895.000 jiwa; kasus baru DBD = 1.250; kasus aktif pada awal tahun = 45; meninggal karena DBD = 8.",text:"Berapakah Incidence Rate (IR) DBD dan Case Fatality Rate (CFR) DBD Kota Malang tahun 2025?",opsi:["A. IR = 139,7/100.000 penduduk; CFR = 0,64%","B. IR = 140,0/100.000 penduduk; CFR = 1,0%","C. IR = 145,5/100.000 penduduk; CFR = 0,50%","D. IR = 139,7/100.000 penduduk; CFR = 0,14%","E. IR = 150,0/100.000 penduduk; CFR = 0,80%"],kunci:"A",pembahasan:"IR = (Kasus baru / Populasi berisiko) x 100.000 = (1.250 / 895.000) x 100.000 = 139,7/100.000 penduduk. CFR = (Kematian akibat penyakit / Total kasus) x 100% = (8 / 1.250) x 100% = 0,64%. Catatan: kasus aktif awal tahun (45) tidak dimasukkan dalam IR karena IR hanya menghitung kasus BARU.",referensi:"Gordis L. Epidemiology 5th ed; Kemenkes RI. Pedoman DBD; Profil Kesehatan Indonesia 2024"},
+    {id:2,vignette:"Peneliti Fakultas Kesehatan Masyarakat ingin mengetahui hubungan antara konsumsi gula berlebihan dengan kejadian DM tipe 2 pada populasi usia 30-60 tahun di Jakarta. Mereka memiliki waktu 3 tahun dan dana yang cukup untuk studi longitudinal. Populasi target: 2.000 responden tanpa DM di awal penelitian.",text:"Desain studi epidemiologi yang PALING TEPAT untuk menjawab pertanyaan penelitian tersebut, dan alasannya?",opsi:["A. Cross-sectional - paling efisien waktu dan biaya untuk meneliti hubungan","B. Case-control - cocok untuk penyakit langka dan membutuhkan sampel sedikit","C. Randomized Controlled Trial (RCT) - gold standard untuk semua pertanyaan kausalitas","D. Studi ekologi - paling cocok untuk data populasi berskala besar","E. Cohort prospektif - karena peneliti dapat mengukur paparan (konsumsi gula) sebelum outcome (DM tipe 2), mengikuti subjek dari waktu ke waktu, menghitung incidence rate, dan menetapkan temporalitas kausalitas dengan lebih kuat; sesuai waktu dan dana yang tersedia"],kunci:"E",pembahasan:"Cohort prospektif adalah desain paling tepat karena: (1) peneliti mengukur paparan (konsumsi gula) SEBELUM outcome (DM) terjadi, memungkinkan analisis temporalitas kausalitas; (2) dapat menghitung incidence rate dan relative risk secara langsung; (3) mengendalikan confounding lebih baik dari cross-sectional.",referensi:"Gordis L. Epidemiology; Szklo M & Nieto FJ. Epidemiology Beyond the Basics"},
+    {id:3,vignette:"Studi kohort di RS Umum tentang risiko pneumonia pada pasien rawat inap: dari 200 pasien dengan ventilasi mekanik, 80 mengalami VAP; dari 300 pasien tanpa ventilasi mekanik, 30 mengalami pneumonia.",text:"Berapakah nilai Relative Risk (RR) terjadinya pneumonia pada pasien dengan ventilasi mekanik, dan apa interpretasinya?",opsi:["A. RR = 2,0 - risiko 2 kali lebih besar","B. RR = 3,0 - risiko 3 kali lebih besar pada kelompok ventilasi mekanik","C. RR = 5,0 - perbedaan proporsi yang sangat bermakna","D. RR = 4,0 - pasien dengan ventilasi mekanik memiliki risiko 4 kali lebih besar terkena pneumonia dibanding tanpa ventilasi mekanik (40% vs 10%), bermakna klinis dan statistis","E. RR = 2,67 - risiko moderat yang perlu dikonfirmasi lebih lanjut"],kunci:"D",pembahasan:"RR = Incidence kelompok terpapar / Incidence kelompok tidak terpapar. Kelompok ventilasi mekanik: 80/200 = 0,40 (40%). Kelompok tanpa ventilasi: 30/300 = 0,10 (10%). RR = 0,40 / 0,10 = 4,0. Interpretasi: pasien dengan ventilasi mekanik memiliki risiko 4 kali lebih besar terkena pneumonia.",referensi:"Gordis L. Epidemiology; CDC VAP Prevention Guidelines; IHI. Ventilator Bundle"},
+    {id:4,vignette:"Penelitian membandingkan rata-rata kadar HbA1c: kelompok edukasi digital (n=50, mean=7,2%, SD=0,8%) versus kelompok kontrol (n=50, mean=7,8%, SD=0,9%). Uji independen t-test menghasilkan nilai p=0,002.",text:"Interpretasi statistik yang PALING TEPAT dari hasil penelitian tersebut adalah?",opsi:["A. Nilai p=0,002 tidak bermakna karena lebih besar dari 0,001","B. Perbedaan mean 0,6% sangat besar secara klinis meskipun p<0,05","C. Nilai p=0,002 artinya ada 0,2% kemungkinan program edukasi tidak efektif","D. Hasil ini membuktikan kausalitas bahwa edukasi digital menyebabkan penurunan HbA1c","E. Nilai p=0,002 kurang dari 0,05 menunjukkan perbedaan bermakna secara statistik; namun perbedaan mean 0,6% perlu dikaji signifikansi klinisnya (MCID untuk HbA1c umumnya 0,5-1,0%), sehingga kesimpulan harus mencakup kedua aspek: statistis DAN klinis"],kunci:"E",pembahasan:"Nilai p=0,002 kurang dari 0,05 menunjukkan perbedaan bermakna secara statistik. NAMUN: signifikansi statistis tidak sama dengan signifikansi klinis. Perbedaan mean 0,6% pada HbA1c: MCID yang disepakati adalah 0,5-1,0%, sehingga 0,6% masuk dalam ambang klinis bermakna tetapi tipis. Kesimpulan harus menyatakan kedua dimensi ini.",referensi:"American Diabetes Association. Standards of Care in Diabetes 2025; BMJ Statistics series"},
+    {id:5,vignette:"Pada minggu ke-3 Maret 2026, Puskesmas Kuta Barat menerima 23 laporan kasus gastroenteritis akut dalam 3 hari, padahal rata-rata mingguan sebelumnya hanya 4 kasus. Investigasi awal menemukan pola kasus terkonsentrasi di satu kompleks perumahan dengan sumber air yang sama.",text:"Berdasarkan kriteria KLB sesuai Permenkes No. 1501 Tahun 2010, apakah situasi ini memenuhi kriteria KLB, dan langkah apa yang harus segera dilakukan?",opsi:["A. Belum KLB karena jumlah 23 kasus masih sedikit, tunggu sampai 50 kasus","B. Langsung umumkan KLB di media sosial untuk peringatan masyarakat","C. MEMENUHI kriteria KLB (peningkatan kasus lebih dari 2 kali rata-rata periode sebelumnya dan adanya clustering geografis); langkah segera: laporan W1 dalam 24 jam ke Dinkes; investigasi lapangan (environmental sampling air minum); aktifkan tim respons cepat; identifikasi dan isolasi sumber penularan; treatment pasien; komunikasi risiko berbasis bukti kepada masyarakat","D. Tunggu konfirmasi laboratorium dulu sebelum mengambil tindakan apapun","E. KLB hanya berlaku untuk penyakit menular berbahaya, gastroenteritis bukan KLB"],kunci:"C",pembahasan:"Permenkes No. 1501/2010 tentang KLB: salah satu kriteria KLB adalah peningkatan kasus melebihi dua kali nilai rata-rata periode sebelumnya. 23 kasus vs rata-rata 4 kasus = 5,75 kali lipat, jelas memenuhi kriteria KLB. Clustering geografis (satu kompleks, sumber air sama) memperkuat dugaan KLB waterborne. W1 harus dilaporkan dalam 24 jam.",referensi:"PMK No. 1501/MENKES/PER/X/2010 tentang KLB; Kemenkes RI. Pedoman Penyelidikan Epidemiologi"},
+    {id:6,vignette:"Dalam penyusunan profil kesehatan Provinsi NTT tahun 2025: jumlah penduduk = 5.500.000; kelahiran hidup = 145.000; kematian bayi kurang dari 1 tahun = 2.175; kematian anak balita kurang dari 5 tahun = 2.900; kematian ibu = 290; kematian total = 42.900.",text:"Berapakah AKB, AKBA, AKI, dan AKK Provinsi NTT tahun 2025?",opsi:["A. AKB=15/1.000 KH; AKBA=20/1.000 KH; AKI=200/100.000 KH; AKK=7,8/1.000","B. AKB=15,0/1.000 KH; AKBA=20,0/1.000 KH; AKI=200/100.000 KH; AKK=7,8/1.000 penduduk - perlu perhatian karena AKI masih tinggi melebihi target RPJMN 183/100.000 KH","C. AKB=20/1.000 KH; AKBA=25/1.000 KH; AKI=150/100.000 KH; AKK=5,0/1.000","D. AKB=14,5/1.000 KH; AKBA=18,5/1.000 KH; AKI=250/100.000 KH; AKK=8,5/1.000","E. AKB=10/1.000 KH; AKBA=15/1.000 KH; AKI=180/100.000 KH; AKK=6,0/1.000"],kunci:"B",pembahasan:"AKB = (2.175/145.000) x 1.000 = 15,0/1.000 KH. AKBA = (2.900/145.000) x 1.000 = 20,0/1.000 KH. AKI = (290/145.000) x 100.000 = 200/100.000 KH. AKK = (42.900/5.500.000) x 1.000 = 7,8/1.000 penduduk. AKI 200/100.000 KH MELEBIHI target RPJMN 2025 sebesar 183/100.000 KH.",referensi:"RPJMN 2020-2024; Kemenkes RI. Profil Kesehatan Indonesia 2024"},
+    {id:7,vignette:"Mahasiswa MIK semester VI akan melakukan penelitian tentang kepuasan pasien rawat jalan di RS Bali Royal. Populasi target: 12.000 kunjungan rawat jalan per tahun. Kepala RS mensyaratkan tingkat kepercayaan 95% dan margin of error 5%.",text:"Berapakah besar sampel minimal menggunakan rumus Slovin n = N/(1+N.e2) dengan N=12.000 dan e=0,05?",opsi:["A. n = 372 responden","B. n = 387 responden","C. n = 400 responden","D. n = 387 responden - dihitung: n = 12.000/(1 + 12.000 x 0,0025) = 12.000/31 = 387,1 kurang lebih 387 responden","E. n = 360 responden"],kunci:"D",pembahasan:"Rumus Slovin: n = N/(1+N.e2) = 12.000/(1 + 12.000 x (0,05)2) = 12.000/(1 + 12.000 x 0,0025) = 12.000/(1 + 30) = 12.000/31 = 387,1 kurang lebih 387 responden. Dalam praktik, disarankan tambah 10% antisipasi drop-out: 387 x 1,1 kurang lebih 426 responden.",referensi:"Slovin E. Formula (1960); Sugiyono. Metodologi Penelitian; Notoatmodjo S. Metodologi Penelitian Kesehatan"},
+    {id:8,vignette:"Tim peneliti MIK mengembangkan kuesioner baru Indeks Literasi Kesehatan Digital (ILKD) pada 30 responden. Hasil: Cronbach Alpha = 0,87; korelasi item-total berkisar 0,42-0,68; uji ulang (test-retest) 2 minggu kemudian menghasilkan korelasi r=0,83.",text:"Berdasarkan hasil uji coba, kesimpulan yang PALING TEPAT tentang kualitas instrumen ILKD adalah?",opsi:["A. Kuesioner tidak valid dan tidak reliabel, perlu dirancang ulang sepenuhnya","B. Reliabel (Cronbach Alpha lebih dari 0,70) tetapi tidak valid karena belum diuji validitas konten","C. Instrumen ILKD memiliki reliabilitas internal yang sangat baik (Cronbach Alpha 0,87, di atas batas 0,70); konsistensi item memadai (korelasi 0,42-0,68 semuanya lebih dari 0,30); reliabilitas temporal baik (r=0,83); namun perlu dilengkapi uji validitas konten (expert panel) dan validitas konstruk (CFA/EFA) sebelum digunakan secara luas","D. Cronbach Alpha 0,87 sudah cukup membuktikan validitas dan reliabilitas secara bersamaan","E. n=30 terlalu kecil, semua hasil tidak dapat dipercaya"],kunci:"C",pembahasan:"Cronbach Alpha 0,87 memenuhi standar reliabilitas internal yang sangat baik (minimal 0,70, baik lebih dari 0,80). Korelasi item-total 0,42-0,68 semuanya di atas batas minimal 0,30. r=0,83 untuk test-retest menunjukkan reliabilitas temporal yang baik. NAMUN: reliabilitas tidak membuktikan validitas. Validitas konten (expert panel) dan validitas konstruk (CFA/EFA) tetap diperlukan.",referensi:"Cronbach LJ. Coefficient alpha (1951); Nunnally JC. Psychometric Theory; Sugiyono. Statistika Penelitian"},
+    {id:9,vignette:"Penelitian membandingkan skor nyeri (VAS 0-10) sebelum dan sesudah intervensi akupresur pada 25 pasien nyeri kronik. Uji normalitas Shapiro-Wilk menunjukkan distribusi tidak normal (p=0,021).",text:"Uji statistik yang PALING TEPAT untuk menganalisis perbedaan skor VAS sebelum dan sesudah intervensi pada data berpasangan yang tidak normal tersebut adalah?",opsi:["A. Independent t-test karena membandingkan dua kelompok yang berbeda","B. Paired t-test karena data berpasangan (sebelum-sesudah)","C. Wilcoxon Signed-Rank Test karena data berpasangan (sebelum-sesudah pada subjek yang sama) dan tidak memenuhi asumsi normalitas; merupakan alternatif non-parametrik yang tepat untuk paired t-test","D. Mann-Whitney U test - alternatif non-parametrik untuk data tidak normal","E. Chi-square test - cocok untuk semua jenis data tidak normal"],kunci:"C",pembahasan:"Ketika data tidak memenuhi asumsi normalitas (Shapiro-Wilk p kurang dari 0,05), uji parametrik (paired t-test) tidak valid digunakan. Wilcoxon Signed-Rank Test adalah alternatif non-parametrik untuk paired t-test: data berpasangan (sebelum-sesudah pada subjek yang sama) dan data tidak normal; membandingkan perbedaan rank. Mann-Whitney U adalah untuk dua sampel independen, bukan berpasangan.",referensi:"Siegel S. Nonparametric Statistics for Behavioral Sciences; Dahlan S. Statistik untuk Kedokteran dan Kesehatan; Field A. Discovering Statistics SPSS"},
+    {id:10,vignette:"Data Riskesdas 2024 menunjukkan: prevalensi hipertensi dewasa Indonesia = 34,1%; prevalensi DM = 11,7%; prevalensi obesitas = 21,8%; proporsi perokok aktif = 28,9%. Kementerian Kesehatan meminta analisis epidemiologi berbasis bukti untuk penyusunan Renstra 2025-2029.",text:"Analisis epidemiologi dan rekomendasi strategis yang PALING BERBASIS BUKTI untuk mengatasi beban ganda penyakit di Indonesia sesuai data Riskesdas 2024 adalah?",opsi:["A. Fokus hanya pada penyakit menular karena masih menjadi masalah utama Indonesia","B. Tambah dokter spesialis penyakit dalam di seluruh RS Indonesia untuk menangani lonjakan PTM","C. Tunggu data Riskesdas 2028 untuk memastikan tren sebelum membuat kebijakan","D. Strategi komprehensif berbasis bukti: akselerasi Prolanis dan PPUM untuk hipertensi dan DM; regulasi fiskal rokok (cukai) dan kawasan tanpa rokok; intervensi lingkungan untuk obesitas (pajak minuman manis, regulasi iklan makanan anak); penguatan surveilans faktor risiko tahunan; integrasi PTM dalam JKN capitation model; community health worker berbasis digital (ASIK/PCARE)","E. Sosialisasi lebih intensif tentang gaya hidup sehat sudah cukup tanpa perubahan kebijakan struktural"],kunci:"D",pembahasan:"Data Riskesdas 2024 menunjukkan dominasi faktor risiko yang dapat dimodifikasi: merokok (28,9%) dan obesitas (21,8%) adalah penyebab hulu hipertensi dan DM. Intervensi fiskal (cukai rokok) memiliki evidence kuat sebagai intervensi paling cost-effective (WHO recommends). Pajak minuman manis terbukti efektif di Chile, Meksiko, UK.",referensi:"Riskesdas 2024 (Balitbangkes Kemenkes RI); WHO. Best Buys NCD Prevention 2023; RPJMN Kesehatan 2025-2029"}
+  ]}
+};
+
+let peserta={nama:"",nim:"",kelas:"",prodi:"",email:""};
+let state={kompId:null,soal:[],currentIdx:0,answered:false,benar:0,salah:0,history:[]};
+
+function doLogin(){
+  const nama=document.getElementById("inp-nama").value.trim();
+  const nim=document.getElementById("inp-nim").value.trim();
+  const kelas=document.getElementById("inp-kelas").value;
+  const prodi=document.getElementById("inp-prodi").value;
+  const email=document.getElementById("inp-email").value.trim();
+  if(!nama){alert("Nama lengkap wajib diisi.");return;}
+  if(!nim){alert("NIM wajib diisi.");return;}
+  if(!kelas){alert("Pilih kelas / angkatan.");return;}
+  if(!prodi){alert("Pilih program studi.");return;}
+  if(!email||!email.includes("@")){alert("Masukkan email yang valid.");return;}
+  peserta={nama,nim,kelas,prodi,email};
+  const initials=nama.split(" ").slice(0,2).map(w=>w[0]).join("").toUpperCase();
+  document.getElementById("user-av").textContent=initials;
+  document.getElementById("user-label").textContent=nama.split(" ")[0];
+  document.getElementById("user-pill").classList.add("on");
+  document.getElementById("peserta-strip").textContent="👤 "+nama+" · "+nim+" · "+kelas;
+  renderLanding();
+  showScreen("screen-landing");
+}
+
+function konfirmasiLogout(){
+  if(confirm("Keluar dan ganti akun? Sesi latihan akan direset.")){
+    state={kompId:null,soal:[],currentIdx:0,answered:false,benar:0,salah:0,history:[]};
+    document.getElementById("user-pill").classList.remove("on");
+    showScreen("screen-login");
+  }
+}
+
+function renderLanding(){
+  const g=document.getElementById("komp-grid");
+  g.innerHTML="";
+  Object.entries(BANK).forEach(([id,k])=>{
+    g.innerHTML+=`<div class="komp-card" onclick="mulaiLatihan('${id}')">
+      <div class="kc-icon">${k.icon}</div>
+      <div class="kc-title">${k.label}</div>
+      <div class="kc-meta">${k.kode} · ${k.soal.length} Soal</div>
+      <div class="kc-sub">${k.deskripsi}</div>
+    </div>`;
+  });
+}
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function acakSoal(soalArr){
+  // Acak urutan soal, lalu acak opsi tiap soal & remap kunci
+  return shuffle(soalArr).map(q=>{
+    const keys=["A","B","C","D","E"].slice(0,q.opsi.length);
+    const shuffledOpsi=shuffle(q.opsi);
+    // Cari huruf kunci baru setelah opsi diacak
+    const kunciText=q.opsi[keys.indexOf(q.kunci)]; // teks opsi yang benar
+    const newKunci=keys[shuffledOpsi.indexOf(kunciText)];
+    return {...q, opsi:shuffledOpsi, kunci:newKunci};
+  });
+}
+
+function mulaiLatihan(kompId){
+  const k=BANK[kompId];
+  state={kompId,soal:acakSoal(k.soal),currentIdx:0,answered:false,benar:0,salah:0,history:[]};
+  document.getElementById("lat-komp-name").textContent=k.label;
+  updateScorePill();
+  showScreen("screen-latihan");
+  renderSoal();
+}
+
+function renderSoal(){
+  const q=state.soal[state.currentIdx];
+  const num=state.currentIdx+1;
+  const total=state.soal.length;
+  state.answered=false;
+  const btn=document.getElementById("btn-lanjut");
+  btn.disabled=true;btn.textContent="Lanjut →";btn.onclick=null;
+  document.getElementById("lat-sub").textContent="Soal "+num+" dari "+total;
+  document.getElementById("prog-fill").style.width=((num-1)/total*100)+"%";
+  let html=`<div class="q-card"><span class="q-badge">● Pilihan Ganda</span><div class="q-num">Soal ${num} dari ${total}</div>`;
+  if(q.vignette) html+=`<div class="q-vignette">${q.vignette}</div>`;
+  html+=`<div class="q-text">${q.text}</div><div class="mc-options">`;
+  q.opsi.forEach((opt,i)=>{
+    const key=["A","B","C","D","E"][i];
+    html+=`<div class="mc-opt" id="opt-${key}" onclick="pilihJawaban('${key}')">
+      <span class="opt-key">${key}</span><span class="opt-text">${opt.substring(3)}</span></div>`;
+  });
+  html+=`</div><div id="pembahasan-area"></div></div>`;
+  document.getElementById("q-container").innerHTML=html;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function pilihJawaban(key){
+  if(state.answered) return;
+  state.answered=true;
+  const q=state.soal[state.currentIdx];
+  const benar=(key===q.kunci);
+  if(benar) state.benar++; else state.salah++;
+  state.history.push({soalId:q.id,jawaban:key,benar});
+  updateScorePill();
+  document.querySelectorAll(".mc-opt").forEach(el=>{el.classList.add("locked");el.onclick=null;});
+  const pEl=document.getElementById("opt-"+key);
+  const kEl=document.getElementById("opt-"+q.kunci);
+  if(benar){pEl.classList.add("correct");}else{pEl.classList.add("wrong");kEl.classList.add("correct");}
+  const area=document.getElementById("pembahasan-area");
+  const hd=benar?"correct-hd":"wrong-hd";
+  const bd=benar?"correct-bd":"wrong-bd";
+  const icon=benar?"✓ Jawaban Benar!":"✗ Jawaban Kurang Tepat";
+  area.innerHTML=`<div class="pembahasan-box">
+    <div class="pb-header ${hd}">${icon}</div>
+    <div class="pb-body ${bd}">
+      <div class="pb-kunci">Kunci Jawaban: ${q.kunci}</div>
+      <p>${q.pembahasan}</p>
+      ${q.referensi?`<div class="pb-ref">📚 ${q.referensi}</div>`:""}
+    </div></div>`;
+  const isLast=(state.currentIdx===state.soal.length-1);
+  const btn=document.getElementById("btn-lanjut");
+  btn.disabled=false;
+  btn.textContent=isLast?"Lihat Hasil ✓":"Soal Berikutnya →";
+  btn.onclick=isLast?tampilHasil:()=>{state.currentIdx++;renderSoal();};
+  setTimeout(()=>window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"}),150);
+}
+
+function tampilHasil(){
+  const total=state.soal.length;
+  const persen=Math.round((state.benar/total)*100);
+  const k=BANK[state.kompId];
+  const now=new Date().toLocaleString("id-ID",{dateStyle:"long",timeStyle:"short"});
+  document.getElementById("pi-nama").textContent=peserta.nama;
+  document.getElementById("pi-nim").textContent=peserta.nim;
+  document.getElementById("pi-kelas").textContent=peserta.kelas;
+  document.getElementById("pi-prodi").textContent=peserta.prodi;
+  document.getElementById("pi-email").textContent=peserta.email;
+  document.getElementById("pi-tgl").textContent=now;
+  document.getElementById("h-persen").textContent=persen+"%";
+  document.getElementById("h-komp").textContent=k.label;
+  document.getElementById("h-meta").textContent=state.benar+" benar dari "+total+" soal · "+now;
+  document.getElementById("h-benar").textContent=state.benar;
+  document.getElementById("h-salah").textContent=state.salah;
+  document.getElementById("h-total").textContent=total;
+  let pred,cls;
+  if(persen>=80){pred="A — Sangat Baik";cls="pred-a";}
+  else if(persen>=65){pred="B — Baik";cls="pred-b";}
+  else if(persen>=55){pred="C — Cukup";cls="pred-c";}
+  else{pred="D — Perlu Belajar";cls="pred-d";}
+  const predEl=document.getElementById("h-pred");
+  predEl.textContent=pred;predEl.className="hasil-predikat "+cls;
+  let rev="";
+  state.history.forEach((h,i)=>{
+    const q=state.soal.find(s=>s.id===h.soalId);
+    const ok=h.benar;
+    rev+=`<div class="rev-item">
+      <div class="rev-row">
+        <span class="ri-num">Soal ${i+1}</span>
+        <span class="ri-st ${ok?"ri-ok":"ri-err"}">${ok?"✓ Benar":"✗ Salah"}</span>
+      </div>
+      <div class="ri-q">${q.text}</div>
+      <div class="ri-info">Jawaban Anda: <strong>${h.jawaban}</strong>${!ok?" &nbsp;·&nbsp; Kunci: <strong style='color:var(--green)'>"+q.kunci+"</strong>":""}</div>
+      <div class="ri-pembahasan">${q.pembahasan}</div>
+    </div>`;
+  });
+  document.getElementById("review-list").innerHTML=rev;
+  showScreen("screen-hasil");
+}
+
+function updateScorePill(){
+  const sisa=state.soal.length-state.benar-state.salah;
+  document.getElementById("sc-benar").textContent=state.benar;
+  document.getElementById("sc-salah").textContent=state.salah;
+  document.getElementById("sc-sisa").textContent=sisa;
+}
+function ulangiLatihan(){mulaiLatihan(state.kompId);}
+function backToLanding(){showScreen("screen-landing");}
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));
+  document.getElementById(id).classList.add("on");
+  window.scrollTo({top:0});
+}
+</script>
+</body>
+</html>
