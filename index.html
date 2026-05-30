@@ -213,6 +213,145 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);m
   .score-pill{gap:10px;}
   .peserta-info-box{grid-template-columns:1fr;}
 }
+
+/* ── SCREEN HUB (landing setelah identitas) ─────────────── */
+.hub-hero{text-align:center;padding:2.5rem 1rem 1.5rem;animation:fadeUp .5s ease;}
+.hub-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,4vw,2rem);color:var(--white);margin-bottom:.4rem;}
+.hub-title em{color:var(--gl);font-style:italic;}
+.hub-sub{font-size:.83rem;color:var(--sl);margin-bottom:.4rem;line-height:1.7;}
+.hub-peserta{display:inline-block;background:rgba(201,162,39,.12);border:1px solid rgba(201,162,39,.25);border-radius:3px;padding:4px 14px;font-size:.78rem;color:var(--gl);font-family:'DM Mono',monospace;letter-spacing:.06em;margin-bottom:2rem;}
+.hub-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;max-width:640px;margin:0 auto 2rem;}
+@media(max-width:520px){.hub-cards{grid-template-columns:1fr;}}
+.hub-card{background:rgba(255,255,255,.04);border:1.5px solid rgba(168,203,232,.15);border-radius:8px;padding:2rem 1.5rem;text-align:center;cursor:pointer;transition:border-color .25s,transform .2s,background .25s;position:relative;overflow:hidden;}
+.hub-card:hover{border-color:rgba(201,162,39,.5);background:rgba(201,162,39,.06);transform:translateY(-3px);}
+.hub-card.belajar:hover{border-color:rgba(91,155,213,.6);background:rgba(91,155,213,.06);}
+.hub-card-icon{font-size:2.8rem;margin-bottom:.8rem;display:block;}
+.hub-card-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white);margin-bottom:.4rem;}
+.hub-card-title em{color:var(--gl);}
+.hub-card.belajar .hub-card-title em{color:var(--sky);}
+.hub-card-desc{font-size:.78rem;color:var(--sl);line-height:1.6;}
+.hub-card-badge{position:absolute;top:12px;right:12px;background:rgba(201,162,39,.2);color:var(--gl);font-size:.65rem;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:2px;letter-spacing:.08em;}
+.hub-card.belajar .hub-card-badge{background:rgba(91,155,213,.2);color:var(--sky);}
+
+/* ── SCREEN BELAJAR ─────────────────────────────────────── */
+.belajar-header{display:flex;align-items:center;gap:10px;padding:.8rem 0 1.2rem;border-bottom:1px solid rgba(168,203,232,.12);margin-bottom:1.5rem;}
+.belajar-header .bh-back{background:transparent;border:1px solid rgba(168,203,232,.25);color:var(--sl);padding:5px 14px;border-radius:3px;font-size:.78rem;cursor:pointer;transition:border-color .2s,color .2s;font-family:'DM Sans',sans-serif;}
+.belajar-header .bh-back:hover{border-color:var(--sky);color:var(--white);}
+.belajar-header .bh-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);flex:1;}
+.belajar-header .bh-title em{color:var(--gl);font-style:italic;}
+
+/* Grid pilih kompetensi belajar */
+.belajar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:1.5rem;}
+.bk-card{background:rgba(255,255,255,.04);border:1px solid rgba(168,203,232,.12);border-radius:6px;padding:1.2rem;cursor:pointer;transition:border-color .2s,background .2s,transform .15s;}
+.bk-card:hover{border-color:rgba(91,155,213,.5);background:rgba(91,155,213,.05);transform:translateY(-2px);}
+.bk-icon{font-size:1.6rem;margin-bottom:.5rem;}
+.bk-kode{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--sky);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.25rem;}
+.bk-label{font-size:.88rem;color:var(--white);font-weight:500;line-height:1.3;}
+
+/* Konten modul belajar */
+.modul-wrap{animation:fadeUp .4s ease;}
+.modul-hero{background:linear-gradient(135deg,rgba(37,99,168,.15),rgba(13,43,78,.3));border:1px solid rgba(91,155,213,.2);border-radius:6px;padding:1.5rem;margin-bottom:1.5rem;}
+.modul-kode{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--sky);letter-spacing:.1em;margin-bottom:.3rem;}
+.modul-judul{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--white);margin-bottom:.6rem;}
+.modul-ringkasan{font-size:.84rem;color:var(--sl);line-height:1.75;}
+
+.modul-section{margin-bottom:1.4rem;}
+.modul-section-title{font-size:.72rem;font-family:'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(201,162,39,.2);padding-bottom:6px;margin-bottom:.9rem;}
+.modul-poin-list{list-style:none;padding:0;}
+.modul-poin-list li{padding:.45rem 0 .45rem 1.4rem;position:relative;font-size:.83rem;color:var(--sl);line-height:1.6;border-bottom:1px solid rgba(168,203,232,.06);}
+.modul-poin-list li:last-child{border-bottom:none;}
+.modul-poin-list li::before{content:"▸";position:absolute;left:0;color:var(--sky);font-size:.7rem;top:.55rem;}
+
+.tips-list{display:flex;flex-direction:column;gap:.6rem;}
+.tips-item{background:rgba(22,163,74,.08);border-left:3px solid rgba(22,163,74,.5);border-radius:0 4px 4px 0;padding:.6rem .9rem;font-size:.82rem;color:#86efac;line-height:1.6;}
+.tips-item::before{content:"💡 ";}
+
+.jebakan-list{display:flex;flex-direction:column;gap:.6rem;}
+.jebakan-item{background:rgba(220,38,38,.07);border-left:3px solid rgba(220,38,38,.4);border-radius:0 4px 4px 0;padding:.6rem .9rem;font-size:.82rem;color:#fca5a5;line-height:1.6;}
+.jebakan-item::before{content:"⚠️ ";}
+
+.modul-cta{background:linear-gradient(135deg,rgba(201,162,39,.12),rgba(201,162,39,.06));border:1px solid rgba(201,162,39,.3);border-radius:6px;padding:1.4rem;text-align:center;margin-top:1.5rem;}
+.modul-cta-text{font-size:.82rem;color:var(--sl);margin-bottom:.9rem;line-height:1.6;}
+.btn-mulai-latihan{padding:12px 32px;background:var(--gold);color:var(--navy);border:none;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;letter-spacing:.06em;transition:background .2s,transform .1s;}
+.btn-mulai-latihan:hover{background:var(--gl);}.btn-mulai-latihan:active{transform:scale(.98);}
+
+
+/* Tombol kembali ke Hub di screen-landing */
+.landing-back{display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
+.btn-back-hub{background:transparent;border:1px solid rgba(168,203,232,.25);color:var(--sl);padding:5px 14px;border-radius:3px;font-size:.78rem;cursor:pointer;transition:border-color .2s,color .2s;font-family:'DM Sans',sans-serif;}
+.btn-back-hub:hover{border-color:var(--sky);color:var(--white);}
+
+
+/* ── TOMBOL EXPORT SOAL (hanya di screen-latihan) ── */
+.btn-export-soal{
+  display:flex;align-items:center;gap:5px;
+  background:transparent;border:1px solid rgba(201,162,39,.35);
+  color:var(--gl);padding:5px 11px;border-radius:3px;
+  font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;
+  cursor:pointer;letter-spacing:.04em;transition:all .2s;
+  white-space:nowrap;
+}
+.btn-export-soal:hover{background:rgba(201,162,39,.1);border-color:var(--gold);}
+.btn-export-soal svg{width:13px;height:13px;flex-shrink:0;}
+
+/* ── MODAL PIN ── */
+.pin-overlay{
+  position:fixed;inset:0;background:rgba(5,15,30,.88);
+  display:flex;align-items:center;justify-content:center;
+  z-index:1000;opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.pin-overlay.on{opacity:1;pointer-events:all;}
+.pin-box{
+  background:var(--nm);border:1px solid rgba(201,162,39,.35);
+  border-radius:8px;padding:2rem 2rem 1.5rem;
+  text-align:center;max-width:320px;width:90%;animation:fadeUp .3s ease;
+}
+.pin-icon{font-size:2rem;margin-bottom:.6rem;}
+.pin-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--white);margin-bottom:.3rem;}
+.pin-sub{font-size:.77rem;color:var(--sl);margin-bottom:1.2rem;line-height:1.6;}
+.pin-input{
+  width:100%;padding:10px 14px;text-align:center;
+  background:rgba(255,255,255,.06);border:1px solid rgba(168,203,232,.25);
+  border-radius:4px;color:var(--white);font-family:'DM Mono',monospace;
+  font-size:1.1rem;letter-spacing:.25em;outline:none;
+  transition:border-color .2s;margin-bottom:.8rem;
+}
+.pin-input:focus{border-color:var(--gold);}
+.pin-err{color:#fca5a5;font-size:.75rem;margin-bottom:.8rem;display:none;}
+.pin-err.on{display:block;}
+.pin-actions{display:flex;gap:.6rem;justify-content:center;}
+.pin-btn{
+  padding:9px 22px;border-radius:4px;font-family:'DM Sans',sans-serif;
+  font-size:.83rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;
+}
+.pin-btn.primary{background:var(--gold);color:var(--navy);}
+.pin-btn.primary:hover{background:var(--gl);}
+.pin-btn.ghost{background:transparent;border:1px solid rgba(168,203,232,.25);color:var(--sl);}
+.pin-btn.ghost:hover{border-color:var(--sl);color:var(--white);}
+
+/* ── PRINT SOAL (khusus cetak) ── */
+@media print {
+  body > *{display:none!important;}
+  #print-soal-container{display:block!important;}
+}
+#print-soal-container{display:none;}
+.ps-header{text-align:center;margin-bottom:1.5rem;border-bottom:2px solid #333;padding-bottom:.8rem;}
+.ps-inst{font-size:.8rem;color:#555;}
+.ps-title{font-size:1.2rem;font-weight:700;margin:.3rem 0;}
+.ps-meta{font-size:.78rem;color:#666;}
+.ps-soal{margin-bottom:1.6rem;break-inside:avoid;}
+.ps-nomor{font-weight:700;font-size:.88rem;margin-bottom:.3rem;}
+.ps-vignette{font-size:.82rem;color:#333;background:#f5f5f5;padding:.5rem .7rem;border-left:3px solid #999;border-radius:0 3px 3px 0;margin-bottom:.5rem;line-height:1.6;}
+.ps-pertanyaan{font-size:.85rem;font-weight:500;margin-bottom:.4rem;line-height:1.5;}
+.ps-opsi{font-size:.82rem;color:#222;margin:.18rem 0 .18rem 1rem;line-height:1.5;}
+.ps-opsi.kunci{font-weight:700;color:#1a5c2a;}
+.ps-kunci-box{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:4px;padding:.4rem .7rem;margin:.5rem 0;font-size:.8rem;}
+.ps-kunci-label{font-weight:700;color:#1a5c2a;}
+.ps-pembahasan{font-size:.79rem;color:#444;margin-top:.3rem;line-height:1.6;background:#fffde7;border-left:3px solid #f9a825;padding:.4rem .7rem;border-radius:0 3px 3px 0;}
+.ps-referensi{font-size:.74rem;color:#777;margin-top:.2rem;font-style:italic;}
+.ps-footer{margin-top:1.5rem;border-top:1px solid #ccc;padding-top:.6rem;font-size:.75rem;color:#888;text-align:center;}
+.ps-divider{border:none;border-top:1px dashed #ddd;margin:.8rem 0;}
+
 </style>
 </head>
 <body>
@@ -289,8 +428,54 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);m
   </div>
 </div>
 
+<!-- SCREEN HUB: Pilih Mode -->
+<div id="screen-hub" class="screen">
+  <div class="hub-hero">
+    <div class="hub-title">Selamat Datang, <em id="hub-nama">—</em></div>
+    <div class="hub-sub">Pilih mode yang ingin Anda gunakan hari ini</div>
+    <div class="hub-peserta" id="hub-peserta-info">— · — · —</div>
+  </div>
+  <div class="hub-cards">
+    <div class="hub-card belajar" onclick="masukBelajar()">
+      <span class="hub-card-icon">📚</span>
+      <div class="hub-card-badge">BELAJAR MANDIRI</div>
+      <div class="hub-card-title">Mode <em>Belajar</em></div>
+      <div class="hub-card-desc">Pelajari ringkasan konsep, rumus, dan tips menjawab soal per kompetensi sebelum berlatih.</div>
+    </div>
+    <div class="hub-card" onclick="masukLatihan()">
+      <span class="hub-card-icon">✏️</span>
+      <div class="hub-card-badge">LATIHAN SOAL</div>
+      <div class="hub-card-title">Mode <em>Latihan</em></div>
+      <div class="hub-card-desc">Kerjakan soal UKOM dengan pembahasan langsung. Timer berjalan otomatis sesuai jumlah soal.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN BELAJAR: Pilih Kompetensi atau Baca Modul -->
+<div id="screen-belajar" class="screen">
+  <!-- Sub-screen: pilih kompetensi -->
+  <div id="belajar-pilih" style="display:block;">
+    <div class="belajar-header">
+      <button class="bh-back" onclick="backToHub()">← Kembali</button>
+      <div class="bh-title">Mode <em>Belajar</em> — Pilih Kompetensi</div>
+    </div>
+    <div class="belajar-grid" id="belajar-grid"></div>
+  </div>
+  <!-- Sub-screen: konten modul -->
+  <div id="belajar-modul" style="display:none;">
+    <div class="belajar-header">
+      <button class="bh-back" onclick="backToBelajarPilih()">← Kompetensi Lain</button>
+      <div class="bh-title" id="modul-header-title">—</div>
+    </div>
+    <div class="modul-wrap" id="modul-konten"></div>
+  </div>
+</div>
+
 <!-- SCREEN 2: LANDING -->
 <div id="screen-landing" class="screen">
+  <div class="landing-back">
+    <button class="btn-back-hub" onclick="showScreen('screen-hub')">← Menu Utama</button>
+  </div>
   <div class="landing-hero">
     <div class="hl">Pilih <em>Kompetensi</em><br>yang Ingin Dilatih</div>
     <div class="sub">Setiap soal disertai pembahasan langsung. Ulangi latihan sebanyak yang dibutuhkan.</div>
@@ -319,6 +504,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);m
       <span class="timer-icon">⏱</span>
       <span id="timer-display">00:00</span>
     </div>
+    <button class="btn-export-soal" onclick="showPinModal()" title="Export soal kompetensi ini (PIN required)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9,15 12,18 15,15"/>
+      </svg>
+      Export Soal
+    </button>
   </div>
   </div>
   <div class="prog-wrap"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
@@ -344,6 +535,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);m
     <div class="pi-row">Program Studi: <strong id="pi-prodi">—</strong></div>
     <div class="pi-row">Email: <strong id="pi-email">—</strong></div>
     <div class="pi-row">Tanggal & Waktu: <strong id="pi-tgl">—</strong></div>
+    <div class="pi-row">Mode Akses: <strong id="pi-jalur">—</strong></div>
   </div>
 
   <div class="hasil-header">
@@ -368,7 +560,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);m
   <div class="hasil-actions">
     <button class="btn-act btn-gold" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
     <button class="btn-act btn-ghost" onclick="ulangiLatihan()">↺ Ulangi Paket Ini</button>
-    <button class="btn-act btn-ghost" onclick="backToLanding()">← Pilih Kompetensi Lain</button>
+    <button class="btn-act btn-ghost" onclick="backToLanding()">← Menu Utama</button>
   </div>
 </div>
 
@@ -412,7 +604,7 @@ const BANK={
     {id:5,text:"Siklus Plan-Do-Check-Act (PDCA) dalam peningkatan mutu rekam medis digunakan untuk...",opsi:["A. Merancang sistem penggajian berbasis kompetensi untuk staf rekam medis; insentif yang adil merupakan fondasi mutu SDM dalam pengelolaan informasi kesehatan","B. Melakukan perbaikan berkelanjutan terhadap masalah mutu yang teridentifikasi","C. Menyusun anggaran tahunan dan rencana pengadaan peralatan unit rekam medis; perencanaan keuangan yang baik menentukan kapasitas unit dalam menjalankan fungsinya","D. Menentukan kebijakan retensi dan pemusnahan rekam medis","E. Melatih dan mengembangkan kompetensi staf rekam medis baru; peningkatan kapasitas SDM adalah investasi jangka panjang terhadap mutu pengelolaan rekam medis"],kunci:"B",pembahasan:"PDCA adalah siklus perbaikan mutu berkelanjutan: PLAN = identifikasi masalah & rencana. DO = implementasi. CHECK = evaluasi hasil vs target. ACT = standarisasi atau modifikasi. Contoh: meningkatkan kelengkapan pengisian RM.",referensi:"Juran JM. Quality Control Handbook; KARS SNARS Bab PMKP"}
   ]},
   statistik_faskes:{icon:"🏥",label:"Statistik Fasilitas Pelayanan Kesehatan",kode:"STAT-FASKES-06",deskripsi:"Indikator efisiensi RS, sensus pasien, BOR, AvLOS, TOI, BTO, NDR, GDR, Grafik Barber Johnson.",soal:[
-    {id:1,vignette:"RSU Mitra Husada Tipe B memiliki 300 tempat tidur tersedia. Pada bulan Maret 2026, total hari perawatan yang tercatat dalam SIMRS adalah 6.750 hari selama 31 hari.",text:"Berapakah nilai BOR RSU Mitra Husada pada bulan Maret 2026, dan bagaimana interpretasinya berdasarkan standar Depkes RI?",opsi:["A. BOR = 72,6% - di bawah standar ideal, kapasitas masih banyak terbuang","B. BOR = 75,0% - tepat di batas bawah standar ideal Depkes RI (75-85%)","C. BOR = 72,6% - termasuk standar ideal karena di atas 70%","D. BOR = 80,0% - sudah melampaui standar dan perlu penambahan tempat tidur","E. BOR = 67,5% - di bawah standar, efisiensi sangat rendah"],kunci:"A",pembahasan:"BOR = (Total Hari Perawatan / (TT Tersedia x Jumlah Hari)) x 100% = (6.750 / (300 x 31)) x 100% = (6.750 / 9.300) x 100% = 72,6%. Standar Depkes RI/WHO untuk BOR ideal adalah 75-85%. BOR 72,6% berada tepat di bawah batas bawah standar. Opsi B (BOR = 75%) adalah pengecoh; perhitungan yang benar menghasilkan 72,6%.",referensi:"Depkes RI. Petunjuk Teknis SIRS; Hatta G. Pedoman MIK. UI Press"},
+    {id:1,vignette:"RSU Mitra Husada Tipe B memiliki 300 tempat tidur tersedia. Pada bulan Maret 2026, total hari perawatan yang tercatat dalam SIMRS adalah 6.750 hari selama 31 hari.",text:"Berapakah nilai BOR RSU Mitra Husada pada bulan Maret 2026, dan bagaimana interpretasinya berdasarkan standar Depkes RI?",opsi:["A. BOR = 72,6% - di bawah standar ideal Depkes RI (75-85%), kapasitas masih banyak terbuang dan perlu strategi peningkatan utilisasi","B. BOR = 75,0% - tepat di batas bawah standar ideal Depkes RI (75-85%)","C. BOR = 72,6% - masuk dalam standar ideal Depkes RI (60-85%); nilai ini menunjukkan utilisasi yang efisien tanpa risiko overloaded","D. BOR = 80,0% - sudah melampaui standar dan perlu penambahan tempat tidur","E. BOR = 67,5% - dihitung dari 6.750 dibagi (300 × 30 hari) karena Maret dihitung 30 hari; nilai di bawah 70% menunjukkan inefisiensi kapasitas"],kunci:"C",pembahasan:"BOR = (6.750 / (300 × 31)) × 100% = 72,6%. Standar BOR ideal Depkes RI adalah 60-85% (bukan 75-85%). Dengan standar yang benar, BOR 72,6% MASUK dalam rentang ideal. Opsi A adalah jebakan: hitungannya benar (72,6%) tetapi interpretasinya keliru karena menggunakan standar 75-85% yang tidak tepat. Opsi B menggunakan angka 75% yang salah secara perhitungan.",referensi:"Depkes RI. Petunjuk Teknis SIRS; Hatta G. Pedoman MIK. UI Press"},
     {id:2,vignette:"RS Pratama Sehat bulan Februari 2026 mencatat: jumlah pasien keluar = 480 pasien; total hari perawatan individual = 2.160 hari.",text:"Berapakah Average Length of Stay (AvLOS) RS Pratama Sehat pada bulan Februari 2026, dan apa makna klinisnya?",opsi:["A. AvLOS = 4,5 hari — di bawah standar Depkes (6-9 hari); mengindikasikan risiko readmisi atau pasien dipulangkan terlalu cepat sebelum kondisi benar-benar stabilangkan terlalu cepat","B. AvLOS = 3,0 hari — dihitung dari total lama rawat dibagi pasien keluar; nilai ini jauh di bawah standar ideal dan mencerminkan efisiensi yang berlebihan dengan risiko readmisi tinggi","C. AvLOS = 4,5 hari — menunjukkan efisiensi pelayanan yang baik; meskipun di bawah standar Depkes, nilai ini mencerminkan manajemen kasus yang optimal dengan LOS tidak berlebihan","D. AvLOS = 5,5 hari — diperoleh dari formula total hari perawatan dibagi jumlah pasien yang dipindahkan; nilai ini mendekati batas bawah standar sehingga tidak memerlukan tindakan","E. AvLOS = 4,5 hari — berada di bawah rata-rata nasional sehingga dianggap sudah optimal; RS tidak perlu melakukan evaluasi manajemen klinis lebih lanjut untuk periode ini"],kunci:"A",pembahasan:"AvLOS = IP Bed Days of Care / Jumlah Pasien Keluar = 2.160 / 480 = 4,5 hari. Standar Depkes RI untuk AvLOS adalah 6-9 hari. AvLOS 4,5 hari secara teknis di bawah standar, yang dapat mengindikasikan: efisiensi tinggi jika kualitas outcome baik; atau risiko pasien dipulangkan terlalu dini yang berpotensi meningkatkan readmisi 30 hari.",referensi:"Depkes RI. Indikator Kinerja Rumah Sakit 2005; Kemenkes RI. Standar Pelayanan Minimal RS"},
     {id:3,vignette:"RSU Bali Medika Tipe C pada triwulan I 2026 (90 hari): kapasitas 150 tempat tidur; total hari perawatan = 9.450 hari; jumlah pasien keluar = 1.050 pasien.",text:"Berapakah nilai Turn Over Interval (TOI) RSU Bali Medika pada triwulan I 2026, dan bagaimana interpretasinya?",opsi:["A. TOI = 1,5 hari - ideal karena di bawah 3 hari","B. TOI = 0,5 hari - terlalu cepat, berisiko infeksi nosokomial","C. TOI = 4,5 hari - di atas standar, berarti terdapat inefisiensi","D. TOI = 2,0 hari - dalam rentang ideal, tidak ada masalah signifikan","E. TOI = 3,0 hari - tepat di batas atas standar ideal Depkes RI (1-3 hari)"],kunci:"E",pembahasan:"TOI = ((TT Tersedia x Periode) - Total Hari Perawatan) / Jumlah Pasien Keluar = ((150 x 90) - 9.450) / 1.050 = (13.500 - 9.450) / 1.050 = 4.050 / 1.050 = 3,857 hari. Nilai ini berada tepat di batas atas atau sedikit melampaui standar Depkes 1-3 hari.",referensi:"Depkes RI. Petunjuk Teknis Statistik Rumah Sakit; Huffman EK. Health Information Management"},
     {id:4,vignette:"RS Permata Bunda Tipe B: tersedia 200 tempat tidur fungsional; jumlah pasien keluar selama 6 bulan (180 hari) = 2.200 pasien.",text:"Berapakah nilai Bed Turn Over (BTO) RS Permata Bunda pada semester I 2026, dan bagaimana penilaiannya terhadap standar Depkes RI?",opsi:["A. BTO = 11 kali - di bawah standar 40-50 kali/tahun, produktivitas sangat rendah","B. BTO = 12,2 kali - dalam kategori normal karena mendekati rata-rata nasional","C. BTO = 22 kali per semester - melebihi standar","D. BTO = 11 kali - sudah memenuhi standar 10-12 kali per semester","E. BTO = 11 kali - jika disetahunkan menjadi 22 kali/tahun, jauh di bawah standar 40-50 kali/tahun"],kunci:"E",pembahasan:"BTO = Jumlah Pasien Keluar / TT Tersedia = 2.200 / 200 = 11 kali per semester. Disetahunkan: 11 x 2 = 22 kali/tahun. Standar Depkes RI untuk BTO adalah 40-50 kali per tahun. Nilai 22 kali/tahun jauh di bawah standar, menunjukkan produktivitas tempat tidur yang rendah.",referensi:"Hatta G. Pedoman MIK. UI Press; Depkes RI. Indikator Kinerja RS"},
@@ -422,7 +614,17 @@ const BANK={
     {id:8,vignette:"RSU Sejahtera Medika bulan Januari 2026 (31 hari) mencatat total IP Service Days = 7.750 hari.",text:"Berapakah Average Daily Census (ADC) RSU Sejahtera Medika pada bulan Januari 2026?",opsi:["A. 240 pasien per hari","B. 250 pasien per hari","C. 248 pasien per hari","D. 260 pasien per hari","E. 245 pasien per hari"],kunci:"B",pembahasan:"ADC = Total IP Service Days / Jumlah Hari Periode = 7.750 / 31 = 250 pasien per hari. ADC merupakan rata-rata jumlah pasien yang dirawat setiap harinya, digunakan sebagai pembanding dengan kapasitas tempat tidur untuk menghitung BOR.",referensi:"Kemenkes RI. Juknis SIRS; Huffman EK. Health Information Management"},
     {id:9,vignette:"Sebagai kepala unit rekam medis RS Kartini Husada yang baru diakreditasi paripurna SNARS 2025, Anda diminta menyusun dashboard KPI statistik fasyankes berbasis SIMRS yang terintegrasi dengan Satu Sehat HIE.",text:"Komponen indikator yang PALING KOMPREHENSIF untuk dashboard KPI statistik fasyankes RS terintegrasi Satu Sehat HIE adalah?",opsi:["A. Hanya dua indikator utama yaitu BOR dan AvLOS sudah cukup mewakili seluruh dimensi efisiensi pelayanan RS","B. Tambahkan GDR sebagai satu-satunya indikator tambahan yang diperlukan; akreditasi RS hanya mewajibkan pelaporan indikator kematian sehingga BOR dan GDR sudah mencakup seluruh kebutuhan dashboard","C. Dashboard mencakup: indikator efisiensi (BOR, AvLOS, TOI, BTO dengan visualisasi Barber-Johnson), indikator kematian (NDR, GDR), indikator mutu klinis (KLPCM, HAIs), dan monitoring tren real-time(NDR, GDR tren 12 bulan); mutu (readmisi 30 hari, HCAI rate, LOS per diagnosis INA-CBG); FHIR-compliant export ke Satu Sehat; alert otomatis jika BOR lebih dari 85% atau NDR lebih dari 25 per mil","D. Batasi dashboard pada tiga indikator utama (BOR, GDR, jumlah kunjungan); tampilan yang sederhana lebih mudah dipahami oleh manajemen non-teknis dan tidak memerlukan infrastruktur IT yang kompleks","E. Pertahankan sistem pelaporan manual mingguan; laporan tertulis yang terjadwal memberikan waktu analisis yang cukup dan tidak memerlukan investasi sistem yang mahal dan sulit dimaintain"],kunci:"C",pembahasan:"Dashboard KPI statistik fasyankes yang efektif harus mencakup semua dimensi kinerja RS: efisiensi, keamanan (NDR, GDR), mutu klinis (readmisi, HCAI, LOS per DRG), dan terintegrasi dengan ekosistem digital nasional. Alert otomatis berbasis threshold memungkinkan tindakan preventif. FHIR-compliant adalah persyaratan wajib Kemenkes 2024.",referensi:"Kemenkes RI. Peta Jalan Transformasi Digital Kesehatan 2024; HL7 FHIR R4; Permenkes 24/2022"},
     {id:10,vignette:"Kemenkes RI mewajibkan seluruh RS melaporkan data melalui SIRS berbasis web. RS Bakti Husada menemukan bahwa data BOR SIMRS internal berbeda dengan formula SIRS Online Kemenkes.",text:"Perbedaan formula BOR antara SIMRS internal dan SIRS Kemenkes paling sering disebabkan oleh faktor apa, dan bagaimana solusi terbaik?",opsi:["A. Perbedaan hanya pada antarmuka perangkat lunak; formula BOR identik di semua sistem sehingga perbedaan angka pasti berasal dari kesalahan input dan dapat diselesaikan dengan rekonsiliasi data sederhana","B. Perbedaan definisi tempat tidur tersedia: SIRS menggunakan tempat tidur terdaftar administratif, sedangkan SIMRS internal menggunakan TT fungsional aktual; perbedaan ini berdampak pada denominator BORktif; solusi: standarisasi definisi sesuai Petunjuk Teknis SIRS Kemenkes terbaru","C. Perbedaan merupakan kesalahan input data oleh petugas administrasi; tidak ada perbedaan metodologi yang perlu diselidiki — cukup koreksi angka yang salah dan pastikan petugas lebih teliti ke depannya","D. SIMRS internal selalu lebih akurat karena menggunakan data real-time langsung dari unit; data SIRS Kemenkes mengalami delay dan transformasi yang menurunkan akurasi, sehingga data internal harus diprioritaskan","E. Perbedaan hanya disebabkan oleh cut-off waktu pelaporan yang berbeda; perbedaan periode tidak mempengaruhi validitas data untuk pengambilan keputusan manajemen jangka panjang"],kunci:"B",pembahasan:"Perbedaan BOR antara SIMRS dan SIRS sering terjadi karena perbedaan definisi operasional tempat tidur tersedia. SIRS Kemenkes menggunakan definisi berdasarkan izin operasional atau registrasi, sementara SIMRS internal mungkin menggunakan tempat tidur yang benar-benar aktif/fungsional. Standarisasi wajib mengacu pada Petunjuk Teknis SIRS Kemenkes terbaru.",referensi:"Kemenkes RI. Petunjuk Teknis SIRS Online; PMK No. 1171/2011 tentang SIRS"}
-  ]},
+  ,
+    {id:11,vignette:"RS Bunda Mulia Tipe B mencatat data persalinan tahun 2025: jumlah kematian ibu (dalam masa kehamilan, persalinan, dan nifas 42 hari) = 7 kasus; jumlah kelahiran hidup = 2.800; jumlah kelahiran mati = 45.",text:"Berapakah Angka Kematian Ibu (AKI) RS Bunda Mulia tahun 2025 dan bagaimana interpretasinya?",opsi:["A. AKI = 250/100.000 KH — dihitung dari 7 dibagi 2.845 (termasuk lahir mati) dikali 100.000; nilai ini melampaui target SDGs 2030 sebesar ≤70/100.000 KH","B. AKI = 175/100.000 KH — dihitung dari 7 dibagi total persalinan (4.000) dikali 100.000; nilai ini masih di atas target SDGs 2030 namun relatif baik untuk RS rujukan","C. AKI = 2,5 per mil — AKI dihitung menggunakan denominator total pasien rawat inap bukan kelahiran hidup; nilai ini mencerminkan kualitas pelayanan maternal secara keseluruhan","D. AKI = 280/100.000 KH — dihitung dari 7 dibagi (2.800 − 7) dikali 100.000 menggunakan denominatur kelahiran hidup dikurangi kematian; nilai ini menunjukkan RS perlu evaluasi menyeluruh","E. AKI = 250/100.000 KH — dihitung dari 7 dibagi 2.800 (hanya kelahiran hidup) dikali 100.000; nilai ini melampaui target SDGs 2030 ≤70/100.000 KH dan mengindikasikan perlunya audit maternal"],kunci:"E",pembahasan:"AKI = (Jumlah Kematian Ibu / Jumlah Kelahiran Hidup) × 100.000 = (7 / 2.800) × 100.000 = 250/100.000 KH. Denominator AKI adalah KELAHIRAN HIDUP saja, tidak termasuk lahir mati. Target SDGs 2030: ≤70/100.000 KH. AKI RS 250 jauh melampaui target, mengindikasikan perlunya audit maternal menyeluruh. Opsi A salah karena menyertakan lahir mati dalam denominator.",referensi:"Nisak & Cholifah (2020) Buku Ajar Statistik Fasyankes; SDGs Target 3.1; Kemenkes RI. Pedoman AKI"},
+    {id:12,vignette:"Puskesmas Rawat Inap Sari Husada Kabupaten Badung mencatat data tahun 2025: jumlah kematian bayi usia 0 sampai kurang dari 1 tahun = 18 kasus; jumlah kelahiran hidup = 1.200; jumlah kelahiran mati = 22.",text:"Berapakah Angka Kematian Bayi (AKB) Puskesmas Sari Husada tahun 2025 dan apa implikasinya terhadap program kesehatan ibu dan anak?",opsi:["A. AKB = 15 per 1.000 KH — dihitung dari 18 dibagi 1.200 dikali 1.000; nilai ini masih di atas target SDGs 2030 (≤12‰) namun sudah mendekati target dan tidak memerlukan intervensi khusus","B. AKB = 18 per 1.000 KH — dihitung menggunakan total persalinan termasuk lahir mati sebagai denominator; nilai ini menunjukkan kualitas ANC yang perlu diperkuat melalui program kunjungan rumah","C. AKB = 14,5 per 1.000 KH — dihitung dari 18 dibagi (1.200 + 22) dikali 1.000 menggunakan total kelahiran; nilai sedikit di atas target namun masih dapat diterima untuk fasilitas tingkat primer","D. AKB = 15 per 1.000 KH — dihitung dari 18 dibagi 1.200 dikali 1.000; melampaui target SDGs (≤12‰); implikasi: perlu penguatan program ANC, persalinan bersih, dan neonatal care berbasis bukti","E. AKB = 12 per 1.000 KH — dihitung dari 18 dikurangi kematian neonatal dibagi 1.500 (estimasi populasi) dikali 1.000; nilai tepat di target SDGs sehingga tidak diperlukan tindakan program tambahan"],kunci:"D",pembahasan:"AKB = (Jumlah Kematian Bayi 0 - <1 tahun / Jumlah Kelahiran Hidup) × 1.000 = (18 / 1.200) × 1.000 = 15 per 1.000 KH. Denominator adalah kelahiran hidup saja. Target SDGs 2030: ≤12 per 1.000 KH. AKB 15 melampaui target, sehingga implikasi programatik harus mencakup penguatan ANC berkualitas, persalinan bersih dan aman, serta perawatan neonatal esensial.",referensi:"Nisak & Cholifah (2020); SDGs Target 3.2; Kemenkes RI. Pedoman AKB; WHO (2019) Hospital Statistics"},
+    {id:13,vignette:"Bangsal Bedah RS Kartini Husada tanggal 5 Juni 2026 mencatat aktivitas berikut: sisa tengah malam (4 Juni pukul 24.00) = 28 pasien; pasien baru masuk pagi = 9 pasien; pasien transfer masuk dari ICU = 3 pasien; pasien pulang = 6 pasien; pasien meninggal = 1 pasien; pasien transfer keluar ke bangsal lain = 2 pasien.",text:"Berapakah nilai Sisa Tengah Malam (STM) dan Census Hari Perawatan (CHP) bangsal Bedah pada tanggal 5 Juni 2026?",opsi:["A. STM = 31 pasien; CHP = 34 pasien — STM dihitung dari 28+9+3−6−1−2=31; CHP menggunakan STM awal (28) ditambah semua pasien yang pernah menempati TT hari ini (9+3+6+1+2=21) namun dikurangi ganda","B. STM = 31 pasien; CHP = 40 pasien — STM = 28+9+3−6−1−2 = 31; CHP = 28+9+3 = 40 menggunakan hanya pasien yang masuk tanpa mengurangi yang keluar karena CHP dihitung saat tengah malam berikutnya","C. STM = 31 pasien; CHP = 31 pasien — STM dan CHP identik karena tidak ada one-day patient; STM = 28+9+3−6−1−2 = 31 dan CHP menggunakan formula yang sama dengan STM pada hari tanpa one-day care","D. STM = 37 pasien; CHP = 37 pasien — STM = 28+9 = 37 karena transfer masuk tidak dihitung dalam formula STM; CHP identik dengan STM karena pasien transfer tidak mempengaruhi census hari perawatan","E. STM = 31 pasien; CHP = 34 pasien — STM = 28+9+3−6−1−2 = 31; CHP = STM ditambah jumlah pasien keluar hari ini (6+1+2=9) karena mereka juga menempati TT selama sebagian hari perawatan tersebut"],kunci:"C",pembahasan:"STM = (28+9+3) − (6+1+2) = 40 − 9 = 31 pasien. CHP = IP Service Days pada hari tersebut. Karena tidak ada one-day patient, IP Service Days = CHP = STM malam berikutnya = 31. Jika ada one-day patient, mereka masuk CHP tapi tidak masuk STM. Opsi B salah karena CHP bukan hanya pasien masuk; opsi E salah karena pasien keluar tidak ditambahkan kembali ke CHP.",referensi:"Nisak & Cholifah (2020) Buku Ajar Statistik Fasyankes; Depkes RI. Petunjuk Teknis SIMRS; WHO (2019) Hospital Statistics"},
+    {id:14,vignette:"RS Husada Prima melakukan analisis tren BOR triwulanan tahun 2025: TW1 = 62%, TW2 = 71%, TW3 = 84%, TW4 = 91%. Kapasitas tetap 200 TT sepanjang tahun. Direktur RS meminta analisis dan rekomendasi berbasis data tren ini.",text:"Analisis tren BOR dan rekomendasi strategis yang PALING TEPAT berdasarkan data triwulanan tersebut adalah?",opsi:["A. Tren meningkat konsisten; TW1-TW2 dalam standar ideal (60-85%); TW3 mendekati batas atas; TW4 = 91% melampaui standar (>85% = over-utilized); rekomendasi: evaluasi kapasitas, persiapkan penambahan TT atau manajemen alur pasien untuk mencegah HAIs","B. Semua triwulan dalam kondisi normal; standar BOR 75-85% hanya berlaku untuk RS tipe A sehingga TW1 dan TW2 tidak bermasalah; TW4 91% justru menunjukkan produktivitas tinggi yang harus dipertahankan tanpa evaluasi","C. TW1 under-utilized (<60%); TW2-TW3 ideal; TW4 over-utilized (>85%); tren ini normal untuk RS dengan musim penyakit; cukup lakukan monitoring rutin tanpa intervensi struktural apapun","D. Tren meningkat konsisten dan semua data valid; BOR 91% tidak bermasalah karena masih di bawah 95%; rekomendasi fokus pada peningkatan jumlah dokter spesialis agar kapasitas dapat dioptimalkan lebih lanjut","E. TW1-TW2 under-utilized karena di bawah 70%; TW3-TW4 over-utilized; perlu segera tambah 50 TT baru; tidak perlu analisis alur pasien karena masalah utama adalah kurangnya kapasitas fisik semata"],kunci:"A",pembahasan:"Standar BOR ideal Depkes RI: 60-85%. TW1 (62%) dan TW2 (71%) = dalam standar ideal. TW3 (84%) = mendekati batas atas, perlu perhatian. TW4 (91%) = over-utilized (>85%), berisiko: HAIs meningkat, kualitas asuhan menurun. Rekomendasi: evaluasi alur pasien dan manajemen kapasitas sebelum langsung menambah TT. Opsi C keliru karena menyebut TW1 <60% padahal 62% sudah dalam standar.",referensi:"Depkes RI. Standar Pelayanan RS; Nisak & Cholifah (2020); WHO (2019) Hospital Statistics"},
+    {id:15,vignette:"Komite Mutu RS Sejahtera Medika sedang menganalisis data statistik semester I 2026: BOR = 78%; AvLOS = 12 hari; TOI = 2,5 hari; BTO = 18 kali/semester; NDR = 28 per mil.",text:"Dari data tersebut, indikator mana yang PALING KRITIS dan memerlukan tindakan perbaikan segera berdasarkan standar Depkes RI?",opsi:["A. BOR 78% adalah yang paling kritis karena mendekati batas atas standar 85%; harus segera dilakukan pembatasan penerimaan pasien baru agar BOR turun ke level yang lebih aman di sekitar 70%","B. TOI 2,5 hari paling kritis karena mendekati batas atas standar 1-3 hari; perlu percepatan turnover pasien agar tempat tidur tidak terlalu lama kosong antara satu penggunaan dengan berikutnya","C. AvLOS 12 hari melampaui standar RS umum (6-9 hari) dan NDR 28 per mil melampaui standar (<25 per mil); keduanya kritis — AvLOS panjang berasosiasi dengan HAIs dan biaya tinggi; NDR tinggi mencerminkan mutu klinis perlu dievaluasi","D. BTO 18 kali/semester paling kritis karena setara 36 kali/tahun, di bawah standar 40-50 kali/tahun; rendahnya produktivitas TT menunjukkan inefisiensi operasional yang lebih berdampak dari indikator lainnya","E. NDR 28 per mil adalah satu-satunya indikator bermasalah; AvLOS 12 hari masih dalam batas toleransi untuk RS tipe B; rekomendasi cukup audit kematian pasca 48 jam tanpa perlu meninjau indikator efisiensi lainnya"],kunci:"C",pembahasan:"Evaluasi: BOR 78% = normal (60-85%). TOI 2,5 hari = ideal (1-3 hari). BTO 18/semester = 36/tahun, di bawah standar 40-50, namun tidak sekritis klinis. AvLOS 12 hari = melampaui standar RS umum 6-9 hari (KRITIS). NDR 28 per mil = melampaui standar <25 per mil (KRITIS). Keduanya paling kritis: AvLOS panjang meningkatkan risiko HAIs dan biaya; NDR tinggi langsung mencerminkan mutu klinis perawatan post-masuk.",referensi:"Depkes RI. Standar RS; Nisak & Cholifah (2020); WHO (2019) Hospital Statistics; SNARS Edisi 1.1 PMKP"},
+    {id:16,vignette:"RS Pratama Nusantara Tipe C memiliki 100 TT. Data bulan Juli 2026 (31 hari): total IP Service Days = 2.325 hari; jumlah pasien keluar (hidup+meninggal) = 310 pasien; jumlah pasien meninggal ≥48 jam = 4 pasien; total meninggal = 9 pasien.",text:"Hitunglah BOR, AvLOS, BTO bulan Juli 2026, dan indikator kematian NDR serta GDR. Kombinasi nilai yang BENAR adalah?",opsi:["A. BOR=75%, AvLOS=7,5 hari, BTO=3,1 kali, NDR=12,9‰, GDR=29,0‰ — dihitung menggunakan periode 30 hari untuk penyeragaman; NDR dan GDR menggunakan total pasien masuk bukan pasien keluar sebagai denominator","B. BOR=75%, AvLOS=7,5 hari, BTO=3,1 kali, NDR=12,9‰, GDR=29,0‰ — semua angka benar namun BTO 3,1/bulan setara 37,2/tahun yang masih di bawah standar sehingga perlu evaluasi produktivitas TT","C. BOR=80%, AvLOS=8 hari, BTO=3,0 kali, NDR=15,0‰, GDR=25,0‰ — BOR dihitung dari sensus harian rata-rata; AvLOS dari total bed-days; NDR dari semua kematian bukan hanya yang ≥48 jam","D. BOR=75%, AvLOS=7,5 hari, BTO=3,1 kali, NDR=12,9‰, GDR=29,0‰ — BOR dan AvLOS dalam standar; BTO 3,1 kali bulanan setara 37,2 kali/tahun sehingga mendekati standar 40-50; NDR dan GDR dalam batas aman","E. BOR=72,5%, AvLOS=7,0 hari, BTO=3,0 kali, NDR=13,0‰, GDR=28,0‰ — dihitung menggunakan IP Service Days dikurangi one-day patient; AvLOS menggunakan median untuk mengurangi bias outlier"],kunci:"D",pembahasan:"BOR = (2.325/(100×31))×100% = 75,0%. AvLOS = 2.325/310 = 7,5 hari (standar 6-9 hari ✓). BTO = 310/100 = 3,1 kali/bulan = 37,2 kali/tahun (mendekati standar 40-50). NDR = (4/310)×1.000 = 12,9‰ (<25‰ ✓). GDR = (9/310)×1.000 = 29,0‰ (<45‰ ✓). Opsi D memberikan konteks analisis BTO bulanan vs tahunan yang paling informatif dan benar.",referensi:"Nisak & Cholifah (2020) Buku Ajar Statistik Fasyankes; Depkes RI. Petunjuk Teknis SIMRS; WHO (2019) Hospital Statistics"},
+    {id:17,vignette:"RS Kasih Bangsa sedang melakukan benchmarking internal: membandingkan data AvLOS dan BTO dua bangsal selama semester I 2026. Bangsal Penyakit Dalam: TT=60, pasien keluar=420, IP Service Days=3.780. Bangsal Bedah: TT=40, pasien keluar=480, IP Service Days=1.920.",text:"Analisis perbandingan efisiensi kedua bangsal yang PALING TEPAT berdasarkan AvLOS dan BTO adalah?",opsi:["A. Penyakit Dalam: AvLOS=9 hari, BTO=7 kali; Bedah: AvLOS=4 hari, BTO=12 kali — Penyakit Dalam lebih efisien karena AvLOS 9 hari masih dalam standar 6-9 hari; BTO Bedah 12 kali/semester setara 24 kali/tahun yang di bawah standar","B. Penyakit Dalam: AvLOS=9 hari, BTO=7 kali; Bedah: AvLOS=4 hari, BTO=12 kali — Bedah lebih efisien dari sisi throughput (BTO 12 vs 7) meski AvLOS Bedah 4 hari di bawah standar 6-9 hari dan berisiko readmisi","C. Penyakit Dalam: AvLOS=9 hari, BTO=7 kali; Bedah: AvLOS=4 hari, BTO=12 kali — keduanya bermasalah; Penyakit Dalam di batas atas standar; Bedah AvLOS terlalu singkat; perlu audit klinis menyeluruh di kedua bangsal","D. Penyakit Dalam: AvLOS=7 hari, BTO=7 kali; Bedah: AvLOS=4 hari, BTO=12 kali — Penyakit Dalam lebih efisien; BTO Bedah 12 kali terlalu tinggi menandakan pasien dipulangkan terlalu cepat dengan risiko komplikasi","E. Penyakit Dalam: AvLOS=9 hari, BTO=7 kali; Bedah: AvLOS=4 hari, BTO=12 kali — interpretasi tidak dapat dilakukan tanpa data TOI karena TOI diperlukan untuk memverifikasi apakah TT digunakan secara efisien"],kunci:"B",pembahasan:"PD: AvLOS = 3.780/420 = 9 hari (batas atas standar 6-9), BTO = 420/60 = 7/semester = 14/tahun (di bawah standar 40-50). Bedah: AvLOS = 1.920/480 = 4 hari (di bawah standar, berisiko readmisi), BTO = 480/40 = 12/semester = 24/tahun (masih di bawah standar). Bedah memiliki throughput lebih tinggi (BTO) namun AvLOS 4 hari perlu diwaspadai untuk risiko readmisi. Opsi B paling tepat dalam mengidentifikasi keunggulan sekaligus risiko klinis.",referensi:"Depkes RI. Standar Pelayanan RS; Nisak & Cholifah (2020); WHO (2019) Hospital Statistics"},
+    {id:18,vignette:"Petugas rekam medis RS Surya Medika sedang merekonsiliasi data sensus harian bangsal VIP tanggal 10 Juli 2026. Data dari register manual: STM = 18 pasien. Data dari SIMRS: STM = 15 pasien. Setelah penelusuran ditemukan: 2 pasien transfer masuk dari ICU malam hari tercatat di register manual namun terlambat diinput di SIMRS; 1 pasien one-day care yang pulang sore tidak dikurangi di register manual.",text:"Setelah rekonsiliasi, berapakah nilai STM yang BENAR dan apa prosedur dokumentasi yang tepat?",opsi:["A. STM yang benar = 17 pasien — register manual (18) dikurangi 1 one-day care yang seharusnya tidak masuk STM = 17; SIMRS perlu diupdate dengan menambah 2 transfer masuk menjadi 17; one-day care tidak masuk STM karena sudah pulang","B. STM yang benar = 18 pasien — register manual sudah benar karena mencatat semua pasien fisik; SIMRS perlu dikoreksi dengan menambah 2 transfer masuk; one-day care yang pulang sore masih terhitung dalam STM malam","C. STM yang benar = 15 pasien — SIMRS lebih akurat karena tervalidasi sistem; 2 transfer masuk belum dikonfirmasi dokter sehingga belum sah secara administratif; one-day care tidak perlu dikoreksi di sensus rawat inap","D. STM yang benar = 20 pasien — SIMRS (15) ditambah 2 transfer yang belum terinput ditambah 3 koreksi lain yang mungkin terlewat; perlu audit menyeluruh sebelum angka final dapat ditetapkan oleh kepala bangsal","E. STM yang benar = 16 pasien — rata-rata dari register manual yang sudah dikoreksi (17) dan SIMRS yang sudah dikoreksi (17) dibagi dua menghasilkan 17; namun karena ada ketidakpastian dibulatkan ke 16 sebagai angka konservatif"],kunci:"A",pembahasan:"Analisis: Register (18), SIMRS (15). Perbedaan: +2 transfer masuk (belum di-input SIMRS) dan -1 one-day care (seharusnya tidak masuk STM). STM benar = 18 − 1 = 17. SIMRS perlu koreksi: 15 + 2 = 17. One-day patient TIDAK masuk STM karena sudah keluar sebelum tengah malam, tetapi MASUK CHP. Kedua sumber harus menghasilkan 17 setelah koreksi.",referensi:"Nisak & Cholifah (2020) Buku Ajar Statistik Fasyankes; Depkes RI. Petunjuk Teknis SIMRS; WHO (2019) Hospital Statistics"},
+    {id:19,vignette:"RS Pemerintah Tipe B di Kabupaten X sedang menyusun laporan tahunan 2025 untuk disampaikan ke Dinas Kesehatan. Data: BOR = 68%; AvLOS = 6,5 hari; TOI = 3,2 hari; BTO = 38 kali; NDR = 22 per mil; GDR = 42 per mil; AKI = 180/100.000 KH; AKB = 10 per 1.000 KH.",text:"Berdasarkan data laporan tahunan tersebut, kesimpulan analisis statistik fasyankes yang PALING AKURAT adalah?",opsi:["A. Semua indikator bermasalah; RS perlu restrukturisasi total karena BOR di bawah 75%, TOI di atas 3 hari, dan BTO di bawah 40 kali; laporan ini tidak layak disampaikan sebelum semua indikator mencapai standar ideal","B. Efisiensi operasional baik (BOR, AvLOS, TOI dalam standar); kematian dalam batas aman (NDR<25, GDR<45); AKI 180 melampaui target SDGs (≤70) menunjukkan perlunya penguatan pelayanan maternal; AKB 10 sudah di bawah target SDGs (≤12)","C. BOR 68% under-utilized; semua indikator kematian bermasalah; AKB 10 dalam target SDGs; fokus utama pada peningkatan utilisasi TT dan audit semua kematian tanpa memilah NDR dari GDR","D. TOI 3,2 hari melampaui standar (>3 hari) dan merupakan masalah terbesar; BOR, AvLOS, NDR, GDR, AKB semua dalam standar; AKI tidak perlu dilaporkan karena tidak relevan untuk RS non-spesialisasi kebidanan","E. Semua indikator efisiensi dalam standar optimal; AKI dan AKB sudah memenuhi target sehingga tidak perlu program intervensi tambahan; laporan menunjukkan kinerja RS yang memuaskan secara keseluruhan"],kunci:"B",pembahasan:"BOR 68% = ideal (60-85%). AvLOS 6,5 hari = ideal (6-9). TOI 3,2 hari = sedikit melampaui batas atas 3 hari (perhatian, tidak kritis). BTO 38 = mendekati standar 40-50. NDR 22 = baik (<25). GDR 42 = baik (<45). AKI 180/100.000 KH = MELAMPAUI target SDGs ≤70 (BERMASALAH). AKB 10 = baik (≤12). Efisiensi operasional baik secara keseluruhan, namun pelayanan maternal memerlukan audit dan intervensi.",referensi:"Depkes RI. Standar RS; Nisak & Cholifah (2020); SDGs Target 3.1 & 3.2; WHO (2019) Hospital Statistics"},
+    {id:20,vignette:"Tim MIK RS Digital Prima sedang menyusun laporan perbandingan kinerja dua tahun: Tahun 2024 — BOR=76%, AvLOS=7 hari, NDR=20‰, jumlah pasien keluar=8.400. Tahun 2025 — BOR=82%, AvLOS=9 hari, NDR=27‰, jumlah pasien keluar=9.200. Kapasitas TT tetap 250 pada kedua tahun.",text:"Interpretasi tren kinerja RS Digital Prima dari 2024 ke 2025 yang PALING TEPAT berdasarkan standar Depkes RI adalah?",opsi:["A. Kinerja 2025 lebih baik di semua dimensi; peningkatan BOR dari 76% ke 82% menunjukkan produktivitas meningkat; kenaikan AvLOS dan NDR adalah konsekuensi wajar dari naiknya kompleksitas kasus yang tidak bisa dihindari","B. Tren 2025 lebih buruk dari 2024 di semua aspek; BOR 82% sudah melampaui standar; AvLOS 9 hari sudah di luar standar normal; NDR 27‰ melampaui standar; RS harus melakukan moratorium penerimaan pasien baru","C. Kedua tahun dalam kondisi normal; standar NDR <25‰ hanya berlaku untuk RS tipe A unggulan; NDR 27‰ untuk RS umum tipe C masih dapat diterima; tidak diperlukan tindakan selain monitoring rutin","D. BOR 82% sudah terlalu tinggi dan mendekati over-utilized; satu-satunya masalah adalah kapasitas; tambah TT segera agar BOR turun ke 70%; kenaikan NDR dan AvLOS bukan indikator mutu klinis yang valid","E. Utilisasi meningkat (BOR naik ke 82%, masih ideal); namun kualitas klinis menurun — AvLOS 9 hari di batas atas standar dan NDR 27‰ melampaui standar (<25‰); tren ini memerlukan audit klinis dan evaluasi manajemen kasus"],kunci:"E",pembahasan:"Tren: BOR 76%→82%: keduanya dalam standar 60-85%, utilisasi meningkat positif. AvLOS 7→9 hari: 9 hari di batas atas standar 6-9 (perlu perhatian). NDR 20→27 per mil: 2024 dalam standar (<25), 2025 MELAMPAUI standar (<25). Tren ini: volume meningkat (positif) diikuti penurunan mutu klinis (negatif). Prioritas: audit kematian ≥48 jam dan evaluasi manajemen kasus untuk kendalikan AvLOS.",referensi:"Depkes RI. Standar RS; Nisak & Cholifah (2020); WHO (2019) Hospital Statistics; SNARS Edisi 1.1 PMKP"}]},
   analisis_pelaporan:{icon:"📋",label:"Analisis dan Pelaporan",kode:"ANLAP-07",deskripsi:"Morbiditas, mortalitas, formulir RL, SIRS, pelaporan Kemenkes, visualisasi data.",soal:[
     {id:1,vignette:"Petugas rekam medis RS Bunda Mulia menerima rekam medis pasien Ny. Sari, 54 tahun, dengan diagnosis: Diabetes Mellitus tipe 2 dengan nefropati diabetik stadium 4, hipertensi stage 2, dan riwayat stroke iskemik 6 bulan lalu. Pasien dirawat terutama karena kontrol glikemik yang buruk.",text:"Berdasarkan prinsip penetapan diagnosis utama untuk pelaporan morbiditas, kode ICD-10 yang PALING TEPAT sebagai diagnosis utama Ny. Sari adalah?",opsi:["A. E11.65 (DM tipe 2 dengan hiperglikemia) — kondisi paling bertanggung jawab atas kebutuhan perawatan saat ini sesuai prinsip UHDDS perawatan saat ini","B. I63.9 (Cerebral infarction, unspecified) — riwayat stroke merupakan kondisi paling berat dalam riwayat pasien dan harus selalu menjadi diagnosis utama","C. I10 (Essential hypertension) — hipertensi sebagai kondisi kronis yang paling mengancam jiwa dan menjadi akar sebagian besar komplikasi pasien","D. N18.4 (CKD stage 4) — komplikasi ginjal stadium berat harus dijadikan diagnosis utama karena merupakan kondisi yang paling mempengaruhi keputusan klinis","E. Z96.0 (Status post stroke) — kondisi historis paling relevan dan menjadi konteks utama seluruh penatalaksanaan pasien selama episode perawatan ini"],kunci:"A",pembahasan:"Berdasarkan prinsip ICD-10 dan Pedoman Koding Indonesia, diagnosis utama adalah kondisi yang setelah studi dan evaluasi paling bertanggung jawab atas episode perawatan saat ini. Ny. Sari dirawat karena kontrol glikemik yang buruk, sehingga DM tipe 2 dengan hiperglikemia (E11.65) adalah diagnosis utama. Hipertensi dan riwayat stroke adalah diagnosis sekunder/komorbiditas.",referensi:"WHO. ICD-10 vol. 2 Instruction Manual; Kemenkes RI. Pedoman Koding Indonesia"},
     {id:2,vignette:"Tim rekam medis Puskesmas Mekar Sari diminta menganalisis 10 besar penyakit rawat jalan tahun 2025 untuk penyusunan RUK 2027. Data: ISPA 1.245 kasus (22%), Hipertensi 980 kasus (17%), DM tipe 2 756 kasus (13%), Diare akut 598 kasus (11%), dan lainnya. Total 5.354 kasus.",text:"Berdasarkan data 10 besar penyakit di atas, program intervensi yang paling strategis dan berbasis bukti untuk diusulkan dalam RUK 2027 adalah?",opsi:["A. Fokus pada TB Paru karena merupakan program prioritas P2M Kemenkes; peningkatan penemuan kasus aktif (ACF) dan pelacakan kontak akan menurunkan beban morbiditas secara signifikaning tepat dan efisien","B. Prioritaskan ISPA karena menempati posisi tertinggi dalam 10 besar morbiditas; intervensi berupa peningkatan tata laksana standar dan edukasi pencegahan berbasis rumah tangga efisien","C. Rekrut dokter spesialis penyakit dalam dan anak untuk Puskesmas agar kasus PTM dan ISPA kompleks dapat ditangani tanpa rujukan; ini efisien dari sisi biaya jangka panjangtepat dan efisien","D. Prolanis untuk Hipertensi dan DM; edukasi PHBS berbasis komunitas; penguatan tata laksana ISPA dan TB; pendekatan ini berbasis data morbiditas lokal dan tidak membatasi pada satu program sajak ISPA dan Diare (33% kasus, dapat dicegah); (c) Skrinning PTM massal; (d) Integrasi dengan aplikasi ASIK untuk monitoring","E. Rujuk seluruh kasus hipertensi dan DM ke RS rujukan; Puskesmas fokus pada preventif dan promosi, sementara kuratif PTM diserahkan sepenuhnya ke fasilitas yang lebih kompeteng tepat dan efisien"],kunci:"D",pembahasan:"Analisis 10 besar penyakit untuk RUK harus berbasis bukti: Hipertensi (17%) + DM (13%) = 30% beban kasus PTM dengan biaya tinggi dan risiko komplikasi serius; ISPA (22%) + Diare (11%) = 33% kasus penyakit yang dapat dicegah dengan PHBS. Pendekatan terpadu Prolanis + PHBS + ASIK paling cost-effective.",referensi:"Kemenkes RI. Pedoman Penyusunan RUK; PMK No. 44/2016 Puskesmas"},
@@ -514,6 +716,201 @@ const BANK={
 };
 
 let peserta={nama:"",nim:"",kelas:"",prodi:"",email:""};
+
+// ═══════════════════════════════════════════════════════════════════════
+// DATA MATERI BELAJAR
+// ═══════════════════════════════════════════════════════════════════════
+const MATERI = {
+rekam_medis:{judul:"Rekam Medis & Informasi Kesehatan",kode:"RMIK-01",icon:"🗂️",ringkasan:"Rekam medis adalah berkas yang memuat catatan dan dokumen identitas pasien, hasil pemeriksaan, pengobatan, tindakan, dan pelayanan lain. Pengelolaan mencakup siklus hidup berkas dari assembling hingga pemusnahan.",poin:["Sistem penomoran Unit Record: satu nomor seumur hidup, riwayat terpusat — standar AHIMA, JCI, SNARS","Assembling: perakitan urutan lembar RM sesuai SOP sebelum disimpan ke dalam berkas","Quantitative analysis: memeriksa kelengkapan FISIK berkas (ada/tidak lembar wajib)","Qualitative analysis: memeriksa KUALITAS isi dokumentasi — akurasi, konsistensi, relevansi","KLPCM = (berkas tidak lengkap ÷ total berkas diaudit) × 100%; standar SNARS ≤10%","Retensi RM dewasa: 5 tahun aktif + 5 tahun inaktif; anak: sampai usia 21 tahun + 5 tahun","Pasien tidak dikenal: diberi nomor RM sementara dengan kode NN atau X","Terminal Digit Filing: paling efisien untuk RS besar — beban filing terdistribusi merata"],tips:["Soal 'sistem penomoran terbaik' → jawaban hampir selalu Unit Record System","Soal 'analisis kelengkapan fisik berkas' → Quantitative; 'kualitas isi' → Qualitative","Jika soal menyebut KLPCM >10% → selalu ada eskalasi ke Komite Medik","Hati-hati: Serial ≠ Serial Unit; Serial Unit = ada pemindahan berkas lama ke nomor baru"],jebakan:["KLPCM mengukur ketidaklengkapan fisik, bukan kualitas isi — keduanya berbeda","Retensi anak dihitung sampai usia 21 TAHUN + 5 tahun, bukan hanya 5 tahun flat","Assembling ≠ Analisis RM; assembling adalah proses fisik penyusunan lembar berkas"]},
+koding:{judul:"Koding & Klasifikasi Penyakit",kode:"KODING-02",icon:"🔢",ringkasan:"Koding adalah penetapan kode alfanumerik sesuai ICD-10 (morbiditas) dan ICD-9-CM (prosedur) berdasarkan dokumentasi klinis. Koding akurat menentukan klaim BPJS, data epidemiologi, dan tarif INA-CBGs.",poin:["Diagnosis Utama: kondisi paling bertanggung jawab atas kebutuhan perawatan — bukan diagnosis pertama yang ditulis","Dagger (†) = underlying disease/etiologi; Asterisk (*) = manifestasi organ — dagger SELALU ditulis lebih dulu","Kode Kombinasi: satu kode sudah mencakup diagnosis + komplikasi (contoh: E11.40 = DM tipe 2 + neuropati)","Kode Z (Bab XXI): faktor mempengaruhi status kesehatan — bukan penyakit spesifik","Kode V/W/X/Y (Bab XX): penyebab luar cedera — selalu kode tambahan, bukan kode utama","Mortalitas: kode underlying cause of death = penyakit AKAR, bukan penyebab langsung kematian","ICD-9-CM prosedur: spesifik lebih baik dari general (47.01 laparoscopic > 47.0 appendectomy)"],tips:["Soal 'diagnosis utama' → cari kondisi yang paling MENYEBABKAN pasien dirawat, bukan yang paling berat","Soal kode mortalitas → pilih underlying cause (akar penyakit), bukan terminal cause","Soal dagger-asterisk → ingat: † lebih dulu, * mengikuti sebagai manifestasi organ","Soal kode Z → untuk check-up, skrining, atau riwayat penyakit tanpa gejala aktif saat ini"],jebakan:["DM + komplikasi bukan selalu 2 kode terpisah — cek dulu kode kombinasi yang lebih spesifik","Kode unspecified hanya dipakai jika dokumentasi klinis MEMANG tidak cukup untuk kode spesifik","Diagnosis utama ≠ diagnosis paling berat; bisa jadi kondisi ringan yang jadi alasan utama dirawat"]},
+simrs:{judul:"SIMRS & Sistem Informasi Kesehatan",kode:"SIMRS-03",icon:"💻",ringkasan:"SIMRS mengelola informasi klinis dan administratif RS secara terintegrasi. Standar interoperabilitas modern menggunakan HL7 FHIR untuk pertukaran data antar sistem kesehatan.",poin:["HL7 FHIR R4: standar interoperabilitas modern berbasis REST API — wajib untuk integrasi Satu Sehat Indonesia","DICOM: standar khusus citra medis (radiologi) — bukan untuk pertukaran data klinis umum","LOINC: kode laboratorium dan observasi; SNOMED-CT: terminologi klinis komprehensif","SRS (Software Requirements Specification): dokumen PERTAMA sebelum desain sistem apapun dibuat","MPI (Master Patient Index): database identitas unik pasien — mencegah duplikasi lintas fasilitas","Relasi One-to-Many (1:N): satu pasien banyak kunjungan — relasi paling umum di SIMRS","Permenkes 24/2022: mengatur RME termasuk tanda tangan elektronik dan penyimpanan data","Data residency: data kesehatan wajib di data center dalam negeri — PP PSTE/Permenkominfo 5/2020"],tips:["Soal 'standar pertukaran data klinis antar sistem' → HL7 FHIR (bukan DICOM, bukan LOINC)","Soal 'dokumen awal pengembangan sistem' → SRS, bukan DFD atau ERD (itu dibuat setelahnya)","Soal 'cegah duplikasi identitas pasien lintas fasilitas' → MPI atau EMPI","Soal 'standar citra medis radiologi' → DICOM (satu-satunya untuk konteks ini)"],jebakan:["FHIR ≠ HL7 v2; FHIR adalah versi modern berbasis REST, HL7 v2 adalah versi lama berbasis pesan","SRS dibuat SEBELUM DFD/ERD/Use Case — urutan pengembangan ini sering ditanyakan","MPI ≠ EMR; MPI hanya menyimpan identitas, EMR menyimpan rekam medis klinis lengkap"]},
+statistik_umum:{judul:"Statistik & Pelaporan Kesehatan",kode:"STAT-04",icon:"📊",ringkasan:"Statistik kesehatan mencakup pengukuran utilisasi, kematian, dan kualitas layanan. Pelaporan menggunakan formulir RL dalam SIRS Online Kemenkes.",poin:["BOR = (Hari Perawatan ÷ (TT × Periode)) × 100%; standar ideal 60–85%","AvLOS = Total Hari Perawatan ÷ Pasien Keluar; standar RS umum 6–9 hari","TOI = ((TT × Periode) − Hari Perawatan) ÷ Pasien Keluar; standar 1–3 hari","BTO = Pasien Keluar ÷ TT Tersedia; standar 40–50 kali/tahun","NDR = (Meninggal ≥48 jam ÷ Pasien Keluar) × 1.000; standar <25 per mil","GDR = (Total Meninggal ÷ Pasien Keluar) × 1.000; standar <45 per mil","RL 3 = Kegiatan Pelayanan RS (sumber data morbiditas rawat inap dan rawat jalan)","Sumber data RL 4a (morbiditas rawat inap) = resume medis + lembar kode diagnosis"],tips:["Soal BOR: hitung dulu angkanya, BARU interpretasi dengan standar 60–85%","Soal NDR vs GDR: NDR = hanya kematian ≥48 jam; GDR = semua kematian termasuk <48 jam","Soal sumber data RL → RL 3 untuk kegiatan, RL 4 untuk morbiditas/mortalitas","Soal TOI tinggi → TT terlalu lama kosong; TOI <1 hari → berisiko HAIs"],jebakan:["Standar BOR adalah 60–85%, BUKAN 75–85%; BOR 68% masih IDEAL!","AvLOS menggunakan pasien KELUAR sebagai denominator, bukan pasien masuk","NDR ≠ GDR: NDR hanya ≥48 jam; GDR mencakup kematian <48 jam (DOA, early death)"]},
+mutu_hukum:{judul:"Manajemen Mutu & Hukum Kesehatan",kode:"MUTU-05",icon:"⚖️",ringkasan:"Mutu layanan kesehatan diukur melalui indikator klinis dan akreditasi SNARS. Aspek hukum mencakup informed consent, kerahasiaan rekam medis, dan hak pasien.",poin:["Informed Consent: wajib sebelum tindakan invasif; pasien berhak menolak setelah mendapat penjelasan","Kerahasiaan RM: dibuka hanya atas persetujuan TERTULIS pasien ATAU perintah pengadilan","Hak Pasien (HPK) SNARS: pasien berhak mendapat salinan RM dalam 14 hari kerja","Confidentiality = kewajiban RS/dokter menjaga kerahasiaan; Privacy = hak pasien kontrol informasinya","PMKP: fungsinya perbaikan berkelanjutan masalah mutu (siklus PDCA)","KLPCM >10% = temuan kritis akreditasi SNARS → wajib eskalasi ke Komite Medik","Emergency exception: tindakan tanpa consent SAH jika gawat darurat mengancam jiwa","Stempel tanda tangan dokter oleh perawat = berpotensi KUHP 263 (pemalsuan dokumen)"],tips:["Soal 'siapa yang boleh akses RM' → hanya pasien sendiri, kuasa tertulis, atau perintah pengadilan","Soal 'pasien menolak operasi setelah dijelaskan' → berikan penjelasan ulang, hormati keputusan","Soal 'fungsi PMKP' → perbaikan berkelanjutan; bukan menyusun anggaran atau melatih staf","Soal HPK SNARS → selalu terkait hak pasien mendapat penjelasan dan akses informasi medis"],jebakan:["Confidentiality ≠ Privacy; confidentiality kewajiban dokter/RS, privacy hak pasien","Consent keluarga pada emergency SAH — ini emergency exception, bukan pelanggaran hukum","PMKP bukan hanya audit — mencakup siklus PDCA penuh termasuk implementasi dan evaluasi"]},
+statistik_faskes:{judul:"Statistik Fasilitas Pelayanan Kesehatan",kode:"STAT-FASKES-06",icon:"🏥",ringkasan:"Statistik fasyankes mengukur efisiensi operasional, kualitas klinis, dan indikator kematian RS. Pemahaman rumus, standar, dan Grafik Barber-Johnson adalah kompetensi inti UKOM.",poin:["BOR standar Depkes RI: 60–85%; <60% = under-utilized; >85% = over-utilized (risiko HAIs)","AvLOS standar RS umum: 6–9 hari; <6 hari = risiko readmisi; >9 hari = inefisiensi/HAIs","TOI standar: 1–3 hari; <1 hari = risiko infeksi nosokomial; >3 hari = TT terlalu lama kosong","BTO standar: 40–50 kali/tahun; <40 = under-utilized; >50 = over-utilized","NDR = (Meninggal ≥48 jam ÷ Pasien Keluar) × 1.000; standar <25 per mil","GDR = (Total Meninggal ÷ Pasien Keluar) × 1.000; standar <45 per mil","STM = sisa pasien pukul 24.00; one-day patient TIDAK masuk STM (sudah pulang sebelum tengah malam)","CHP = STM awal + semua pasien masuk termasuk one-day; IP Service Days = CHP tanpa one-day","ADC = Total IP Service Days ÷ Jumlah Hari Periode","AKI = (Kematian Ibu ÷ Kelahiran Hidup) × 100.000; target SDGs 2030: ≤70/100.000 KH","AKB = (Kematian Bayi 0–<1 th ÷ Kelahiran Hidup) × 1.000; target SDGs 2030: ≤12/1.000 KH","Barber-Johnson: zona efisien = irisan BOR, AvLOS, TOI, BTO semua dalam standar"],tips:["Hitung dulu angkanya dengan TELITI sebelum membaca interpretasi di pilihan jawaban","Soal NDR vs GDR: NDR = ≥48 jam (mutu klinis); GDR = semua kematian termasuk DOA","Soal AKI/AKB: denominator SELALU kelahiran HIDUP, bukan total kelahiran atau total persalinan","Soal STM: one-day patient masuk CHP tapi TIDAK masuk STM — ini jebakan paling sering muncul","BOR 60–85% = IDEAL; jangan terkecoh opsi yang menyebut 75–85% sebagai standar"],jebakan:["Standar BOR = 60–85%, bukan 75–85%; BOR 68% itu IDEAL, bukan under-utilized!","AKI dan AKB: denominator = kelahiran HIDUP saja; lahir mati tidak ikut dihitung","One-day patient: masuk CHP tapi TIDAK masuk STM — sudah pulang sebelum tengah malam","BTO bulanan harus dikali 12 dulu untuk dibandingkan dengan standar 40–50 kali/tahun"]},
+analisis_pelaporan:{judul:"Analisis dan Pelaporan",kode:"ANLAP-07",icon:"📋",ringkasan:"Analisis data kesehatan mencakup pelaporan morbiditas, mortalitas, surveilans, dan evaluasi program. Kemampuan membaca data dan membuat rekomendasi berbasis bukti adalah kompetensi utama.",poin:["SP2TP/ASIK: sistem pelaporan puskesmas; jika ada discrepancy, register manual = gold standard","SKDR alert ≠ KLB otomatis — alert wajib diinvestigasi lapangan dulu sebelum penetapan KLB","KLB (PMK 1501/2010): peningkatan ≥2× rata-rata baseline DAN ada clustering geografis","Laporan W1: dilaporkan ke Dinkes dalam 24 jam saat sinyal KLB terdeteksi","IPA: prioritas perbaikan = dimensi dengan GAP antara ekspektasi dan kinerja terbesar","SIRS Online RL 4a vs casemix BPJS: perbedaan normal karena cakupan populasi berbeda","Drop-out imunisasi = masalah retensi (sudah mulai tapi tidak selesai) — solusinya kohort tracking","BOR, ALOS, TOI: tiga indikator efisiensi RS yang sering ditanyakan bersama dalam satu vignette"],tips:["Soal discrepancy dua sistem → rekonsiliasi dengan sumber primer; register manual = gold standard","Soal KLB → prosedur: investigasi → konfirmasi lab → tetapkan KLB → respons; jangan skip langkah","Soal IPA → dimensi skor TERENDAH = prioritas perbaikan pertama, bukan yang tertinggi","Soal under-reporting → triangulasi data (register + farmasi + lab + RS rujukan), bukan langsung sanksi"],jebakan:["SKDR alert bukan otomatis KLB — harus ada investigasi lapangan dan konfirmasi dulu","Drop-out imunisasi ≠ rendahnya akses; ini masalah retensi — sudah mulai tapi tidak selesai","Data digital (ASIK/SIMRS) bukan selalu lebih akurat — bisa ada gangguan jaringan atau input terlambat"]},
+manajemen_data:{judul:"Manajemen Data dan Informasi Kesehatan",kode:"MDIK-08",icon:"🗄️",ringkasan:"Manajemen data kesehatan mencakup klasifikasi data, keamanan informasi, interoperabilitas, dan tata kelola. UU PDP No. 27/2022 adalah landasan hukum utama perlindungan data pribadi termasuk data kesehatan.",poin:["Skala data: Nominal (tanpa urutan) → Ordinal (urutan, jarak tidak sama) → Interval (jarak sama, nol relatif) → Rasio (nol absolut bermakna)","UU PDP 27/2022: kebocoran data wajib dilaporkan ke BSSN dan Kemenkominfo dalam 3×24 jam","HL7 FHIR R4: standar interoperabilitas wajib untuk integrasi Satu Sehat Indonesia","Federated HIE: data tetap di fasilitas asal — sesuai prinsip data sovereignty UU PDP","Missing values: MCAR → listwise deletion aman; MAR → multiple imputation; MNAR → bias sistematis","Cronbach Alpha >0,70 = reliabel; item r < r-tabel = item tidak valid → pertimbangkan hapus","Cloud SIMRS: data center WAJIB di Indonesia (PP PSTE/Permenkominfo 5/2020)","Data Governance: mulai dari Stewardship → Quality Standards → Security → Privacy Compliance"],tips:["Soal klasifikasi data: tanya 'apakah nol bermakna?'; ya = Rasio; tidak = Interval","Soal kebocoran data UU PDP → selalu ada kewajiban notifikasi BSSN dalam 3×24 jam","Soal missing values → identifikasi mekanisme dulu (MCAR/MAR/MNAR) BARU pilih strategi","Soal reliabilitas instrumen → Alpha naik setelah item dihapus = konfirmasi hapus item itu"],jebakan:["Z-score TB/U bisa negatif — nol = median populasi referensi, bukan nol absolut (bukan Rasio murni)","MNAR: mean imputation dan listwise deletion KEDUANYA berpotensi bias sistematis","NDA saja TIDAK cukup untuk akses data kesehatan pihak ketiga — perlu consent pasien + komite etik"]},
+rekam_medis_hybrid:{judul:"Manajemen Rekam Medis Hybrid",kode:"RMH-09",icon:"🔄",ringkasan:"Rekam medis hybrid adalah kondisi transisi ketika sebagian berkas masih kertas dan sebagian sudah elektronik. Tantangan utama: fragmentasi data, kerahasiaan, dan keabsahan dokumen medikolegal.",poin:["Unit Numbering: satu pasien satu nomor seumur hidup — standar AHIMA, JCI, SNARS","Clinical Summary Bridge: ekstrak data kritis dari kertas ke RME untuk pasien aktif — solusi hybrid pragmatis","Tanda tangan dokter TIDAK bisa didelegasikan; stempel oleh perawat = potensi KUHP 263","Akses RM pasien: hak penuh atas seluruh RM dalam 14 hari kerja (UU PDP + Permenkes 269/2008)","Emergency exception: tindakan tanpa consent SAH jika gawat darurat mengancam jiwa","Scan RM boleh musnahkan fisik HANYA jika: ≥300 DPI + sistem berintegritas + audit trail + backup","Retensi RM: dewasa 5+5 tahun; anak usia 21 tahun + 5 tahun; jiwa dan medikolegal: kajian khusus","CDI: query klinis terbuka kepada dokter — bukan memaksakan kode tertentu"],tips:["Soal 'tanda tangan dokter' → tidak ada delegasi; stempel oleh orang lain = pelanggaran hukum","Soal 'pasien minta akses RM' → tidak boleh ditolak dengan alasan apapun, termasuk tunggakan biaya","Soal 'consent emergency' → doktrin emergency exception; ini bukan pelanggaran hukum","Soal 'sistem penomoran terbaik' → Unit Numbering selalu lebih baik dari Serial jangka panjang"],jebakan:["RS tidak boleh menahan RM karena tunggakan biaya — melanggar hak pasien (UU PDP)","Scan RM bukan otomatis menggantikan berkas asli — ada syarat teknis dan hukum yang harus dipenuhi","KLPCM 18% sudah kritis (>10% standar SNARS) — wajib eskalasi, bukan hanya dimaklumi"]},
+statistik_epidemiologi:{judul:"Aplikasi Statistik Kesehatan, Epidemiologi Dasar, dan Biomedik",kode:"STAT-EPI-10",icon:"🔬",ringkasan:"Statistik epidemiologi mencakup desain studi, ukuran asosiasi, uji hipotesis, dan interpretasi data populasi. Membedakan signifikansi statistik dan relevansi klinis adalah kompetensi tingkat tinggi.",poin:["OR (Odds Ratio) = (a×d)/(b×c) dari tabel 2×2; digunakan dalam regresi logistik untuk kontrol confounding","RR (Relative Risk) = insidensi paparan ÷ insidensi tidak terpapar; HANYA untuk cohort dan RCT","Sensitivitas = TP/(TP+FN); Spesifisitas = TN/(TN+FP); NPP = TP/(TP+FP); NPN = TN/(TN+FN)","Tes skrining: prioritaskan SENSITIVITAS tinggi (sedikit false negative = sedikit kasus terlewat)","Confounding positif: OR adjusted < OR crude — confounder memperbesar asosiasi yang sesungguhnya","Ecological fallacy: korelasi agregat ≠ hubungan individu — batasan studi ekologis","Two-Way ANOVA: dua faktor independen kategorik + satu dependen kontinu + dapat uji interaction effect","KLB: threshold = 2× rata-rata baseline; peningkatan ≥2× DAN ada clustering geografis","Kurva epidemi: point source = naik-turun simetris cepat; continuing source = naik cepat, turun lambat dengan plateau","ITS dan DiD: desain terbaik untuk evaluasi program yang sudah berjalan tanpa randomisasi awal"],tips:["Soal OR: hitung manual (a×d)/(b×c); jangan tebak dari angka yang terlihat besar","Soal desain studi: 'paparan diukur SEBELUM outcome' = cohort; 'rekrut dari outcome' = case-control","Soal p-value: p kecil ≠ bermakna klinis; selalu pertimbangkan effect size dan MCID juga","Soal KLB: cek ≥2× baseline DAN clustering geografis sebelum menetapkan KLB"],jebakan:["OR dan RR berbeda matematis; RR TIDAK bisa dihitung dari case-control (hanya OR yang bisa)","p=0,001 bukan berarti 0,1% kemungkinan salah — ini probabilitas data seekstrem ini jika H0 benar","Cohen's d 0,62 = efek MODERAT, bukan kecil; skala: kecil <0,2 · sedang ≈0,5 · besar >0,8","Studi ekologis TETAP bernilai ilmiah — yang tidak boleh adalah inferensi kausal level individu dari data agregat"]}
+};
+
+// ── STATE TAMBAHAN ──────────────────────────────────────────────────────
+let jalurMasuk = 'langsung';
+let belajarKompId = null;
+
+// ── NAVIGASI HUB ────────────────────────────────────────────────────────
+function masukBelajar(){
+  renderBelajarGrid();
+  document.getElementById('belajar-pilih').style.display='block';
+  document.getElementById('belajar-modul').style.display='none';
+  showScreen('screen-belajar');
+}
+function masukLatihan(){
+  if(jalurMasuk!=='belajar') jalurMasuk='langsung';
+  showScreen('screen-landing');
+}
+function backToHub(){ showScreen('screen-hub'); }
+function backToBelajarPilih(){
+  document.getElementById('belajar-pilih').style.display='block';
+  document.getElementById('belajar-modul').style.display='none';
+}
+
+// ── RENDER GRID BELAJAR ─────────────────────────────────────────────────
+function renderBelajarGrid(){
+  const grid=document.getElementById('belajar-grid');
+  if(!grid) return;
+  grid.innerHTML='';
+  Object.keys(MATERI).forEach(key=>{
+    const m=MATERI[key];
+    const b=BANK[key];
+    const n=b?b.soal.length:0;
+    grid.innerHTML+=`<div class="bk-card" onclick="bukaModul('${key}')">
+      <div class="bk-icon">${m.icon}</div>
+      <div class="bk-kode">${m.kode} · ${n} soal</div>
+      <div class="bk-label">${m.judul}</div>
+    </div>`;
+  });
+}
+
+// ── RENDER MODUL BELAJAR ────────────────────────────────────────────────
+function bukaModul(kompId){
+  belajarKompId=kompId;
+  const m=MATERI[kompId];
+  if(!m) return;
+  document.getElementById('modul-header-title').innerHTML=`<em>${m.kode}</em> — ${m.judul}`;
+  const poinHTML=m.poin.map(p=>`<li>${p}</li>`).join('');
+  const tipsHTML=m.tips.map(t=>`<div class="tips-item">${t}</div>`).join('');
+  const jebakanHTML=m.jebakan.map(j=>`<div class="jebakan-item">${j}</div>`).join('');
+  document.getElementById('modul-konten').innerHTML=`
+    <div class="modul-hero">
+      <div class="modul-kode">${m.kode}</div>
+      <div class="modul-judul">${m.icon} ${m.judul}</div>
+      <div class="modul-ringkasan">${m.ringkasan}</div>
+    </div>
+    <div class="modul-section">
+      <div class="modul-section-title">📌 Poin Kunci yang Harus Dipahami</div>
+      <ul class="modul-poin-list">${poinHTML}</ul>
+    </div>
+    <div class="modul-section">
+      <div class="modul-section-title">💡 Tips Menjawab Soal</div>
+      <div class="tips-list">${tipsHTML}</div>
+    </div>
+    <div class="modul-section">
+      <div class="modul-section-title">⚠️ Kata Kunci Jebakan — Hati-Hati!</div>
+      <div class="jebakan-list">${jebakanHTML}</div>
+    </div>
+    <div class="modul-cta">
+      <div class="modul-cta-text">Sudah memahami materi <strong>${m.kode}</strong>?<br>Sekarang uji pemahaman Anda dengan latihan soal kompetensi ini.</div>
+      <button class="btn-mulai-latihan" onclick="mulaiDariBelajar('${kompId}')">✏️ Latihan Soal ${m.kode} →</button>
+    </div>`;
+  document.getElementById('belajar-pilih').style.display='none';
+  document.getElementById('belajar-modul').style.display='block';
+}
+
+// ── MULAI LATIHAN DARI BELAJAR ──────────────────────────────────────────
+function mulaiDariBelajar(kompId){
+  jalurMasuk='belajar';
+  showScreen('screen-landing');
+  setTimeout(()=>{ mulaiLatihan(kompId); },150);
+}
+
+// ── UPDATE HUB SETELAH LOGIN ────────────────────────────────────────────
+
+// ═══════════════════════════════════════════════════════════
+// EXPORT SOAL — PIN PROTECTED
+// ═══════════════════════════════════════════════════════════
+const DOSEN_PIN = '211021';
+
+function showPinModal(){
+  document.getElementById('pin-input').value = '';
+  document.getElementById('pin-err').classList.remove('on');
+  document.getElementById('pin-overlay').classList.add('on');
+  setTimeout(()=>document.getElementById('pin-input').focus(), 200);
+}
+
+function tutupPinModal(){
+  document.getElementById('pin-overlay').classList.remove('on');
+  document.getElementById('pin-input').value = '';
+  document.getElementById('pin-err').classList.remove('on');
+}
+
+function verifikasiPin(){
+  const pin = document.getElementById('pin-input').value.trim();
+  if(pin === DOSEN_PIN){
+    tutupPinModal();
+    exportSoalPDF();
+  } else {
+    document.getElementById('pin-err').classList.add('on');
+    document.getElementById('pin-input').value = '';
+    document.getElementById('pin-input').focus();
+  }
+}
+
+function exportSoalPDF(){
+  const kompId = state.kompId;
+  if(!kompId || !BANK[kompId]) return;
+  const k = BANK[kompId];
+  const now = new Date().toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'});
+
+  // Build HTML soal lengkap
+  let soalHTML = '';
+  k.soal.forEach((s, idx)=>{
+    const opsiHTML = s.opsi.map((o, i)=>{
+      const huruf = String.fromCharCode(65+i);
+      const isKunci = huruf === s.kunci;
+      return `<div class="ps-opsi${isKunci?' kunci':''}">
+        ${huruf}. ${o}${isKunci?' ✓':''}
+      </div>`;
+    }).join('');
+
+    const vigHTML = s.vignette
+      ? `<div class="ps-vignette"><strong>Vignette:</strong> ${s.vignette}</div>`
+      : '';
+
+    soalHTML += `
+      <div class="ps-soal">
+        <div class="ps-nomor">Soal ${idx+1}</div>
+        ${vigHTML}
+        <div class="ps-pertanyaan">${s.text}</div>
+        ${opsiHTML}
+        <div class="ps-kunci-box">
+          <span class="ps-kunci-label">Kunci Jawaban: ${s.kunci}</span>
+        </div>
+        <div class="ps-pembahasan"><strong>Pembahasan:</strong> ${s.pembahasan}</div>
+        <div class="ps-referensi">Referensi: ${s.referensi||'—'}</div>
+      </div>
+      <hr class="ps-divider"/>`;
+  });
+
+  const container = document.getElementById('print-soal-container');
+  container.innerHTML = `
+    <div class="ps-header">
+      <div class="ps-inst">Politeknik Kesehatan Kartini Bali</div>
+      <div class="ps-title">Bank Soal UKOM D4 MIK — ${k.label}</div>
+      <div class="ps-meta">${k.kode} · ${k.soal.length} Soal · Dicetak: ${now}</div>
+      <div class="ps-meta">Fasilitator: Gede Wirabuana Putra, S.KM, M.K.M, AIFO-P</div>
+    </div>
+    ${soalHTML}
+    <div class="ps-footer">
+      Dokumen ini berisi soal, kunci jawaban, dan pembahasan — hanya untuk penggunaan fasilitator.<br>
+      Portal Latihan UKOM D4 MIK — Politeknik Kesehatan Kartini Bali
+    </div>`;
+
+  // Trigger print
+  setTimeout(()=>{
+    window.print();
+    // Bersihkan container setelah print dialog ditutup
+    setTimeout(()=>{ container.innerHTML = ''; }, 1000);
+  }, 200);
+}
+
+function updateHub(){
+  const el=document.getElementById('hub-nama');
+  const info=document.getElementById('hub-peserta-info');
+  if(el) el.textContent=peserta.nama||'—';
+  if(info) info.textContent=`${peserta.nim||'—'} · ${peserta.kelas||'—'} · ${peserta.prodi||'—'}`;
+}
+
+
 let state={kompId:null,soal:[],currentIdx:0,answered:false,benar:0,salah:0,history:[]};
 
 
@@ -566,7 +963,8 @@ function doLogin(){
   document.getElementById("user-pill").classList.add("on");
   document.getElementById("peserta-strip").textContent="👤 "+nama+" · "+nim+" · "+kelas;
   renderLanding();
-  showScreen("screen-landing");
+  showScreen("screen-hub");
+  updateHub();
 }
 
 function konfirmasiLogout(){
@@ -685,6 +1083,10 @@ function tampilHasil(){stopTimer();
   document.getElementById("pi-prodi").textContent=peserta.prodi;
   document.getElementById("pi-email").textContent=peserta.email;
   document.getElementById("pi-tgl").textContent=now;
+  const jalurEl=document.getElementById("pi-jalur");
+  if(jalurEl) jalurEl.textContent = jalurMasuk==='belajar'
+    ? "Mengakses modul belajar terlebih dahulu sebelum latihan soal"
+    : "Langsung mengerjakan latihan soal tanpa mengakses modul belajar";
   document.getElementById("h-persen").textContent=persen+"%";
   document.getElementById("h-komp").textContent=k.label;
   document.getElementById("h-meta").textContent=state.benar+" benar dari "+total+" soal · "+now;
@@ -723,7 +1125,7 @@ function updateScorePill(){
   document.getElementById("sc-sisa").textContent=sisa;
 }
 function ulangiLatihan(){mulaiLatihan(state.kompId);}
-function backToLanding(){stopTimer();showScreen("screen-landing");}
+function backToLanding(){stopTimer();jalurMasuk="langsung";showScreen("screen-hub");}
 function showScreen(id){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));
   document.getElementById(id).classList.add("on");
@@ -740,6 +1142,26 @@ function showScreen(id){
     <button class="modal-btn ghost" onclick="timeoutUlangi()">Ulangi Latihan</button>
   </div>
 </div>
+
+
+<!-- MODAL PIN EXPORT -->
+<div class="pin-overlay" id="pin-overlay">
+  <div class="pin-box">
+    <div class="pin-icon">🔐</div>
+    <div class="pin-title">Akses Dosen</div>
+    <div class="pin-sub">Masukkan PIN untuk mengunduh soal,<br>kunci jawaban, dan pembahasan.</div>
+    <input class="pin-input" type="password" id="pin-input" maxlength="10"
+      placeholder="••••••" onkeydown="if(event.key==='Enter')verifikasiPin()"/>
+    <div class="pin-err" id="pin-err">PIN salah. Silakan coba lagi.</div>
+    <div class="pin-actions">
+      <button class="pin-btn ghost" onclick="tutupPinModal()">Batal</button>
+      <button class="pin-btn primary" onclick="verifikasiPin()">Masuk</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTAINER PRINT SOAL (hidden, hanya muncul saat print) -->
+<div id="print-soal-container"></div>
 
 </body>
 </html>
