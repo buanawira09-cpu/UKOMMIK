@@ -352,6 +352,201 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);m
 .ps-footer{margin-top:1.5rem;border-top:1px solid #ccc;padding-top:.6rem;font-size:.75rem;color:#888;text-align:center;}
 .ps-divider{border:none;border-top:1px dashed #ddd;margin:.8rem 0;}
 
+
+/* ══ BARBER-JOHNSON INTERAKTIF ══════════════════════════════════════════════ */
+.bj-wrap{background:rgba(13,43,78,.5);border:1px solid rgba(91,155,213,.2);border-radius:8px;padding:1.2rem;margin:1.2rem 0;}
+.bj-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);margin-bottom:.3rem;}
+.bj-title em{color:var(--gl);font-style:italic;}
+.bj-desc{font-size:.76rem;color:var(--sl);margin-bottom:1rem;line-height:1.6;}
+
+/* Input grid */
+.bj-inputs{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1rem;}
+@media(max-width:480px){.bj-inputs{grid-template-columns:1fr;}}
+.bj-field{background:rgba(255,255,255,.04);border:1px solid rgba(168,203,232,.15);border-radius:5px;padding:.7rem .9rem;}
+.bj-field label{display:block;font-size:.7rem;color:var(--sky);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.35rem;}
+.bj-field .bj-slider{width:100%;accent-color:var(--gold);margin-bottom:.3rem;cursor:pointer;}
+.bj-field .bj-val{font-family:'DM Mono',monospace;font-size:.95rem;color:var(--white);font-weight:500;}
+.bj-field .bj-unit{font-size:.7rem;color:var(--sl);}
+
+/* Status bar */
+.bj-status{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.9rem;}
+.bj-badge{font-family:'DM Mono',monospace;font-size:.7rem;padding:3px 10px;border-radius:3px;letter-spacing:.05em;}
+.bj-badge.ok{background:rgba(22,163,74,.15);color:#86efac;border:1px solid rgba(22,163,74,.3);}
+.bj-badge.warn{background:rgba(251,191,36,.1);color:#fbbf24;border:1px solid rgba(251,191,36,.25);}
+.bj-badge.danger{background:rgba(220,38,38,.1);color:#f87171;border:1px solid rgba(220,38,38,.25);}
+
+/* SVG chart */
+.bj-chart-wrap{width:100%;overflow-x:auto;}
+.bj-chart-wrap svg{display:block;max-width:100%;}
+
+/* Interpretasi */
+.bj-interp{background:rgba(255,255,255,.03);border-radius:5px;padding:.8rem 1rem;margin-top:.9rem;font-size:.78rem;color:var(--sl);line-height:1.75;}
+.bj-interp strong{color:var(--white);}
+.bj-interp .ok-txt{color:#86efac;}
+.bj-interp .warn-txt{color:#fbbf24;}
+.bj-interp .danger-txt{color:#f87171;}
+
+/* Case buttons */
+.bj-cases{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.9rem;}
+@media(max-width:480px){.bj-cases{grid-template-columns:1fr 1fr;}}
+.bj-case-btn{background:rgba(255,255,255,.04);border:1px solid rgba(168,203,232,.12);border-radius:4px;padding:.55rem .7rem;cursor:pointer;font-size:.72rem;color:var(--sl);text-align:left;transition:all .2s;line-height:1.5;}
+.bj-case-btn:hover{background:rgba(91,155,213,.08);border-color:rgba(91,155,213,.3);color:var(--white);}
+.bj-case-btn strong{display:block;color:var(--white);font-size:.73rem;margin-bottom:.15rem;}
+.bj-case-btn .ok-txt{color:#86efac;}
+.bj-case-btn .danger-txt{color:#f87171;}
+
+/* Legend */
+.bj-legend{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.7rem;font-size:.71rem;color:var(--sl);align-items:center;}
+.bj-dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:3px;vertical-align:middle;}
+
+
+/* ══ POHON RUMUS STAT-FASKES ═══════════════════════════════════════════════ */
+/* Tab navigasi */
+.pr-tabs{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap;}
+.pr-tab{background:rgba(255,255,255,.04);border:1px solid rgba(168,203,232,.15);
+  border-radius:4px;padding:6px 14px;font-size:.74rem;font-family:'DM Mono',monospace;
+  letter-spacing:.05em;color:var(--sl);cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.pr-tab:hover{border-color:rgba(201,162,39,.4);color:var(--gl);}
+.pr-tab.active{background:rgba(201,162,39,.12);border-color:var(--gold);color:var(--gl);font-weight:600;}
+.pr-panel{display:none;animation:fadeUp .3s ease;}
+.pr-panel.active{display:block;}
+
+/* Cara pakai banner */
+.pr-banner{background:linear-gradient(135deg,rgba(37,99,168,.2),rgba(13,43,78,.4));
+  border:1px solid rgba(91,155,213,.25);border-radius:6px;padding:.9rem 1.1rem;
+  margin-bottom:1.2rem;font-size:.78rem;color:var(--sl);line-height:1.8;}
+.pr-banner ol{margin:.4rem 0 0 1.2rem;padding:0;}
+.pr-banner li{margin-bottom:.2rem;}
+
+/* Variabel inti */
+.pr-vars{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem;}
+@media(max-width:500px){.pr-vars{grid-template-columns:repeat(2,1fr);}}
+.pr-var{background:rgba(37,99,168,.2);border:1px solid rgba(91,155,213,.3);
+  border-radius:5px;padding:.6rem .8rem;text-align:center;}
+.pr-var .vcode{font-family:'DM Mono',monospace;font-size:1rem;font-weight:700;color:var(--sky);margin-bottom:.2rem;}
+.pr-var .vname{font-size:.68rem;color:var(--sl);line-height:1.4;}
+
+/* Panah pohon */
+.pr-arrow{text-align:center;color:rgba(201,162,39,.5);font-size:.9rem;
+  margin:.3rem 0;letter-spacing:.5rem;}
+
+/* Kartu indikator utilisasi */
+.pr-indikators{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin-bottom:1rem;}
+@media(max-width:600px){.pr-indikators{grid-template-columns:repeat(2,1fr);}}
+.pr-ind{background:rgba(255,255,255,.04);border:1px solid rgba(168,203,232,.12);
+  border-radius:5px;padding:.65rem .7rem;text-align:center;position:relative;}
+.pr-ind .ind-name{font-family:'DM Mono',monospace;font-size:.85rem;font-weight:700;
+  color:var(--gold);margin-bottom:.2rem;}
+.pr-ind .ind-rumus{font-size:.68rem;color:var(--sl);line-height:1.5;margin-bottom:.3rem;}
+.pr-ind .ind-std{font-size:.66rem;font-family:'DM Mono',monospace;
+  background:rgba(22,163,74,.12);color:#86efac;border-radius:3px;
+  padding:2px 6px;display:inline-block;}
+
+/* Box pasangan BOR-TOI */
+.pr-pasangan{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;
+  margin-bottom:.8rem;align-items:center;}
+@media(max-width:500px){.pr-pasangan{grid-template-columns:1fr;}}
+.pr-pair-card{background:rgba(91,155,213,.08);border:1px solid rgba(91,155,213,.2);
+  border-radius:5px;padding:.7rem .9rem;font-size:.76rem;color:var(--sl);line-height:1.6;}
+.pr-pair-card .pc-title{font-family:'DM Mono',monospace;font-size:.8rem;font-weight:700;
+  color:var(--sky);margin-bottom:.3rem;}
+.pr-pair-arrow{text-align:center;color:var(--gold);font-size:1.2rem;}
+
+/* Pohon mortalitas */
+.pr-mort-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:.8rem;}
+@media(max-width:500px){.pr-mort-grid{grid-template-columns:1fr;}}
+.pr-mort-group{background:rgba(255,255,255,.03);border:1px solid rgba(168,203,232,.12);
+  border-radius:5px;padding:.8rem;}
+.pr-mort-group .mg-title{font-size:.68rem;font-family:'DM Mono',monospace;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--sky);
+  border-bottom:1px solid rgba(168,203,232,.12);padding-bottom:.4rem;margin-bottom:.7rem;}
+.pr-mort-card{background:rgba(255,255,255,.04);border-radius:4px;
+  padding:.55rem .7rem;margin-bottom:.5rem;}
+.pr-mort-card:last-child{margin-bottom:0;}
+.pr-mort-card .mc-name{font-family:'DM Mono',monospace;font-size:.82rem;
+  font-weight:700;color:var(--gold);margin-bottom:.15rem;}
+.pr-mort-card .mc-rumus{font-size:.7rem;color:var(--sl);margin-bottom:.2rem;line-height:1.4;}
+.pr-mort-card .mc-std{font-size:.66rem;background:rgba(220,38,38,.1);
+  color:#fca5a5;border-radius:3px;padding:1px 6px;display:inline-block;}
+.pr-mort-card .mc-std.sdgs{background:rgba(37,99,168,.15);color:var(--sky);}
+
+/* Kunci hafalan */
+.pr-kunci{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.8rem;}
+@media(max-width:500px){.pr-kunci{grid-template-columns:1fr;}}
+.pr-kunci-item{background:rgba(201,162,39,.07);border-left:3px solid var(--gold);
+  border-radius:0 4px 4px 0;padding:.55rem .8rem;font-size:.76rem;color:var(--sl);line-height:1.6;}
+.pr-kunci-item strong{color:var(--gl);display:block;margin-bottom:.2rem;font-size:.78rem;}
+
+/* Sensus harian */
+.pr-sensus{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.8rem;}
+@media(max-width:500px){.pr-sensus{grid-template-columns:1fr;}}
+.pr-sensus-card{background:rgba(255,255,255,.04);border:1px solid rgba(168,203,232,.12);
+  border-radius:5px;padding:.75rem .9rem;}
+.pr-sensus-card .sc-name{font-family:'DM Mono',monospace;font-size:.85rem;font-weight:700;
+  color:var(--sky);margin-bottom:.3rem;}
+.pr-sensus-card .sc-rumus{font-size:.75rem;color:var(--white);margin-bottom:.3rem;line-height:1.5;}
+.pr-sensus-card .sc-note{font-size:.7rem;color:#fbbf24;line-height:1.5;}
+
+/* Jembatan Keledai Tabel */
+.jk-table{width:100%;border-collapse:collapse;font-size:.75rem;}
+.jk-table th{background:rgba(37,99,168,.3);color:var(--sky);font-family:'DM Mono',monospace;
+  font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.5rem .7rem;text-align:left;border-bottom:1px solid rgba(91,155,213,.3);}
+.jk-table td{padding:.5rem .7rem;border-bottom:1px solid rgba(168,203,232,.06);
+  vertical-align:top;color:var(--sl);line-height:1.5;}
+.jk-table tr:hover td{background:rgba(255,255,255,.02);}
+.jk-table .jk-group{background:rgba(201,162,39,.07);color:var(--gl);
+  font-family:'DM Mono',monospace;font-size:.67rem;letter-spacing:.08em;
+  text-transform:uppercase;padding:.35rem .7rem;font-weight:700;}
+.jk-ind{font-family:'DM Mono',monospace;font-weight:700;color:var(--gold);font-size:.82rem;}
+.jk-ind small{display:block;font-size:.63rem;color:var(--sl);font-weight:400;
+  font-family:'DM Sans',sans-serif;letter-spacing:0;}
+.jk-rumus{color:var(--white);font-size:.73rem;}
+.jk-jembatan{color:#86efac;font-size:.73rem;font-style:italic;}
+.jk-std{font-family:'DM Mono',monospace;font-size:.7rem;}
+.jk-std .ok{color:#86efac;}.jk-std .warn{color:#fbbf24;}.jk-std .danger{color:#f87171;}
+.jk-ingat{font-size:.7rem;color:#fbbf24;}
+
+/* Box perbedaan kritis */
+.pr-kritis{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.2);
+  border-radius:5px;padding:.85rem 1rem;margin-top:.8rem;}
+.pr-kritis .kritis-title{font-family:'DM Mono',monospace;font-size:.7rem;
+  letter-spacing:.08em;text-transform:uppercase;color:#f87171;margin-bottom:.6rem;}
+.pr-kritis-item{font-size:.77rem;color:var(--sl);padding:.3rem 0;
+  border-bottom:1px solid rgba(220,38,38,.1);line-height:1.6;}
+.pr-kritis-item:last-child{border-bottom:none;}
+.pr-kritis-item strong{color:#fca5a5;}
+
+/* Pola umum mortalitas */
+.pr-pola{background:linear-gradient(135deg,rgba(37,99,168,.15),rgba(13,43,78,.3));
+  border:1px solid rgba(91,155,213,.2);border-radius:5px;padding:.75rem 1rem;
+  margin-bottom:.8rem;font-size:.78rem;text-align:center;}
+.pr-pola .pola-formula{font-family:'DM Mono',monospace;font-size:.9rem;
+  color:var(--white);margin:.4rem 0;letter-spacing:.03em;}
+.pr-pola .pola-sub{font-size:.72rem;color:var(--sl);}
+
+
+/* ── TOGGLE MODE LATIHAN ─────────────────────────────────── */
+.mode-toggle{display:flex;align-items:center;gap:.5rem;
+  background:rgba(255,255,255,.03);border:1px solid rgba(168,203,232,.12);
+  border-radius:6px;padding:.7rem 1rem;margin-bottom:1.2rem;flex-wrap:wrap;}
+.mode-label{font-size:.73rem;color:var(--sl);font-family:'DM Mono',monospace;
+  letter-spacing:.06em;text-transform:uppercase;margin-right:.3rem;white-space:nowrap;}
+.mode-btn{padding:6px 16px;border-radius:4px;font-size:.78rem;font-family:'DM Sans',sans-serif;
+  font-weight:500;cursor:pointer;transition:all .2s;border:1px solid transparent;white-space:nowrap;}
+.mode-btn.bebas{background:rgba(91,155,213,.1);border-color:rgba(91,155,213,.3);color:var(--sky);}
+.mode-btn.bebas.active{background:rgba(91,155,213,.25);border-color:var(--sky);color:var(--white);font-weight:600;}
+.mode-btn.simulasi{background:rgba(201,162,39,.08);border-color:rgba(201,162,39,.25);color:var(--gl);}
+.mode-btn.simulasi.active{background:rgba(201,162,39,.2);border-color:var(--gold);color:var(--white);font-weight:600;}
+.mode-desc{font-size:.72rem;color:var(--muted);margin-left:.3rem;flex:1;min-width:160px;}
+
+/* Timer info-only state (mode bebas) */
+.timer-wrap.info-only{border-color:rgba(168,203,232,.15);color:var(--muted);}
+.timer-wrap.info-only .timer-icon{opacity:.4;}
+.timer-info-badge{font-size:.62rem;font-family:'DM Mono',monospace;
+  background:rgba(91,155,213,.12);color:var(--sky);border-radius:2px;
+  padding:1px 5px;margin-left:4px;letter-spacing:.04em;vertical-align:middle;}
+
 </style>
 </head>
 <body>
@@ -476,6 +671,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);m
   <div class="landing-back">
     <button class="btn-back-hub" onclick="showScreen('screen-hub')">← Menu Utama</button>
   </div>
+  <div class="mode-toggle">
+    <span class="mode-label">Mode:</span>
+    <button class="mode-btn bebas active" id="btn-mode-bebas" onclick="setModeTimer(false)">
+      📖 Latihan Bebas
+    </button>
+    <button class="mode-btn simulasi" id="btn-mode-simulasi" onclick="setModeTimer(true)">
+      ⏱ Simulasi UKOM
+    </button>
+    <span class="mode-desc" id="mode-desc-text">Tanpa batas waktu — fokus memahami soal dan pembahasan</span>
+  </div>
   <div class="landing-hero">
     <div class="hl">Pilih <em>Kompetensi</em><br>yang Ingin Dilatih</div>
     <div class="sub">Setiap soal disertai pembahasan langsung. Ulangi latihan sebanyak yang dibutuhkan.</div>
@@ -536,6 +741,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);m
     <div class="pi-row">Email: <strong id="pi-email">—</strong></div>
     <div class="pi-row">Tanggal & Waktu: <strong id="pi-tgl">—</strong></div>
     <div class="pi-row">Mode Akses: <strong id="pi-jalur">—</strong></div>
+    <div class="pi-row">Mode Latihan: <strong id="pi-mode">—</strong></div>
   </div>
 
   <div class="hasil-header">
@@ -735,9 +941,29 @@ statistik_epidemiologi:{judul:"Aplikasi Statistik Kesehatan, Epidemiologi Dasar,
 
 // ── STATE TAMBAHAN ──────────────────────────────────────────────────────
 let jalurMasuk = 'langsung';
+let modeTimer = false; // false = Latihan Bebas, true = Simulasi UKOM
 let belajarKompId = null;
 
 // ── NAVIGASI HUB ────────────────────────────────────────────────────────
+
+// ── MODE TIMER ──────────────────────────────────────────────
+function setModeTimer(isSimulasi){
+  modeTimer = isSimulasi;
+  const btnBebas = document.getElementById('btn-mode-bebas');
+  const btnSim   = document.getElementById('btn-mode-simulasi');
+  const desc     = document.getElementById('mode-desc-text');
+  if(!btnBebas || !btnSim) return;
+  if(isSimulasi){
+    btnBebas.classList.remove('active');
+    btnSim.classList.add('active');
+    if(desc) desc.textContent = '1 menit per soal — rasakan atmosfer ujian UKOM sesungguhnya';
+  } else {
+    btnSim.classList.remove('active');
+    btnBebas.classList.add('active');
+    if(desc) desc.textContent = 'Tanpa batas waktu — fokus memahami soal dan pembahasan';
+  }
+}
+
 function masukBelajar(){
   renderBelajarGrid();
   document.getElementById('belajar-pilih').style.display='block';
@@ -746,6 +972,8 @@ function masukBelajar(){
 }
 function masukLatihan(){
   if(jalurMasuk!=='belajar') jalurMasuk='langsung';
+  modeTimer=false;
+  setModeTimer(false);
   showScreen('screen-landing');
 }
 function backToHub(){ showScreen('screen-hub'); }
@@ -777,7 +1005,10 @@ function bukaModul(kompId){
   const m=MATERI[kompId];
   if(!m) return;
   document.getElementById('modul-header-title').innerHTML=`<em>${m.kode}</em> — ${m.judul}`;
-  const poinHTML=m.poin.map(p=>`<li>${p}</li>`).join('');
+  const isPohon = kompId==='statistik_faskes';
+  const poinHTML = isPohon
+    ? renderPohonRumus()
+    : m.poin.map(p=>`<li>${p}</li>`).join('');
   const tipsHTML=m.tips.map(t=>`<div class="tips-item">${t}</div>`).join('');
   const jebakanHTML=m.jebakan.map(j=>`<div class="jebakan-item">${j}</div>`).join('');
   document.getElementById('modul-konten').innerHTML=`
@@ -786,10 +1017,15 @@ function bukaModul(kompId){
       <div class="modul-judul">${m.icon} ${m.judul}</div>
       <div class="modul-ringkasan">${m.ringkasan}</div>
     </div>
-    <div class="modul-section">
-      <div class="modul-section-title">📌 Poin Kunci yang Harus Dipahami</div>
-      <ul class="modul-poin-list">${poinHTML}</ul>
-    </div>
+    ${isPohon
+      ? `<div class="modul-section">
+          <div class="modul-section-title">🌳 Pohon Rumus &amp; Jembatan Keledai</div>
+          ${poinHTML}
+        </div>`
+      : `<div class="modul-section">
+          <div class="modul-section-title">📌 Poin Kunci yang Harus Dipahami</div>
+          <ul class="modul-poin-list">${poinHTML}</ul>
+        </div>`}
     <div class="modul-section">
       <div class="modul-section-title">💡 Tips Menjawab Soal</div>
       <div class="tips-list">${tipsHTML}</div>
@@ -798,12 +1034,223 @@ function bukaModul(kompId){
       <div class="modul-section-title">⚠️ Kata Kunci Jebakan — Hati-Hati!</div>
       <div class="jebakan-list">${jebakanHTML}</div>
     </div>
+    ${kompId==='statistik_faskes'?`
+    <div class="modul-section">
+      <div class="modul-section-title">📊 Simulasi Interaktif — Grafik Barber-Johnson</div>
+      <div class="bj-wrap">
+        <div class="bj-title">Grafik <em>Barber-Johnson</em> — Simulasi Interaktif</div>
+        <div class="bj-desc">Geser slider TOI dan AvLOS untuk melihat posisi titik RS pada grafik. BOR dan BTO dihitung otomatis. Titik biru adalah posisi RS Anda saat ini.</div>
+        <div class="bj-inputs">
+          <div class="bj-field">
+            <label>TOI — Turn Over Interval (hari)</label>
+            <input type="range" class="bj-slider" min="0.5" max="10" step="0.1" value="2" id="bj-toi" oninput="bjUpdate()">
+            <span class="bj-val" id="bj-vtoi">2.0</span> <span class="bj-unit">hari &nbsp;|&nbsp; Standar: 1–3 hari</span>
+          </div>
+          <div class="bj-field">
+            <label>AvLOS — Average Length of Stay (hari)</label>
+            <input type="range" class="bj-slider" min="1" max="20" step="0.1" value="7" id="bj-avlos" oninput="bjUpdate()">
+            <span class="bj-val" id="bj-vavlos">7.0</span> <span class="bj-unit">hari &nbsp;|&nbsp; Standar: 3–12 hari (RS umum: 6–9 hari)</span>
+          </div>
+          <div class="bj-field" style="background:rgba(201,162,39,.05);border-color:rgba(201,162,39,.2);">
+            <label style="color:var(--gold);">BOR — Bed Occupancy Rate (dihitung otomatis)</label>
+            <span class="bj-val" id="bj-vbor">77.8</span> <span class="bj-unit">% &nbsp;|&nbsp; Standar: 60–85%</span>
+          </div>
+          <div class="bj-field" style="background:rgba(201,162,39,.05);border-color:rgba(201,162,39,.2);">
+            <label style="color:var(--gold);">BTO — Bed Turn Over (dihitung otomatis)</label>
+            <span class="bj-val" id="bj-vbto">40.6</span> <span class="bj-unit">kali/thn &nbsp;|&nbsp; Standar: 40–50 kali/thn</span>
+          </div>
+        </div>
+        <div class="bj-status" id="bj-badges"></div>
+        <div class="bj-chart-wrap">
+          <svg viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg" role="img">
+            <!-- Defs: clip path -->
+            <defs>
+              <clipPath id="chart-clip"><rect x="70" y="30" width="460" height="390"/></clipPath>
+            </defs>
+
+            <!-- Chart background -->
+            <rect x="70" y="30" width="460" height="390" fill="rgba(13,43,78,0.4)" rx="3"/>
+
+            <!-- Grid lines vertical (TOI: 1–10) -->
+            <g stroke="rgba(168,203,232,0.1)" stroke-width="0.8" clip-path="url(#chart-clip)">
+              <line x1="116" y1="30" x2="116" y2="420"/>
+              <line x1="162" y1="30" x2="162" y2="420"/>
+              <line x1="208" y1="30" x2="208" y2="420"/>
+              <line x1="254" y1="30" x2="254" y2="420"/>
+              <line x1="300" y1="30" x2="300" y2="420"/>
+              <line x1="346" y1="30" x2="346" y2="420"/>
+              <line x1="392" y1="30" x2="392" y2="420"/>
+              <line x1="438" y1="30" x2="438" y2="420"/>
+              <line x1="484" y1="30" x2="484" y2="420"/>
+              <line x1="530" y1="30" x2="530" y2="420"/>
+            </g>
+            <!-- Grid lines horizontal (AvLOS: 2,4,6,8,10,12,14,16,18,20) -->
+            <g stroke="rgba(168,203,232,0.1)" stroke-width="0.8" clip-path="url(#chart-clip)">
+              <line x1="70" y1="382" x2="530" y2="382"/>
+              <line x1="70" y1="344" x2="530" y2="344"/>
+              <line x1="70" y1="306" x2="530" y2="306"/>
+              <line x1="70" y1="268" x2="530" y2="268"/>
+              <line x1="70" y1="230" x2="530" y2="230"/>
+              <line x1="70" y1="192" x2="530" y2="192"/>
+              <line x1="70" y1="154" x2="530" y2="154"/>
+              <line x1="70" y1="116" x2="530" y2="116"/>
+              <line x1="70" y1="78" x2="530" y2="78"/>
+              <line x1="70" y1="40" x2="530" y2="40"/>
+            </g>
+
+            <!-- ZONA EFISIENSI: TOI 1–3 hari, AvLOS 3–12 hari -->
+            <!-- x: 70+1*46=116 to 70+3*46=208 | y: 420-12*19=192 to 420-3*19=363 -->
+            <rect x="116" y="192" width="92" height="171" fill="rgba(22,163,74,0.12)" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5 3" rx="2" clip-path="url(#chart-clip)"/>
+            <text font-size="9" fill="#4ade80" x="162" y="186" text-anchor="middle" font-family="'DM Mono',monospace" letter-spacing="0.05em">ZONA EFISIENSI</text>
+
+            <!-- BOR diagonal lines: BOR = AvLOS/(AvLOS+TOI)
+                 BOR 60%: TOI = AvLOS*(1-0.6)/0.6 = AvLOS*2/3
+                   At AvLOS=0: TOI=0 → (70,420); At AvLOS=20: TOI=13.3 (off chart); At TOI=10: AvLOS=15 → (530,135)
+                 BOR 85%: TOI = AvLOS*(1-0.85)/0.85 = AvLOS*0.176
+                   At AvLOS=0: (70,420); At AvLOS=20: TOI=3.53 → (232,40)
+                 BOR 70%: TOI = AvLOS*0.3/0.7 = AvLOS*0.429
+                   At AvLOS=20: TOI=8.57 → (464,40)
+                 BOR 75%: TOI = AvLOS*0.25/0.75 = AvLOS/3
+                   At AvLOS=20: TOI=6.67 → (376,40)
+            -->
+            <!-- BOR=60% line: from (70,420) to (530,135) -->
+            <line x1="70" y1="420" x2="530" y2="135" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="7 4" clip-path="url(#chart-clip)"/>
+            <text font-size="10" fill="#ef4444" x="534" y="133" font-family="'DM Mono',monospace" font-weight="500">60%</text>
+
+            <!-- BOR=85% line: from (70,420) to (232,40) -->
+            <line x1="70" y1="420" x2="232" y2="40" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="7 4" clip-path="url(#chart-clip)"/>
+            <text font-size="10" fill="#3b82f6" x="218" y="35" font-family="'DM Mono',monospace" font-weight="500">85%</text>
+
+            <!-- BOR=75% reference line: from (70,420) to (376,40) -->
+            <line x1="70" y1="420" x2="376" y2="40" stroke="rgba(168,203,232,0.35)" stroke-width="0.8" stroke-dasharray="4 5" clip-path="url(#chart-clip)"/>
+            <text font-size="9" fill="rgba(168,203,232,0.5)" x="379" y="37" font-family="'DM Mono',monospace">75%</text>
+
+            <!-- BOR=70% reference line: from (70,420) to (464,40) -->
+            <line x1="70" y1="420" x2="464" y2="40" stroke="rgba(168,203,232,0.2)" stroke-width="0.7" stroke-dasharray="3 5" clip-path="url(#chart-clip)"/>
+            <text font-size="9" fill="rgba(168,203,232,0.35)" x="467" y="37" font-family="'DM Mono',monospace">70%</text>
+
+            <!-- Axes (drawn last to be on top of grid) -->
+            <!-- X axis -->
+            <line x1="70" y1="420" x2="535" y2="420" stroke="rgba(168,203,232,0.6)" stroke-width="2"/>
+            <!-- Y axis -->
+            <line x1="70" y1="420" x2="70" y2="25" stroke="rgba(168,203,232,0.6)" stroke-width="2"/>
+            <!-- Tick marks X -->
+            <g stroke="rgba(168,203,232,0.5)" stroke-width="1.2">
+              <line x1="116" y1="420" x2="116" y2="426"/>
+              <line x1="162" y1="420" x2="162" y2="426"/>
+              <line x1="208" y1="420" x2="208" y2="426"/>
+              <line x1="254" y1="420" x2="254" y2="426"/>
+              <line x1="300" y1="420" x2="300" y2="426"/>
+              <line x1="346" y1="420" x2="346" y2="426"/>
+              <line x1="392" y1="420" x2="392" y2="426"/>
+              <line x1="438" y1="420" x2="438" y2="426"/>
+              <line x1="484" y1="420" x2="484" y2="426"/>
+              <line x1="530" y1="420" x2="530" y2="426"/>
+            </g>
+            <!-- Tick marks Y -->
+            <g stroke="rgba(168,203,232,0.5)" stroke-width="1.2">
+              <line x1="64" y1="382" x2="70" y2="382"/>
+              <line x1="64" y1="344" x2="70" y2="344"/>
+              <line x1="64" y1="306" x2="70" y2="306"/>
+              <line x1="64" y1="268" x2="70" y2="268"/>
+              <line x1="64" y1="230" x2="70" y2="230"/>
+              <line x1="64" y1="192" x2="70" y2="192"/>
+              <line x1="64" y1="154" x2="70" y2="154"/>
+              <line x1="64" y1="116" x2="70" y2="116"/>
+              <line x1="64" y1="78" x2="70" y2="78"/>
+              <line x1="64" y1="40" x2="70" y2="40"/>
+            </g>
+
+            <!-- X axis labels (TOI 1–10) -->
+            <g font-size="10" text-anchor="middle" fill="rgba(168,203,232,0.8)" font-family="'DM Mono',monospace">
+              <text x="116" y="438">1</text>
+              <text x="162" y="438">2</text>
+              <text x="208" y="438">3</text>
+              <text x="254" y="438">4</text>
+              <text x="300" y="438">5</text>
+              <text x="346" y="438">6</text>
+              <text x="392" y="438">7</text>
+              <text x="438" y="438">8</text>
+              <text x="484" y="438">9</text>
+              <text x="530" y="438">10</text>
+            </g>
+            <!-- X axis title -->
+            <text font-size="11" text-anchor="middle" fill="rgba(168,203,232,0.9)" x="300" y="453" font-family="'DM Sans',sans-serif" font-weight="600">TOI — Turn Over Interval (hari)</text>
+
+            <!-- Y axis labels (AvLOS 2–20, step 2) -->
+            <g font-size="10" text-anchor="end" fill="rgba(168,203,232,0.8)" font-family="'DM Mono',monospace">
+              <text x="60" y="385">2</text>
+              <text x="60" y="347">4</text>
+              <text x="60" y="309">6</text>
+              <text x="60" y="271">8</text>
+              <text x="60" y="233">10</text>
+              <text x="60" y="195">12</text>
+              <text x="60" y="157">14</text>
+              <text x="60" y="119">16</text>
+              <text x="60" y="81">18</text>
+              <text x="60" y="43">20</text>
+            </g>
+            <!-- Y axis title (rotated) -->
+            <text font-size="11" text-anchor="middle" fill="rgba(168,203,232,0.9)" x="14" y="225" font-family="'DM Sans',sans-serif" font-weight="600" transform="rotate(-90,14,225)">AvLOS — Average Length of Stay (hari)</text>
+
+            <!-- BOR label area (between lines) -->
+            <text font-size="9" fill="rgba(34,197,94,0.7)" x="145" y="290" text-anchor="middle" font-family="'DM Mono',monospace" transform="rotate(-72,145,290)">BOR IDEAL</text>
+
+            <!-- Fixed case points -->
+            <!-- Kasus A: BOR rendah TOI=5, AvLOS=4 → x=300, y=344 -->
+            <circle cx="300" cy="344" r="6" fill="#f97316" opacity="0.85"/>
+            <text font-size="9" fill="#f97316" x="310" y="340" font-family="'DM Mono',monospace">A</text>
+            <!-- Kasus B: AvLOS tinggi TOI=2, AvLOS=16 → x=162, y=116 -->
+            <circle cx="162" cy="116" r="6" fill="#a855f7" opacity="0.85"/>
+            <text font-size="9" fill="#a855f7" x="172" y="112" font-family="'DM Mono',monospace">B</text>
+            <!-- Kasus C: ideal TOI=2, AvLOS=7 → x=162, y=287 -->
+            <circle cx="162" cy="287" r="6" fill="#22c55e" opacity="0.85"/>
+            <text font-size="9" fill="#22c55e" x="172" y="283" font-family="'DM Mono',monospace">C</text>
+            <!-- Kasus D: TOI pendek TOI=0.5, AvLOS=7 → x=93, y=287 -->
+            <circle cx="93" cy="287" r="6" fill="#ef4444" opacity="0.8"/>
+            <text font-size="9" fill="#ef4444" x="98" y="282" font-family="'DM Mono',monospace">D</text>
+
+            <!-- User point (dynamic) -->
+            <circle id="bj-user-pt" cx="162" cy="287" r="9" fill="#38bdf8" stroke="white" stroke-width="2.5" opacity="0.95"/>
+            <text id="bj-user-lbl" font-size="9" fill="white" x="173" y="279" font-family="'DM Mono',monospace" font-weight="700">RS Anda</text>
+          </svg>
+        </div>
+
+        <!-- Legend -->
+        <div class="bj-legend">
+          <span><span class="bj-dot" style="background:#38bdf8;border:1px solid white;"></span>RS Anda (dinamis)</span>
+          <span><span class="bj-dot" style="background:#22c55e;"></span>A: Ideal</span>
+          <span><span class="bj-dot" style="background:#f97316;"></span>B: BOR rendah</span>
+          <span><span class="bj-dot" style="background:#a855f7;"></span>C: AvLOS tinggi</span>
+          <span><span class="bj-dot" style="background:#ef4444;"></span>D: TOI terlalu pendek</span>
+          <span style="color:rgba(168,203,232,0.6);font-size:.7rem;">— — BOR 60% (merah) &nbsp;|&nbsp; — — BOR 85% (biru) &nbsp;|&nbsp; kotak hijau = zona efisiensi</span>
+        </div>
+
+        <!-- Kasus contoh -->
+        <p style="font-size:.74rem;color:var(--sl);margin:.8rem 0 .4rem;font-family:'DM Mono',monospace;letter-spacing:.05em;text-transform:uppercase;">Pilih kasus contoh:</p>
+        <div class="bj-cases">
+          <button class="bj-case-btn" onclick="bjLoadCase(2,7)"><strong>Ideal — RS Sehat</strong>TOI=2, AvLOS=7<br><span class="ok-txt">Dalam zona efisiensi</span></button>
+          <button class="bj-case-btn" onclick="bjLoadCase(5,4)"><strong>BOR rendah — A</strong>TOI=5, AvLOS=4<br><span class="danger-txt">TT banyak kosong</span></button>
+          <button class="bj-case-btn" onclick="bjLoadCase(2,16)"><strong>AvLOS tinggi — B</strong>TOI=2, AvLOS=16<br><span class="danger-txt">Rawat inap terlalu lama</span></button>
+          <button class="bj-case-btn" onclick="bjLoadCase(0.5,7)"><strong>TOI pendek — D</strong>TOI=0.5, AvLOS=7<br><span class="danger-txt">Risiko HAIs nosokomial</span></button>
+          <button class="bj-case-btn" onclick="bjLoadCase(1.5,9)"><strong>Batas atas AvLOS</strong>TOI=1.5, AvLOS=9<br><span class="ok-txt">Masih dalam zona</span></button>
+          <button class="bj-case-btn" onclick="bjLoadCase(3,6)"><strong>Batas kanan zona</strong>TOI=3, AvLOS=6<br><span class="ok-txt">Tepat di tepi zona</span></button>
+        </div>
+
+        <div class="bj-interp" id="bj-interp">Geser slider untuk melihat interpretasi...</div>
+      </div>
+    </div>
+    `:''}
     <div class="modul-cta">
       <div class="modul-cta-text">Sudah memahami materi <strong>${m.kode}</strong>?<br>Sekarang uji pemahaman Anda dengan latihan soal kompetensi ini.</div>
       <button class="btn-mulai-latihan" onclick="mulaiDariBelajar('${kompId}')">✏️ Latihan Soal ${m.kode} →</button>
     </div>`;
   document.getElementById('belajar-pilih').style.display='none';
   document.getElementById('belajar-modul').style.display='block';
+  // Init Barber-Johnson jika statistik_faskes
+  if(kompId==='statistik_faskes'){
+    setTimeout(bjUpdate, 100);
+  }
 }
 
 // ── MULAI LATIHAN DARI BELAJAR ──────────────────────────────────────────
@@ -903,6 +1350,376 @@ function exportSoalPDF(){
   }, 200);
 }
 
+
+// ══ BARBER-JOHNSON INTERAKTIF ══════════════════════════════════════════════
+
+// Konstanta grafik (SVG viewBox 560×460)
+// X-axis: TOI  0–10 hari  → px: x = 70 + toi * 46
+// Y-axis: AvLOS 0–20 hari → px: y = 420 - avlos * 19
+const BJ = {
+  toX: t => 70 + t * 46,
+  toY: a => 420 - a * 19,
+  bor:  (toi, avlos) => (avlos / (avlos + toi)) * 100,
+  bto:  (toi, avlos) => 365 / (avlos + toi),
+  inZone: (toi, avlos, bor) => toi>=1&&toi<=3&&avlos>=3&&avlos<=12&&bor>=60&&bor<=85
+};
+
+function bjUpdate(){
+  const toi   = parseFloat(document.getElementById('bj-toi').value);
+  const avlos = parseFloat(document.getElementById('bj-avlos').value);
+  document.getElementById('bj-vtoi').textContent   = toi.toFixed(1);
+  document.getElementById('bj-vavlos').textContent = avlos.toFixed(1);
+
+  const bor = BJ.bor(toi, avlos);
+  const bto = BJ.bto(toi, avlos);
+  const zone = BJ.inZone(toi, avlos, bor);
+
+  // Update derived value displays
+  document.getElementById('bj-vbor').textContent = bor.toFixed(1);
+  document.getElementById('bj-vbto').textContent = bto.toFixed(1);
+
+  // Update user point on SVG
+  const cx = Math.min(Math.max(BJ.toX(toi), 70), 530);
+  const cy = Math.min(Math.max(BJ.toY(avlos), 30), 420);
+  const pt = document.getElementById('bj-user-pt');
+  if(pt){ pt.setAttribute('cx', cx); pt.setAttribute('cy', cy); }
+  const lbl = document.getElementById('bj-user-lbl');
+  if(lbl){ lbl.setAttribute('x', Math.min(cx+11,510)); lbl.setAttribute('y', Math.max(cy-8,20)); }
+
+  // Status badges
+  const borClass  = bor<60?'danger':bor>85?'warn':'ok';
+  const toiClass  = toi<1?'danger':toi>3?'warn':'ok';
+  const avlosClass= avlos<3?'danger':avlos>12?'warn':'ok';
+  const btoClass  = bto<40?'warn':bto>50?'warn':'ok';
+  const zoneClass = zone?'ok':'danger';
+
+  document.getElementById('bj-badges').innerHTML =
+    `<span class="bj-badge ${borClass}">BOR ${bor.toFixed(1)}%</span>` +
+    `<span class="bj-badge ${toiClass}">TOI ${toi.toFixed(1)} hr</span>` +
+    `<span class="bj-badge ${avlosClass}">AvLOS ${avlos.toFixed(1)} hr</span>` +
+    `<span class="bj-badge ${btoClass}">BTO ${bto.toFixed(1)}/thn</span>` +
+    `<span class="bj-badge ${zoneClass}">${zone?'✓ ZONA EFISIENSI':'✗ LUAR ZONA'}</span>`;
+
+  // Interpretasi
+  const msgs = [];
+  if(bor<60) msgs.push(`<span class="danger-txt">BOR ${bor.toFixed(1)}% — terlalu rendah (&lt;60%), TT banyak kosong, utilisasi tidak efisien.</span>`);
+  else if(bor>85) msgs.push(`<span class="warn-txt">BOR ${bor.toFixed(1)}% — terlalu tinggi (&gt;85%), RS terlalu padat, risiko HAIs meningkat.</span>`);
+  else msgs.push(`<span class="ok-txt">BOR ${bor.toFixed(1)}% — ideal (60–85%). ✓</span>`);
+
+  if(toi<1) msgs.push(`<span class="danger-txt">TOI ${toi.toFixed(1)} hari — terlalu pendek (&lt;1 hari), TT tidak sempat disterilkan, risiko infeksi nosokomial.</span>`);
+  else if(toi>3) msgs.push(`<span class="warn-txt">TOI ${toi.toFixed(1)} hari — terlalu panjang (&gt;3 hari), TT terlalu lama kosong, inefisiensi kapasitas.</span>`);
+  else msgs.push(`<span class="ok-txt">TOI ${toi.toFixed(1)} hari — ideal (1–3 hari). ✓</span>`);
+
+  if(avlos<3) msgs.push(`<span class="danger-txt">AvLOS ${avlos.toFixed(1)} hari — terlalu pendek (&lt;3 hari), pasien dipulangkan terlalu cepat, risiko readmisi.</span>`);
+  else if(avlos>12) msgs.push(`<span class="warn-txt">AvLOS ${avlos.toFixed(1)} hari — terlalu panjang (&gt;12 hari), rawat inap berkepanjangan, perlu audit klinis.</span>`);
+  else msgs.push(`<span class="ok-txt">AvLOS ${avlos.toFixed(1)} hari — ideal (3–12 hari). ✓</span>`);
+
+  if(bto<40) msgs.push(`<span class="warn-txt">BTO ${bto.toFixed(1)} kali/thn — di bawah standar (&lt;40), produktivitas TT rendah.</span>`);
+  else if(bto>50) msgs.push(`<span class="warn-txt">BTO ${bto.toFixed(1)} kali/thn — di atas standar (&gt;50), beban TT terlalu tinggi.</span>`);
+  else msgs.push(`<span class="ok-txt">BTO ${bto.toFixed(1)} kali/thn — ideal (40–50). ✓</span>`);
+
+  document.getElementById('bj-interp').innerHTML =
+    '<strong>Interpretasi & Rekomendasi:</strong><br>' + msgs.join('<br>');
+}
+
+function bjLoadCase(toi, avlos){
+  document.getElementById('bj-toi').value   = toi;
+  document.getElementById('bj-avlos').value = avlos;
+  bjUpdate();
+}
+
+
+// ══ POHON RUMUS STAT-FASKES — konten pengganti poin kunci ══════════════════
+function renderPohonRumus(){
+  return `
+  <div class="pr-tabs">
+    <button class="pr-tab active" onclick="prTab(this,'pr-utilisasi')">🏥 Utilisasi TT</button>
+    <button class="pr-tab" onclick="prTab(this,'pr-mortalitas')">💀 Mortalitas & KIA</button>
+    <button class="pr-tab" onclick="prTab(this,'pr-sensus')">📋 Sensus Harian</button>
+    <button class="pr-tab" onclick="prTab(this,'pr-jembatan')">🔑 Jembatan Keledai</button>
+  </div>
+
+  <!-- TAB 1: UTILISASI TT ─────────────────────────────────────────────── -->
+  <div class="pr-panel active" id="pr-utilisasi">
+    <div class="pr-banner">
+      <strong style="color:var(--white);">💡 Konsep Kunci:</strong> Semua 5 indikator utilisasi TT berasal dari <strong style="color:var(--gl);">4 variabel yang sama</strong>.
+      Hafal variabelnya, lalu rakit kombinasinya.
+    </div>
+
+    <div class="modul-section-title" style="margin-bottom:.7rem;">🌱 4 Variabel Akar (Sumber Semua Rumus)</div>
+    <div class="pr-vars">
+      <div class="pr-var"><div class="vcode">HRI</div><div class="vname">Hari Rawat Inap<br><em>jumlah hari pasien dirawat</em></div></div>
+      <div class="pr-var"><div class="vcode">PK</div><div class="vname">Pasien Keluar<br><em>hidup + meninggal</em></div></div>
+      <div class="pr-var"><div class="vcode">TT</div><div class="vname">Tempat Tidur<br><em>TT tersedia</em></div></div>
+      <div class="pr-var"><div class="vcode">Per</div><div class="vname">Periode<br><em>jumlah hari periode</em></div></div>
+    </div>
+    <div class="pr-arrow">▼ &nbsp; dikombinasikan menghasilkan &nbsp; ▼</div>
+
+    <div class="modul-section-title" style="margin:.7rem 0 .6rem;">🌿 5 Indikator Utilisasi TT</div>
+    <div class="pr-indikators">
+      <div class="pr-ind">
+        <div class="ind-name">BOR</div>
+        <div class="ind-rumus">HRI ÷ (TT × Per)<br>× 100%</div>
+        <div class="ind-std">60–85%</div>
+      </div>
+      <div class="pr-ind">
+        <div class="ind-name">AvLOS</div>
+        <div class="ind-rumus">HRI ÷ PK</div>
+        <div class="ind-std">6–9 hari</div>
+      </div>
+      <div class="pr-ind">
+        <div class="ind-name">TOI</div>
+        <div class="ind-rumus">(TT×Per − HRI)<br>÷ PK</div>
+        <div class="ind-std">1–3 hari</div>
+      </div>
+      <div class="pr-ind">
+        <div class="ind-name">BTO</div>
+        <div class="ind-rumus">PK ÷ TT</div>
+        <div class="ind-std">40–50/thn</div>
+      </div>
+      <div class="pr-ind">
+        <div class="ind-name">ADC</div>
+        <div class="ind-rumus">HRI ÷ Periode</div>
+        <div class="ind-std" style="background:rgba(91,155,213,.15);color:var(--sky);">Sesuai kapasitas</div>
+      </div>
+    </div>
+
+    <div class="modul-section-title" style="margin:.8rem 0 .6rem;">🔗 Hubungan Antar Indikator</div>
+    <div class="pr-pasangan">
+      <div class="pr-pair-card">
+        <div class="pc-title">BOR &amp; TOI — Pasangan</div>
+        Keduanya pakai HRI + TT + Periode, tapi <strong style="color:var(--white);">posisi dibalik</strong>.<br>
+        BOR = HRI di pembilang<br>
+        TOI = HRI di penyebut (dikurang)
+      </div>
+      <div class="pr-pair-arrow">⟺</div>
+      <div class="pr-pair-card">
+        <div class="pc-title">AvLOS &amp; BTO — Paling Simpel</div>
+        Masing-masing hanya <strong style="color:var(--white);">2 variabel</strong>.<br>
+        AvLOS = HRI ÷ PK<br>
+        BTO = PK ÷ TT
+      </div>
+    </div>
+
+    <div class="modul-section-title" style="margin:.8rem 0 .6rem;">📌 Kunci Hafalan Pohon Utilisasi</div>
+    <div class="pr-kunci">
+      <div class="pr-kunci-item"><strong>BOR &amp; TOI adalah pasangan</strong>Rumus sama, posisi pembilang/penyebut dibalik. Hafal satu, dapatkan keduanya.</div>
+      <div class="pr-kunci-item"><strong>AvLOS &amp; BTO paling mudah</strong>Masing-masing hanya 2 variabel. AvLOS = HRI÷PK, BTO = PK÷TT.</div>
+      <div class="pr-kunci-item"><strong>ADC satu-satunya yang bagi Periode langsung</strong>ADC = HRI ÷ Periode. Digunakan untuk perencanaan tenaga keperawatan.</div>
+      <div class="pr-kunci-item"><strong>Ingat standar dengan logika!</strong>&lt;60% TT kosong banyak. &gt;85% terlalu padat. TOI &lt;1 hari = TT belum steril.</div>
+    </div>
+  </div>
+
+  <!-- TAB 2: MORTALITAS & KIA ─────────────────────────────────────────── -->
+  <div class="pr-panel" id="pr-mortalitas">
+    <div class="pr-pola">
+      <div style="font-size:.76rem;color:var(--sl);">Pola umum semua indikator mortalitas:</div>
+      <div class="pola-formula">Kejadian Spesifik ÷ Total Populasi × Pengali</div>
+      <div class="pola-sub">Yang berbeda hanya pembilang, penyebut, dan besar pengalinya</div>
+    </div>
+
+    <div class="pr-mort-grid">
+      <!-- Mortalitas RS -->
+      <div class="pr-mort-group">
+        <div class="mg-title">🏥 Mortalitas Rawat Inap<br>Penyebut: Total Pasien Keluar (PK)</div>
+        <div class="pr-mort-card">
+          <div class="mc-name">NDR — Net Death Rate</div>
+          <div class="mc-rumus">Meninggal ≥48 jam ÷ Total PK × 1.000</div>
+          <div class="mc-std">&lt; 25‰</div>
+        </div>
+        <div class="pr-mort-card">
+          <div class="mc-name">GDR — Gross Death Rate</div>
+          <div class="mc-rumus">Semua meninggal ÷ Total PK × 1.000</div>
+          <div class="mc-std">&lt; 45‰</div>
+        </div>
+        <div class="pr-kunci-item" style="margin-top:.6rem;font-size:.73rem;">
+          <strong>NET vs GROSS</strong>
+          NDR (Net) = selektif, hanya ≥48 jam<br>
+          GDR (Gross) = total, semua kematian<br>
+          <em style="color:#fbbf24;">NDR selalu lebih kecil dari GDR</em>
+        </div>
+      </div>
+
+      <!-- KIA -->
+      <div class="pr-mort-group">
+        <div class="mg-title">👶 Kesehatan Ibu &amp; Bayi<br>Penyebut: Kelahiran Hidup (KH)</div>
+        <div class="pr-mort-card">
+          <div class="mc-name">AKI — Angka Kematian Ibu</div>
+          <div class="mc-rumus">Kematian ibu ÷ KH × 100.000</div>
+          <div class="mc-std sdgs">≤70/100.000 KH (SDGs 2030)</div>
+        </div>
+        <div class="pr-mort-card">
+          <div class="mc-name">AKB — Angka Kematian Bayi</div>
+          <div class="mc-rumus">Kematian bayi 0–&lt;1 th ÷ KH × 1.000</div>
+          <div class="mc-std sdgs">≤12‰ (SDGs 2030)</div>
+        </div>
+        <div class="pr-kunci-item" style="margin-top:.6rem;font-size:.73rem;">
+          <strong>Pengali berbeda!</strong>
+          AK-<em style="color:var(--gl);">I</em> (akhiran I) → × 100.000 (lebih langka)<br>
+          AK-<em style="color:var(--gl);">B</em> (akhiran B) → × 1.000 (lebih sering)<br>
+          <em style="color:#fbbf24;">Hafal 1 pola, bukan 4 rumus terpisah</em>
+        </div>
+      </div>
+    </div>
+
+    <div class="pr-kritis">
+      <div class="kritis-title">⚠️ Perbedaan Kritis yang Sering Membingungkan</div>
+      <div class="pr-kritis-item"><strong>NDR vs GDR:</strong> Soal akan menyebut "meninggal dalam 2 hari pertama" → itu masuk GDR bukan NDR. NDR hanya ≥48 jam.</div>
+      <div class="pr-kritis-item"><strong>AKI vs AKB:</strong> Perhatikan subjeknya. Kematian IBU saat hamil/bersalin/nifas = AKI. Kematian BAYI 0–&lt;1 tahun = AKB.</div>
+      <div class="pr-kritis-item"><strong>Denominator AKI &amp; AKB:</strong> Selalu Kelahiran HIDUP saja. Lahir mati TIDAK ikut dihitung.</div>
+    </div>
+  </div>
+
+  <!-- TAB 3: SENSUS HARIAN ────────────────────────────────────────────── -->
+  <div class="pr-panel" id="pr-sensus">
+    <div class="pr-banner">
+      <strong style="color:var(--white);">Konsep Kunci:</strong> Perbedaan STM dan CHP terletak pada perlakuan terhadap <strong style="color:#fbbf24;">one-day patient</strong> (pasien yang masuk dan pulang di hari yang sama).
+    </div>
+    <div class="pr-sensus">
+      <div class="pr-sensus-card">
+        <div class="sc-name">🌙 Sisa Tengah Malam (STM)</div>
+        <div class="sc-rumus">(STM kemarin + Masuk + Transfer Masuk)<br>− (Pulang + Meninggal + Transfer Keluar)</div>
+        <div class="sc-note">⚠️ One-day patient TIDAK masuk STM<br>→ sudah pulang sebelum pukul 24.00</div>
+      </div>
+      <div class="pr-sensus-card">
+        <div class="sc-name">📊 Census Hari Perawatan (CHP)</div>
+        <div class="sc-rumus">Sisa TM kemarin + Semua pasien masuk<br>(termasuk one-day patient)</div>
+        <div class="sc-note">✓ One-day patient MASUK CHP<br>→ menempati TT pada hari tersebut</div>
+      </div>
+    </div>
+    <div class="pr-sensus" style="grid-template-columns:1fr 1fr;">
+      <div class="pr-sensus-card">
+        <div class="sc-name">📈 IP Service Days</div>
+        <div class="sc-rumus">= CHP − one-day patient<br>(atau = STM malam berikutnya jika tidak ada one-day)</div>
+        <div class="sc-note" style="color:var(--sl);">Digunakan untuk menghitung BOR dan AvLOS</div>
+      </div>
+      <div class="pr-sensus-card">
+        <div class="sc-name">📅 ADC</div>
+        <div class="sc-rumus">= Total IP Service Days ÷ Jumlah Hari Periode</div>
+        <div class="sc-note" style="color:var(--sl);">Rata-rata pasien yang dirawat setiap hari. Digunakan untuk perencanaan tenaga.</div>
+      </div>
+    </div>
+    <div class="pr-kritis">
+      <div class="kritis-title">⚠️ Jebakan Soal Sensus yang Sering Muncul</div>
+      <div class="pr-kritis-item"><strong>One-day patient</strong> = masuk CHP (karena menempati TT hari itu) tapi TIDAK masuk STM (karena sudah pulang sebelum tengah malam).</div>
+      <div class="pr-kritis-item"><strong>Transfer masuk</strong> = masuk dalam hitungan STM dan CHP dari unit yang menerima. Unit asal mengurangi dari STM-nya.</div>
+      <div class="pr-kritis-item"><strong>Pasien meninggal</strong> = dihitung sebagai keluar dalam rumus STM (dikurangi), meskipun jenazah belum dipindahkan.</div>
+    </div>
+  </div>
+
+  <!-- TAB 4: JEMBATAN KELEDAI ─────────────────────────────────────────── -->
+  <div class="pr-panel" id="pr-jembatan">
+    <div class="pr-banner">
+      <strong style="color:var(--white);">📌 Catatan:</strong> Jembatan keledai adalah pengait ingatan. Gunakan <strong style="color:#fbbf24;">SETELAH</strong> memahami pohon rumus, bukan sebelumnya.
+    </div>
+    <div style="overflow-x:auto;">
+    <table class="jk-table">
+      <thead>
+        <tr>
+          <th>Indikator</th>
+          <th>Rumus</th>
+          <th>🔑 Jembatan Keledai</th>
+          <th>Standar</th>
+          <th>Ingat!</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="5" class="jk-group">Kelompok A — Utilisasi Tempat Tidur</td></tr>
+        <tr>
+          <td><span class="jk-ind">BOR<small>Bed Occupancy Rate</small></span></td>
+          <td class="jk-rumus">HRI ÷ (TT × Per) × 100</td>
+          <td class="jk-jembatan">"Berapa Orang Rawat?"<br>hitung persen TT terisi dari total kapasitas</td>
+          <td class="jk-std"><span class="ok">60–85%</span></td>
+          <td class="jk-ingat">&lt;60 = sepi<br>&gt;85 = sesak</td>
+        </tr>
+        <tr>
+          <td><span class="jk-ind">AvLOS<small>Avg Length of Stay</small></span></td>
+          <td class="jk-rumus">HRI ÷ PK</td>
+          <td class="jk-jembatan">"Lama Orang Singgah"<br>total malam menginap ÷ tamu check-out</td>
+          <td class="jk-std"><span class="ok">6–9 hari</span></td>
+          <td class="jk-ingat">&lt;6 = cepat<br>&gt;9 = lama</td>
+        </tr>
+        <tr>
+          <td><span class="jk-ind">TOI<small>Turn Over Interval</small></span></td>
+          <td class="jk-rumus">(TT×Per − HRI) ÷ PK</td>
+          <td class="jk-jembatan">"TT Istirahat Dulu"<br>jeda kosong TT sebelum pasien baru masuk</td>
+          <td class="jk-std"><span class="ok">1–3 hari</span></td>
+          <td class="jk-ingat">&lt;1 hari = risiko infeksi nosokomial</td>
+        </tr>
+        <tr>
+          <td><span class="jk-ind">BTO<small>Bed Turn Over</small></span></td>
+          <td class="jk-rumus">PK ÷ TT</td>
+          <td class="jk-jembatan">"Berapa kali TT ganti Orang?"<br>frekuensi TT dipakai bergantian setahun</td>
+          <td class="jk-std"><span class="ok">40–50/tahun</span></td>
+          <td class="jk-ingat">&lt;40 = sepi<br>&gt;50 = padat</td>
+        </tr>
+        <tr>
+          <td><span class="jk-ind">ADC<small>Avg Daily Census</small></span></td>
+          <td class="jk-rumus">HRI ÷ Periode</td>
+          <td class="jk-jembatan">"Rata-rata isi tiap Hari"<br>sensus harian RS</td>
+          <td class="jk-std"><span style="color:var(--sky);">Sesuai kapasitas</span></td>
+          <td class="jk-ingat">Untuk perencanaan tenaga</td>
+        </tr>
+        <tr><td colspan="5" class="jk-group">Kelompok B — Mortalitas</td></tr>
+        <tr>
+          <td><span class="jk-ind">NDR<small>Net Death Rate</small></span></td>
+          <td class="jk-rumus">Meninggal ≥48 jam ÷ Total PK × 1.000</td>
+          <td class="jk-jembatan">"Net = Ninggal setelah 48 jam"<br>bersih/selektif — cermin mutu pelayanan</td>
+          <td class="jk-std"><span class="danger">&lt;25‰</span></td>
+          <td class="jk-ingat">NET = selektif<br>NDR &lt; GDR selalu</td>
+        </tr>
+        <tr>
+          <td><span class="jk-ind">GDR<small>Gross Death Rate</small></span></td>
+          <td class="jk-rumus">Total Meninggal ÷ Total PK × 1.000</td>
+          <td class="jk-jembatan">"Gross = Gede cakupannya"<br>semua kematian termasuk &lt;48 jam</td>
+          <td class="jk-std"><span class="danger">&lt;45‰</span></td>
+          <td class="jk-ingat">GROSS = total<br>termasuk &lt;48 jam</td>
+        </tr>
+        <tr><td colspan="5" class="jk-group">Kelompok C — Kesehatan Ibu &amp; Bayi</td></tr>
+        <tr>
+          <td><span class="jk-ind">AKI<small>Angka Kematian Ibu</small></span></td>
+          <td class="jk-rumus">Kematian Ibu ÷ KH × 100.000</td>
+          <td class="jk-jembatan">"Ibu per 100 Ribu lahir hidup"<br>AK-I = akhiran I → × 100.000</td>
+          <td class="jk-std"><span class="warn">≤70/100.000 KH</span></td>
+          <td class="jk-ingat">Hamil, bersalin, nifas 42 hari</td>
+        </tr>
+        <tr>
+          <td><span class="jk-ind">AKB<small>Angka Kematian Bayi</small></span></td>
+          <td class="jk-rumus">Kematian Bayi 0–&lt;1 th ÷ KH × 1.000</td>
+          <td class="jk-jembatan">"Bayi per 1 Ribu lahir hidup"<br>AK-B = akhiran B → × 1.000</td>
+          <td class="jk-std"><span class="warn">≤12‰</span></td>
+          <td class="jk-ingat">Usia 0 sampai &lt;1 tahun</td>
+        </tr>
+        <tr><td colspan="5" class="jk-group">Kelompok D — Sensus Harian</td></tr>
+        <tr>
+          <td><span class="jk-ind">CHP<small>Census Hari Perawatan</small></span></td>
+          <td class="jk-rumus">STM kemarin + Semua Masuk (termasuk one-day)</td>
+          <td class="jk-jembatan">"Cek Hitung Pasien yang ada hari itu"<br>termasuk pasien masuk-pulang hari sama</td>
+          <td class="jk-std"><span style="color:var(--sl);">—</span></td>
+          <td class="jk-ingat">One-day masuk CHP tapi tidak masuk TM</td>
+        </tr>
+        <tr>
+          <td><span class="jk-ind">Sisa TM<small>Sisa Tengah Malam</small></span></td>
+          <td class="jk-rumus">(STM + Masuk + Transfer in) − (Pulang + Meninggal + Transfer out)</td>
+          <td class="jk-jembatan">"Siapa yang masih ada waktu Tengah Malam?"<br>yang datang dikurangi yang pergi</td>
+          <td class="jk-std"><span style="color:var(--sl);">—</span></td>
+          <td class="jk-ingat">One-day TIDAK masuk TM (sudah pulang)</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+`;
+}
+
+function prTab(btn, panelId){
+  document.querySelectorAll('.pr-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.pr-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = document.getElementById(panelId);
+  if(panel) panel.classList.add('active');
+}
+
 function updateHub(){
   const el=document.getElementById('hub-nama');
   const info=document.getElementById('hub-peserta-info');
@@ -930,6 +1747,36 @@ function togglePw(){
   const inp=document.getElementById("inp-pw");const ico=document.getElementById("toggle-icon");
   if(inp.type==="password"){inp.type="text";ico.textContent="🙈";}else{inp.type="password";ico.textContent="👁";}
 }
+
+// ── INIT TIMER SESUAI MODE ──────────────────────────────────
+function initTimerMode(jumlahSoal){
+  const wrap = document.getElementById('timer-wrap');
+  const lbl  = document.getElementById('timer-display');
+  if(!wrap || !lbl) return;
+  if(modeTimer){
+    // SIMULASI: timer berjalan
+    wrap.classList.remove('info-only');
+    // hapus badge INFO jika ada
+    const badge = wrap.querySelector('.timer-info-badge');
+    if(badge) badge.remove();
+    startTimer(jumlahSoal);
+  } else {
+    // BEBAS: timer tampil tapi tidak berjalan
+    stopTimer();
+    wrap.classList.add('info-only');
+    // hitung total waktu sebagai info
+    const totalMenit = jumlahSoal;
+    lbl.textContent = String(totalMenit).padStart(2,'0') + ':00';
+    // tambahkan badge INFO jika belum ada
+    if(!wrap.querySelector('.timer-info-badge')){
+      const badge = document.createElement('span');
+      badge.className = 'timer-info-badge';
+      badge.textContent = 'INFO';
+      wrap.appendChild(badge);
+    }
+  }
+}
+
 function startTimer(jumlahSoal){
   stopTimer();timerSisa=jumlahSoal*60;renderTimer();
   timerInterval=setInterval(function(){timerSisa--;renderTimer();if(timerSisa<=0){stopTimer();document.getElementById("modal-timeout").classList.add("on");}},1000);
@@ -1016,7 +1863,7 @@ function mulaiLatihan(kompId){
   updateScorePill();
   showScreen("screen-latihan");
   renderSoal();
-  startTimer(state.soal.length);
+  initTimerMode(state.soal.length);
 }
 
 function renderSoal(){
@@ -1087,6 +1934,10 @@ function tampilHasil(){stopTimer();
   if(jalurEl) jalurEl.textContent = jalurMasuk==='belajar'
     ? "Mengakses modul belajar terlebih dahulu sebelum latihan soal"
     : "Langsung mengerjakan latihan soal tanpa mengakses modul belajar";
+  const modeEl=document.getElementById("pi-mode");
+  if(modeEl) modeEl.textContent = modeTimer
+    ? "Simulasi UKOM — dengan timer (1 menit per soal)"
+    : "Latihan Bebas — tanpa batas waktu";
   document.getElementById("h-persen").textContent=persen+"%";
   document.getElementById("h-komp").textContent=k.label;
   document.getElementById("h-meta").textContent=state.benar+" benar dari "+total+" soal · "+now;
