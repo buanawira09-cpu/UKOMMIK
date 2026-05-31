@@ -198,6 +198,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);m
   .hasil-predikat{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   .print-header{display:block !important;}
   .ri-pembahasan{background:#f9f9f9 !important;border:1px solid #ddd !important;}
+
+  /* ── Mode print soal (export dosen) ── */
+  body.mode-print-soal > *{display:none!important;}
+  body.mode-print-soal #print-soal-container{display:block!important;}
 }
 .print-header{display:none;text-align:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid #1A2840;}
 .ph-inst{font-size:.8rem;color:#555;margin-bottom:.25rem;}
@@ -330,10 +334,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);m
 .pin-btn.ghost:hover{border-color:var(--sl);color:var(--white);}
 
 /* ── PRINT SOAL (khusus cetak) ── */
-@media print {
-  body > *{display:none!important;}
-  #print-soal-container{display:block!important;}
-}
+/* print soal: dikendalikan via class .mode-print-soal */
 #print-soal-container{display:none;}
 .ps-header{text-align:center;margin-bottom:1.5rem;border-bottom:2px solid #333;padding-bottom:.8rem;}
 .ps-inst{font-size:.8rem;color:#555;}
@@ -546,6 +547,197 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);m
 .timer-info-badge{font-size:.62rem;font-family:'DM Mono',monospace;
   background:rgba(91,155,213,.12);color:var(--sky);border-radius:2px;
   padding:1px 5px;margin-left:4px;letter-spacing:.04em;vertical-align:middle;}
+
+
+/* ══ KALKULATOR SENSUS HARIAN ══════════════════════════════════════════════ */
+.kalk-wrap{font-size:.82rem;}
+.kalk-info{background:rgba(37,99,168,.12);border-left:3px solid var(--sky);
+  border-radius:0 5px 5px 0;padding:.7rem 1rem;margin-bottom:1rem;
+  font-size:.77rem;color:var(--sl);line-height:1.7;}
+.kalk-info strong{color:var(--sky);}
+
+/* Preset buttons */
+.kalk-presets{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;align-items:center;}
+.kalk-preset-label{font-size:.7rem;color:var(--muted);font-family:'DM Mono',monospace;
+  letter-spacing:.04em;margin-right:.3rem;}
+.kalk-preset-btn{background:rgba(255,255,255,.04);border:1px solid rgba(168,203,232,.15);
+  border-radius:4px;padding:4px 11px;font-size:.72rem;color:var(--sl);cursor:pointer;
+  transition:all .2s;}
+.kalk-preset-btn:hover,.kalk-preset-btn.kpactive{
+  background:rgba(37,99,168,.15);border-color:var(--sky);color:var(--white);}
+.kalk-preset-btn.kpactive{font-weight:600;}
+
+/* Sec label */
+.kalk-sec{font-size:.68rem;font-family:'DM Mono',monospace;letter-spacing:.07em;
+  text-transform:uppercase;margin-bottom:.5rem;padding-left:2px;}
+.kalk-sec.blue{color:var(--sky);}
+.kalk-sec.green{color:#86efac;}
+.kalk-sec.red{color:#f87171;}
+
+/* Input grid */
+.kalk-grid2{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.9rem;}
+.kalk-grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-bottom:.9rem;}
+@media(max-width:520px){.kalk-grid2,.kalk-grid3{grid-template-columns:1fr 1fr;}}
+@media(max-width:380px){.kalk-grid2,.kalk-grid3{grid-template-columns:1fr;}}
+
+/* Input card */
+.kalk-inp{background:rgba(255,255,255,.04);border:1px solid rgba(168,203,232,.12);
+  border-radius:5px;padding:.6rem .8rem;}
+.kalk-inp .ki-tag{display:inline-block;font-size:.62rem;font-weight:600;
+  padding:2px 7px;border-radius:10px;margin-bottom:.4rem;letter-spacing:.03em;}
+.ki-tag-start{background:rgba(37,99,168,.2);color:var(--sky);}
+.ki-tag-in{background:rgba(22,163,74,.15);color:#86efac;}
+.ki-tag-out{background:rgba(220,38,38,.12);color:#fca5a5;}
+.ki-tag-special{background:rgba(251,191,36,.12);color:#fbbf24;}
+.kalk-inp label{display:block;font-size:.72rem;color:var(--sl);margin-bottom:.35rem;line-height:1.4;}
+.kalk-inp input[type=number]{width:100%;padding:5px 8px;font-size:1.1rem;font-weight:700;
+  color:var(--white);background:rgba(255,255,255,.07);border:1px solid rgba(168,203,232,.2);
+  border-radius:4px;text-align:center;outline:none;transition:border-color .15s;
+  -moz-appearance:textfield;}
+.kalk-inp input[type=number]::-webkit-inner-spin-button,
+.kalk-inp input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;}
+.kalk-inp input[type=number]:focus{border-color:var(--sky);}
+.kalk-inp .ki-hint{font-size:.67rem;color:#fbbf24;margin-top:.3rem;line-height:1.4;}
+
+.kalk-divider{border:none;border-top:1px solid rgba(168,203,232,.1);margin:.8rem 0;}
+
+/* Result section */
+.kalk-result{background:rgba(255,255,255,.03);border:1px solid rgba(168,203,232,.1);
+  border-radius:5px;padding:.9rem;margin-bottom:.8rem;}
+.kalk-result h4{font-size:.74rem;font-weight:600;color:var(--sl);margin-bottom:.7rem;
+  letter-spacing:.03em;}
+
+/* Formula steps */
+.kf-step{display:flex;justify-content:space-between;align-items:center;
+  padding:4px 7px;border-bottom:1px solid rgba(168,203,232,.06);font-size:.77rem;}
+.kf-step:last-child{border-bottom:none;}
+.kf-step .kfl{color:var(--sl);}
+.kf-step .kfr{font-weight:700;color:var(--white);}
+.kf-step.kf-green{background:rgba(22,163,74,.1);border-radius:4px;border:none;
+  padding:7px 9px;margin-top:3px;}
+.kf-step.kf-green .kfl{color:#86efac;font-weight:600;}
+.kf-step.kf-green .kfr{color:#4ade80;font-size:1rem;}
+.kf-step.kf-blue{background:rgba(37,99,168,.15);border-radius:4px;border:none;
+  padding:7px 9px;margin-top:3px;}
+.kf-step.kf-blue .kfl{color:var(--sky);font-weight:600;}
+.kf-step.kf-blue .kfr{color:#93c5fd;font-size:1rem;}
+.kf-step.kf-warn .kfl,.kf-step.kf-warn .kfr{color:#fbbf24;font-size:.72rem;font-style:italic;}
+
+/* Metric cards */
+.kalk-metrics{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.8rem;}
+.kalk-metric{background:rgba(255,255,255,.04);border-radius:5px;padding:.65rem .8rem;text-align:center;}
+.km-label{font-size:.68rem;color:var(--muted);margin-bottom:.25rem;}
+.km-val{font-size:1.4rem;font-weight:700;line-height:1.1;}
+.km-sub{font-size:.63rem;color:var(--muted);margin-top:.2rem;line-height:1.4;}
+.km-green{color:#4ade80;}.km-blue{color:#93c5fd;}.km-amber{color:#fbbf24;}.km-gray{color:var(--sl);}
+
+/* Comparison table */
+.kalk-comp{background:rgba(251,191,36,.07);border-radius:5px;padding:.8rem .9rem;margin-bottom:.8rem;}
+.kalk-comp h4{font-size:.72rem;font-weight:600;color:#fbbf24;margin-bottom:.6rem;}
+.kcomp-row{display:flex;justify-content:space-between;align-items:center;
+  padding:4px 0;border-bottom:1px solid rgba(251,191,36,.1);font-size:.73rem;}
+.kcomp-row:last-child{border-bottom:none;}
+.kcomp-key{color:var(--sl);flex:1;}
+.kcomp-y{color:#4ade80;font-weight:600;min-width:60px;text-align:center;}
+.kcomp-n{color:#f87171;font-weight:600;min-width:60px;text-align:center;}
+.kcomp-hdr{font-size:.66rem;color:var(--muted);min-width:60px;text-align:center;}
+.kcomp-row.kcomp-hl{background:rgba(251,191,36,.08);border-radius:4px;padding:5px 4px;}
+.kcomp-row.kcomp-hl .kcomp-key{font-weight:600;color:#fbbf24;}
+
+/* Interpretasi */
+.kalk-interp{background:rgba(22,163,74,.07);border-left:3px solid rgba(22,163,74,.5);
+  border-radius:0 5px 5px 0;padding:.7rem .9rem;font-size:.76rem;color:var(--sl);line-height:1.75;}
+.kalk-interp strong{color:#86efac;}
+
+
+/* ── MODUL TABS (Tips & Jebakan sebagai tab) ─────────────────────────────── */
+.modul-tabs{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap;}
+.modul-tab{background:rgba(255,255,255,.04);border:1px solid rgba(168,203,232,.15);
+  border-radius:4px;padding:5px 13px;font-size:.73rem;font-family:'DM Mono',monospace;
+  letter-spacing:.04em;color:var(--sl);cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.modul-tab:hover{border-color:rgba(201,162,39,.35);color:var(--gl);}
+.modul-tab.active{background:rgba(201,162,39,.12);border-color:var(--gold);
+  color:var(--gl);font-weight:600;}
+.modul-tab.tips-tab.active{background:rgba(22,163,74,.1);border-color:rgba(22,163,74,.4);color:#86efac;}
+.modul-tab.jebakan-tab.active{background:rgba(220,38,38,.08);border-color:rgba(220,38,38,.3);color:#fca5a5;}
+.modul-tab-panel{display:none;animation:fadeUp .25s ease;}
+.modul-tab-panel.active{display:block;}
+
+
+/* ── ONE-DAY CARE TAB ───────────────────────────────────────────────────── */
+.modul-tab.odc-tab.active{background:rgba(168,85,247,.1);border-color:rgba(168,85,247,.4);color:#d8b4fe;}
+
+.odc-why{background:linear-gradient(135deg,rgba(37,99,168,.15),rgba(13,43,78,.3));
+  border:1px solid rgba(91,155,213,.2);border-radius:6px;padding:.85rem 1.1rem;
+  margin-bottom:1.2rem;font-size:.78rem;color:var(--sl);line-height:1.75;}
+.odc-why strong{color:var(--white);}
+
+/* Dua kartu konsep */
+.odc-cards{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1.1rem;}
+@media(max-width:500px){.odc-cards{grid-template-columns:1fr;}}
+
+.odc-card{border-radius:6px;padding:.9rem 1rem;}
+.odc-card.statistik{background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.25);}
+.odc-card.klinis{background:rgba(37,99,168,.08);border:1px solid rgba(91,155,213,.25);}
+.odc-card .oc-badge{font-size:.63rem;font-family:'DM Mono',monospace;letter-spacing:.07em;
+  text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-bottom:.55rem;display:inline-block;}
+.odc-card.statistik .oc-badge{background:rgba(22,163,74,.2);color:#86efac;}
+.odc-card.klinis .oc-badge{background:rgba(37,99,168,.2);color:var(--sky);}
+.odc-card .oc-title{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--white);
+  margin-bottom:.6rem;line-height:1.3;}
+.odc-card .oc-list{list-style:none;padding:0;margin:0;}
+.odc-card .oc-list li{font-size:.76rem;color:var(--sl);padding:.28rem 0 .28rem 1.2rem;
+  position:relative;border-bottom:1px solid rgba(168,203,232,.06);line-height:1.5;}
+.odc-card .oc-list li:last-child{border-bottom:none;}
+.odc-card.statistik .oc-list li::before{content:"▸";position:absolute;left:0;color:#86efac;font-size:.65rem;top:.38rem;}
+.odc-card.klinis .oc-list li::before{content:"▸";position:absolute;left:0;color:var(--sky);font-size:.65rem;top:.38rem;}
+.odc-list-ok{color:#4ade80!important;font-weight:600;}
+.odc-list-no{color:#f87171!important;font-weight:600;}
+
+/* Definisi klinis accordion-like */
+.odc-def-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.1rem;}
+@media(max-width:500px){.odc-def-grid{grid-template-columns:1fr;}}
+.odc-def{background:rgba(255,255,255,.03);border:1px solid rgba(168,203,232,.1);
+  border-radius:5px;padding:.7rem .85rem;}
+.odc-def .od-src{font-size:.63rem;font-family:'DM Mono',monospace;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--sky);margin-bottom:.35rem;}
+.odc-def .od-quote{font-size:.74rem;color:var(--sl);line-height:1.65;font-style:italic;}
+.odc-def .od-tag{font-size:.65rem;background:rgba(251,191,36,.1);color:#fbbf24;
+  border-radius:3px;padding:1px 7px;display:inline-block;margin-top:.35rem;font-style:normal;}
+
+/* Tabel perbandingan */
+.odc-table-wrap{overflow-x:auto;margin-bottom:1.1rem;}
+.odc-table{width:100%;border-collapse:collapse;font-size:.74rem;}
+.odc-table th{background:rgba(168,85,247,.12);color:#d8b4fe;font-family:'DM Mono',monospace;
+  font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.45rem .7rem;text-align:left;border-bottom:1px solid rgba(168,85,247,.2);}
+.odc-table td{padding:.45rem .7rem;border-bottom:1px solid rgba(168,203,232,.06);
+  vertical-align:top;color:var(--sl);line-height:1.5;}
+.odc-table tr:hover td{background:rgba(255,255,255,.02);}
+.odc-table .odc-aspek{color:var(--white);font-weight:600;font-size:.73rem;white-space:nowrap;}
+.odc-table .odc-ya{color:#4ade80;font-weight:700;text-align:center;}
+.odc-table .odc-tdk{color:#f87171;font-weight:700;text-align:center;}
+
+/* Catatan kritis */
+.odc-kritis{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.2);
+  border-radius:5px;padding:.85rem 1rem;margin-bottom:1rem;}
+.odc-kritis .ok-title{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;
+  text-transform:uppercase;color:#fbbf24;margin-bottom:.6rem;}
+.odc-kritis-item{font-size:.76rem;color:var(--sl);padding:.28rem 0;
+  border-bottom:1px solid rgba(251,191,36,.08);line-height:1.6;}
+.odc-kritis-item:last-child{border-bottom:none;}
+.odc-kritis-item strong{color:#fbbf24;}
+
+/* Pesan kunci UKOM */
+.odc-pesan{background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(13,43,78,.3));
+  border:1px solid rgba(168,85,247,.3);border-radius:6px;padding:.9rem 1.1rem;}
+.odc-pesan .op-title{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;
+  text-transform:uppercase;color:#d8b4fe;margin-bottom:.6rem;}
+.odc-pesan-item{font-size:.77rem;color:var(--sl);padding:.25rem 0;line-height:1.65;}
+.odc-pesan-item strong{color:var(--white);}
+.odc-pesan .op-highlight{background:rgba(168,85,247,.12);border-radius:4px;
+  padding:.55rem .8rem;margin-top:.6rem;font-size:.78rem;color:#d8b4fe;
+  border-left:3px solid rgba(168,85,247,.5);line-height:1.7;}
 
 </style>
 </head>
@@ -1017,240 +1209,160 @@ function bukaModul(kompId){
       <div class="modul-judul">${m.icon} ${m.judul}</div>
       <div class="modul-ringkasan">${m.ringkasan}</div>
     </div>
-    ${isPohon
-      ? `<div class="modul-section">
-          <div class="modul-section-title">🌳 Pohon Rumus &amp; Jembatan Keledai</div>
-          ${poinHTML}
-        </div>`
-      : `<div class="modul-section">
-          <div class="modul-section-title">📌 Poin Kunci yang Harus Dipahami</div>
-          <ul class="modul-poin-list">${poinHTML}</ul>
-        </div>`}
-    <div class="modul-section">
-      <div class="modul-section-title">💡 Tips Menjawab Soal</div>
-      <div class="tips-list">${tipsHTML}</div>
+
+    <!-- Tab navigasi modul -->
+    <div class="modul-tabs">
+      <button class="modul-tab active" onclick="modulTab(this,'mtab-poin-${kompId}')">
+        ${isPohon ? '🌳 Pohon Rumus' : '📌 Poin Kunci'}
+      </button>
+      <button class="modul-tab tips-tab" onclick="modulTab(this,'mtab-tips-${kompId}')">💡 Tips Menjawab</button>
+      <button class="modul-tab jebakan-tab" onclick="modulTab(this,'mtab-jebakan-${kompId}')">⚠️ Kata Kunci Jebakan</button>
+      ${isPohon ? '<button class="modul-tab odc-tab" onclick="modulTab(this,\'mtab-odc-'+kompId+'\')" >🏥 One-Day Care</button>' : ''}
     </div>
-    <div class="modul-section">
-      <div class="modul-section-title">⚠️ Kata Kunci Jebakan — Hati-Hati!</div>
-      <div class="jebakan-list">${jebakanHTML}</div>
+
+    <!-- Panel: Poin Kunci / Pohon Rumus -->
+    <div class="modul-tab-panel active" id="mtab-poin-${kompId}">
+      ${isPohon
+        ? `<div class="modul-section" style="margin-top:0">
+            ${poinHTML}
+          </div>`
+        : `<div class="modul-section" style="margin-top:0">
+            <ul class="modul-poin-list">${poinHTML}</ul>
+          </div>`}
     </div>
-    ${kompId==='statistik_faskes'?`
-    <div class="modul-section">
-      <div class="modul-section-title">📊 Simulasi Interaktif — Grafik Barber-Johnson</div>
-      <div class="bj-wrap">
-        <div class="bj-title">Grafik <em>Barber-Johnson</em> — Simulasi Interaktif</div>
-        <div class="bj-desc">Geser slider TOI dan AvLOS untuk melihat posisi titik RS pada grafik. BOR dan BTO dihitung otomatis. Titik biru adalah posisi RS Anda saat ini.</div>
-        <div class="bj-inputs">
-          <div class="bj-field">
-            <label>TOI — Turn Over Interval (hari)</label>
-            <input type="range" class="bj-slider" min="0.5" max="10" step="0.1" value="2" id="bj-toi" oninput="bjUpdate()">
-            <span class="bj-val" id="bj-vtoi">2.0</span> <span class="bj-unit">hari &nbsp;|&nbsp; Standar: 1–3 hari</span>
-          </div>
-          <div class="bj-field">
-            <label>AvLOS — Average Length of Stay (hari)</label>
-            <input type="range" class="bj-slider" min="1" max="20" step="0.1" value="7" id="bj-avlos" oninput="bjUpdate()">
-            <span class="bj-val" id="bj-vavlos">7.0</span> <span class="bj-unit">hari &nbsp;|&nbsp; Standar: 3–12 hari (RS umum: 6–9 hari)</span>
-          </div>
-          <div class="bj-field" style="background:rgba(201,162,39,.05);border-color:rgba(201,162,39,.2);">
-            <label style="color:var(--gold);">BOR — Bed Occupancy Rate (dihitung otomatis)</label>
-            <span class="bj-val" id="bj-vbor">77.8</span> <span class="bj-unit">% &nbsp;|&nbsp; Standar: 60–85%</span>
-          </div>
-          <div class="bj-field" style="background:rgba(201,162,39,.05);border-color:rgba(201,162,39,.2);">
-            <label style="color:var(--gold);">BTO — Bed Turn Over (dihitung otomatis)</label>
-            <span class="bj-val" id="bj-vbto">40.6</span> <span class="bj-unit">kali/thn &nbsp;|&nbsp; Standar: 40–50 kali/thn</span>
-          </div>
-        </div>
-        <div class="bj-status" id="bj-badges"></div>
-        <div class="bj-chart-wrap">
-          <svg viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg" role="img">
-            <!-- Defs: clip path -->
-            <defs>
-              <clipPath id="chart-clip"><rect x="70" y="30" width="460" height="390"/></clipPath>
-            </defs>
 
-            <!-- Chart background -->
-            <rect x="70" y="30" width="460" height="390" fill="rgba(13,43,78,0.4)" rx="3"/>
-
-            <!-- Grid lines vertical (TOI: 1–10) -->
-            <g stroke="rgba(168,203,232,0.1)" stroke-width="0.8" clip-path="url(#chart-clip)">
-              <line x1="116" y1="30" x2="116" y2="420"/>
-              <line x1="162" y1="30" x2="162" y2="420"/>
-              <line x1="208" y1="30" x2="208" y2="420"/>
-              <line x1="254" y1="30" x2="254" y2="420"/>
-              <line x1="300" y1="30" x2="300" y2="420"/>
-              <line x1="346" y1="30" x2="346" y2="420"/>
-              <line x1="392" y1="30" x2="392" y2="420"/>
-              <line x1="438" y1="30" x2="438" y2="420"/>
-              <line x1="484" y1="30" x2="484" y2="420"/>
-              <line x1="530" y1="30" x2="530" y2="420"/>
-            </g>
-            <!-- Grid lines horizontal (AvLOS: 2,4,6,8,10,12,14,16,18,20) -->
-            <g stroke="rgba(168,203,232,0.1)" stroke-width="0.8" clip-path="url(#chart-clip)">
-              <line x1="70" y1="382" x2="530" y2="382"/>
-              <line x1="70" y1="344" x2="530" y2="344"/>
-              <line x1="70" y1="306" x2="530" y2="306"/>
-              <line x1="70" y1="268" x2="530" y2="268"/>
-              <line x1="70" y1="230" x2="530" y2="230"/>
-              <line x1="70" y1="192" x2="530" y2="192"/>
-              <line x1="70" y1="154" x2="530" y2="154"/>
-              <line x1="70" y1="116" x2="530" y2="116"/>
-              <line x1="70" y1="78" x2="530" y2="78"/>
-              <line x1="70" y1="40" x2="530" y2="40"/>
-            </g>
-
-            <!-- ZONA EFISIENSI: TOI 1–3 hari, AvLOS 3–12 hari -->
-            <!-- x: 70+1*46=116 to 70+3*46=208 | y: 420-12*19=192 to 420-3*19=363 -->
-            <rect x="116" y="192" width="92" height="171" fill="rgba(22,163,74,0.12)" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5 3" rx="2" clip-path="url(#chart-clip)"/>
-            <text font-size="9" fill="#4ade80" x="162" y="186" text-anchor="middle" font-family="'DM Mono',monospace" letter-spacing="0.05em">ZONA EFISIENSI</text>
-
-            <!-- BOR diagonal lines: BOR = AvLOS/(AvLOS+TOI)
-                 BOR 60%: TOI = AvLOS*(1-0.6)/0.6 = AvLOS*2/3
-                   At AvLOS=0: TOI=0 → (70,420); At AvLOS=20: TOI=13.3 (off chart); At TOI=10: AvLOS=15 → (530,135)
-                 BOR 85%: TOI = AvLOS*(1-0.85)/0.85 = AvLOS*0.176
-                   At AvLOS=0: (70,420); At AvLOS=20: TOI=3.53 → (232,40)
-                 BOR 70%: TOI = AvLOS*0.3/0.7 = AvLOS*0.429
-                   At AvLOS=20: TOI=8.57 → (464,40)
-                 BOR 75%: TOI = AvLOS*0.25/0.75 = AvLOS/3
-                   At AvLOS=20: TOI=6.67 → (376,40)
-            -->
-            <!-- BOR=60% line: from (70,420) to (530,135) -->
-            <line x1="70" y1="420" x2="530" y2="135" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="7 4" clip-path="url(#chart-clip)"/>
-            <text font-size="10" fill="#ef4444" x="534" y="133" font-family="'DM Mono',monospace" font-weight="500">60%</text>
-
-            <!-- BOR=85% line: from (70,420) to (232,40) -->
-            <line x1="70" y1="420" x2="232" y2="40" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="7 4" clip-path="url(#chart-clip)"/>
-            <text font-size="10" fill="#3b82f6" x="218" y="35" font-family="'DM Mono',monospace" font-weight="500">85%</text>
-
-            <!-- BOR=75% reference line: from (70,420) to (376,40) -->
-            <line x1="70" y1="420" x2="376" y2="40" stroke="rgba(168,203,232,0.35)" stroke-width="0.8" stroke-dasharray="4 5" clip-path="url(#chart-clip)"/>
-            <text font-size="9" fill="rgba(168,203,232,0.5)" x="379" y="37" font-family="'DM Mono',monospace">75%</text>
-
-            <!-- BOR=70% reference line: from (70,420) to (464,40) -->
-            <line x1="70" y1="420" x2="464" y2="40" stroke="rgba(168,203,232,0.2)" stroke-width="0.7" stroke-dasharray="3 5" clip-path="url(#chart-clip)"/>
-            <text font-size="9" fill="rgba(168,203,232,0.35)" x="467" y="37" font-family="'DM Mono',monospace">70%</text>
-
-            <!-- Axes (drawn last to be on top of grid) -->
-            <!-- X axis -->
-            <line x1="70" y1="420" x2="535" y2="420" stroke="rgba(168,203,232,0.6)" stroke-width="2"/>
-            <!-- Y axis -->
-            <line x1="70" y1="420" x2="70" y2="25" stroke="rgba(168,203,232,0.6)" stroke-width="2"/>
-            <!-- Tick marks X -->
-            <g stroke="rgba(168,203,232,0.5)" stroke-width="1.2">
-              <line x1="116" y1="420" x2="116" y2="426"/>
-              <line x1="162" y1="420" x2="162" y2="426"/>
-              <line x1="208" y1="420" x2="208" y2="426"/>
-              <line x1="254" y1="420" x2="254" y2="426"/>
-              <line x1="300" y1="420" x2="300" y2="426"/>
-              <line x1="346" y1="420" x2="346" y2="426"/>
-              <line x1="392" y1="420" x2="392" y2="426"/>
-              <line x1="438" y1="420" x2="438" y2="426"/>
-              <line x1="484" y1="420" x2="484" y2="426"/>
-              <line x1="530" y1="420" x2="530" y2="426"/>
-            </g>
-            <!-- Tick marks Y -->
-            <g stroke="rgba(168,203,232,0.5)" stroke-width="1.2">
-              <line x1="64" y1="382" x2="70" y2="382"/>
-              <line x1="64" y1="344" x2="70" y2="344"/>
-              <line x1="64" y1="306" x2="70" y2="306"/>
-              <line x1="64" y1="268" x2="70" y2="268"/>
-              <line x1="64" y1="230" x2="70" y2="230"/>
-              <line x1="64" y1="192" x2="70" y2="192"/>
-              <line x1="64" y1="154" x2="70" y2="154"/>
-              <line x1="64" y1="116" x2="70" y2="116"/>
-              <line x1="64" y1="78" x2="70" y2="78"/>
-              <line x1="64" y1="40" x2="70" y2="40"/>
-            </g>
-
-            <!-- X axis labels (TOI 1–10) -->
-            <g font-size="10" text-anchor="middle" fill="rgba(168,203,232,0.8)" font-family="'DM Mono',monospace">
-              <text x="116" y="438">1</text>
-              <text x="162" y="438">2</text>
-              <text x="208" y="438">3</text>
-              <text x="254" y="438">4</text>
-              <text x="300" y="438">5</text>
-              <text x="346" y="438">6</text>
-              <text x="392" y="438">7</text>
-              <text x="438" y="438">8</text>
-              <text x="484" y="438">9</text>
-              <text x="530" y="438">10</text>
-            </g>
-            <!-- X axis title -->
-            <text font-size="11" text-anchor="middle" fill="rgba(168,203,232,0.9)" x="300" y="453" font-family="'DM Sans',sans-serif" font-weight="600">TOI — Turn Over Interval (hari)</text>
-
-            <!-- Y axis labels (AvLOS 2–20, step 2) -->
-            <g font-size="10" text-anchor="end" fill="rgba(168,203,232,0.8)" font-family="'DM Mono',monospace">
-              <text x="60" y="385">2</text>
-              <text x="60" y="347">4</text>
-              <text x="60" y="309">6</text>
-              <text x="60" y="271">8</text>
-              <text x="60" y="233">10</text>
-              <text x="60" y="195">12</text>
-              <text x="60" y="157">14</text>
-              <text x="60" y="119">16</text>
-              <text x="60" y="81">18</text>
-              <text x="60" y="43">20</text>
-            </g>
-            <!-- Y axis title (rotated) -->
-            <text font-size="11" text-anchor="middle" fill="rgba(168,203,232,0.9)" x="14" y="225" font-family="'DM Sans',sans-serif" font-weight="600" transform="rotate(-90,14,225)">AvLOS — Average Length of Stay (hari)</text>
-
-            <!-- BOR label area (between lines) -->
-            <text font-size="9" fill="rgba(34,197,94,0.7)" x="145" y="290" text-anchor="middle" font-family="'DM Mono',monospace" transform="rotate(-72,145,290)">BOR IDEAL</text>
-
-            <!-- Fixed case points -->
-            <!-- Kasus A: BOR rendah TOI=5, AvLOS=4 → x=300, y=344 -->
-            <circle cx="300" cy="344" r="6" fill="#f97316" opacity="0.85"/>
-            <text font-size="9" fill="#f97316" x="310" y="340" font-family="'DM Mono',monospace">A</text>
-            <!-- Kasus B: AvLOS tinggi TOI=2, AvLOS=16 → x=162, y=116 -->
-            <circle cx="162" cy="116" r="6" fill="#a855f7" opacity="0.85"/>
-            <text font-size="9" fill="#a855f7" x="172" y="112" font-family="'DM Mono',monospace">B</text>
-            <!-- Kasus C: ideal TOI=2, AvLOS=7 → x=162, y=287 -->
-            <circle cx="162" cy="287" r="6" fill="#22c55e" opacity="0.85"/>
-            <text font-size="9" fill="#22c55e" x="172" y="283" font-family="'DM Mono',monospace">C</text>
-            <!-- Kasus D: TOI pendek TOI=0.5, AvLOS=7 → x=93, y=287 -->
-            <circle cx="93" cy="287" r="6" fill="#ef4444" opacity="0.8"/>
-            <text font-size="9" fill="#ef4444" x="98" y="282" font-family="'DM Mono',monospace">D</text>
-
-            <!-- User point (dynamic) -->
-            <circle id="bj-user-pt" cx="162" cy="287" r="9" fill="#38bdf8" stroke="white" stroke-width="2.5" opacity="0.95"/>
-            <text id="bj-user-lbl" font-size="9" fill="white" x="173" y="279" font-family="'DM Mono',monospace" font-weight="700">RS Anda</text>
-          </svg>
-        </div>
-
-        <!-- Legend -->
-        <div class="bj-legend">
-          <span><span class="bj-dot" style="background:#38bdf8;border:1px solid white;"></span>RS Anda (dinamis)</span>
-          <span><span class="bj-dot" style="background:#22c55e;"></span>A: Ideal</span>
-          <span><span class="bj-dot" style="background:#f97316;"></span>B: BOR rendah</span>
-          <span><span class="bj-dot" style="background:#a855f7;"></span>C: AvLOS tinggi</span>
-          <span><span class="bj-dot" style="background:#ef4444;"></span>D: TOI terlalu pendek</span>
-          <span style="color:rgba(168,203,232,0.6);font-size:.7rem;">— — BOR 60% (merah) &nbsp;|&nbsp; — — BOR 85% (biru) &nbsp;|&nbsp; kotak hijau = zona efisiensi</span>
-        </div>
-
-        <!-- Kasus contoh -->
-        <p style="font-size:.74rem;color:var(--sl);margin:.8rem 0 .4rem;font-family:'DM Mono',monospace;letter-spacing:.05em;text-transform:uppercase;">Pilih kasus contoh:</p>
-        <div class="bj-cases">
-          <button class="bj-case-btn" onclick="bjLoadCase(2,7)"><strong>Ideal — RS Sehat</strong>TOI=2, AvLOS=7<br><span class="ok-txt">Dalam zona efisiensi</span></button>
-          <button class="bj-case-btn" onclick="bjLoadCase(5,4)"><strong>BOR rendah — A</strong>TOI=5, AvLOS=4<br><span class="danger-txt">TT banyak kosong</span></button>
-          <button class="bj-case-btn" onclick="bjLoadCase(2,16)"><strong>AvLOS tinggi — B</strong>TOI=2, AvLOS=16<br><span class="danger-txt">Rawat inap terlalu lama</span></button>
-          <button class="bj-case-btn" onclick="bjLoadCase(0.5,7)"><strong>TOI pendek — D</strong>TOI=0.5, AvLOS=7<br><span class="danger-txt">Risiko HAIs nosokomial</span></button>
-          <button class="bj-case-btn" onclick="bjLoadCase(1.5,9)"><strong>Batas atas AvLOS</strong>TOI=1.5, AvLOS=9<br><span class="ok-txt">Masih dalam zona</span></button>
-          <button class="bj-case-btn" onclick="bjLoadCase(3,6)"><strong>Batas kanan zona</strong>TOI=3, AvLOS=6<br><span class="ok-txt">Tepat di tepi zona</span></button>
-        </div>
-
-        <div class="bj-interp" id="bj-interp">Geser slider untuk melihat interpretasi...</div>
+    <!-- Panel: Tips -->
+    <div class="modul-tab-panel" id="mtab-tips-${kompId}">
+      <div class="modul-section" style="margin-top:0">
+        <div class="tips-list">${tipsHTML}</div>
       </div>
     </div>
-    `:''}
+
+    <!-- Panel: Jebakan -->
+    <div class="modul-tab-panel" id="mtab-jebakan-${kompId}">
+      <div class="modul-section" style="margin-top:0">
+        <div class="jebakan-list">${jebakanHTML}</div>
+      </div>
+    </div>
+
+    <!-- Panel: One-Day Care (hanya statistik_faskes) -->
+    ${isPohon ? `
+    <div class="modul-tab-panel" id="mtab-odc-${kompId}">
+
+      <!-- Mengapa penting -->
+      <div class="odc-why">
+        <strong>⚡ Mengapa topik ini penting?</strong><br>
+        Mahasiswa sering menyamakan <strong>One-Day Patient</strong> (statistik sensus) dengan <strong>One Day Care</strong> (layanan klinis).
+        Keduanya berbeda dalam tujuan, batasan waktu, dan konteks penggunaannya.
+        Dalam soal UKOM, yang diuji adalah konsep One-Day Patient untuk perhitungan CHP — bukan batasan jam One Day Care.
+      </div>
+
+      <!-- Dua kartu konsep -->
+      <div class="odc-cards">
+        <div class="odc-card statistik">
+          <span class="oc-badge">📊 Konteks Statistik Sensus</span>
+          <div class="oc-title">One-Day Patient</div>
+          <ul class="oc-list">
+            <li>Pasien masuk &amp; keluar pada <strong style="color:var(--white)">tanggal yang sama</strong> tanpa menginap semalam</li>
+            <li><span class="odc-list-ok">✓ DIHITUNG</span> dalam CHP — menggunakan fasilitas RS hari itu</li>
+            <li><span class="odc-list-no">✗ TIDAK MASUK</span> Sisa TM — sudah pulang sebelum pukul 00.00</li>
+            <li><span class="odc-list-ok">✓ TERMASUK</span> Pasien Keluar (PK) → AvLOS, NDR, GDR</li>
+            <li>1 hari perawatan</li>
+            <li><strong style="color:#fbbf24;">Tidak ada syarat batas jam minimum</strong> — hanya syarat tanggal masuk = tanggal keluar</li>
+          </ul>
+        </div>
+        <div class="odc-card klinis">
+          <span class="oc-badge">🏥 Konteks Pelayanan Klinis</span>
+          <div class="oc-title">One Day Care</div>
+          <ul class="oc-list">
+            <li>Model pelayanan RS: observasi, diagnosis, pengobatan yang menempati TT <strong style="color:var(--white)">&lt; 24 jam</strong></li>
+            <li><span class="odc-list-ok">✓ DIHITUNG</span> dalam CHP — jika menggunakan TT RS</li>
+            <li><span class="odc-list-no">✗ TIDAK MASUK</span> Sisa TM — sudah pulang sebelum tengah malam</li>
+            <li><span class="odc-list-ok">✓ TERMASUK</span> Pasien Keluar (PK)</li>
+            <li>Batas waktu: minimum <strong style="color:#fbbf24;">4–8 jam</strong> bergantung regulasi &amp; kebijakan RS</li>
+            <li>Contoh: kuretase, sirkumsisi, pemasangan IUD, bedah minor</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4 Definisi klinis dari sumber berbeda -->
+      <div class="modul-section-title" style="margin-bottom:.6rem;">📑 Definisi One Day Care dari Berbagai Sumber</div>
+      <div class="odc-def-grid">
+        <div class="odc-def">
+          <div class="od-src">Depkes RI / RS Puri Medika</div>
+          <div class="od-quote">"Pelayanan rawat sehari adalah pelayanan pasien untuk observasi, diagnosis, pengobatan, rehabilitasi medik dan menempati TT kurang dari 24 jam."</div>
+          <span class="od-tag">Batas atas: &lt;24 jam</span>
+        </div>
+        <div class="odc-def">
+          <div class="od-src">Lily Widjaja — SIRS Depkes RI (Esa Unggul)</div>
+          <div class="od-quote">"Pasien dapat menjadi pasien rawat inap jika pengobatan dan/atau perawatan diberikan tidak kurang dari 4 jam, di mana pasien memakai tempat tidur RS."</div>
+          <span class="od-tag">Minimum: 4 jam</span>
+        </div>
+        <div class="odc-def">
+          <div class="od-src">SOP Puskesmas Sleman — Kemenkes RI</div>
+          <div class="od-quote">"Petugas melakukan observasi kepada pasien minimal 8 jam dalam tanggal yang sama; apabila tidak ada perbaikan lebih dari 24 jam, dirujuk ke rawat inap."</div>
+          <span class="od-tag">Minimum: 8 jam</span>
+        </div>
+        <div class="odc-def">
+          <div class="od-src">BKIM Provinsi Jawa Tengah — ODC Surgery</div>
+          <div class="od-quote">"One Day Care adalah pelayanan bedah sehari untuk tindakan operasi tertentu dengan pengawasan 1–2 jam setelah operasi di ruang pemulihan tanpa rawat inap."</div>
+          <span class="od-tag">Pengawasan: 1–2 jam post-op</span>
+        </div>
+      </div>
+
+      <!-- Tabel perbandingan -->
+      <div class="modul-section-title" style="margin-bottom:.6rem;">📊 Tabel Perbandingan Lengkap</div>
+      <div class="odc-table-wrap">
+        <table class="odc-table">
+          <thead>
+            <tr>
+              <th>Aspek</th>
+              <th>One-Day Patient (Statistik)</th>
+              <th>One Day Care (Klinis)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="odc-aspek">Tujuan</td><td>Perhitungan CHP / Sensus Harian</td><td>Jenis / model pelayanan RS</td></tr>
+            <tr><td class="odc-aspek">Definisi</td><td>Masuk &amp; keluar pada tanggal yang sama</td><td>Observasi, diagnosis, pengobatan &lt;24 jam menggunakan TT</td></tr>
+            <tr><td class="odc-aspek">Batas waktu</td><td><strong style="color:#fbbf24;">Tidak ada batas jam</strong> — hanya syarat tanggal sama</td><td>&lt;24 jam (batas atas) · Minimum 4–8 jam bergantung regulasi</td></tr>
+            <tr><td class="odc-aspek">Masuk CHP?</td><td class="odc-ya">✓ YA</td><td class="odc-ya">✓ YA</td></tr>
+            <tr><td class="odc-aspek">Masuk Sisa TM?</td><td class="odc-tdk">✗ TIDAK</td><td class="odc-tdk">✗ TIDAK</td></tr>
+            <tr><td class="odc-aspek">Masuk PK?</td><td class="odc-ya">✓ YA</td><td class="odc-ya">✓ YA</td></tr>
+            <tr><td class="odc-aspek">Regulasi utama</td><td>Depkes RI SIRS · Nisak &amp; Cholifah (2020)</td><td>Permenkes 40/2022 · Kepmenkes 129/2008 · Kebijakan RS</td></tr>
+            <tr><td class="odc-aspek">Relevansi UKOM</td><td style="color:#4ade80;font-weight:600;">TINGGI — langsung diuji</td><td style="color:#fbbf24;font-weight:600;">SEDANG — konsep latar belakang</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Catatan kritis regulasi -->
+      <div class="odc-kritis">
+        <div class="ok-title">⚠️ Catatan Kritis tentang Regulasi</div>
+        <div class="odc-kritis-item"><strong>Tidak ada satu Permenkes yang menetapkan standar jam minimum tunggal secara nasional.</strong></div>
+        <div class="odc-kritis-item">Batasan <strong>4 jam</strong> → dokumen SIRS Depkes RI (via Lily Widjaja, Esa Unggul)</div>
+        <div class="odc-kritis-item">Batasan <strong>8 jam</strong> → SOP Puskesmas Kemenkes RI</div>
+        <div class="odc-kritis-item">Permenkes No. 40/2022 menyebut ruang rawat sehari dalam konteks persyaratan bangunan RS — tidak secara eksplisit menetapkan batas jam.</div>
+        <div class="odc-kritis-item">Dalam praktik, setiap RS menetapkan SOP sendiri berdasarkan kebijakan internal dan akreditasi.</div>
+        <div class="odc-kritis-item" style="color:var(--white);margin-top:.3rem;"><strong>Untuk soal UKOM D4 MIK → gunakan definisi statistik: tanggal masuk = tanggal keluar.</strong></div>
+      </div>
+
+      <!-- Pesan kunci -->
+      <div class="odc-pesan">
+        <div class="op-title">🎯 Pesan Kunci untuk Mahasiswa</div>
+        <div class="odc-pesan-item"><strong>Untuk soal UKOM:</strong> One-day patient = tanggal masuk SAMA dengan tanggal keluar. Tidak ada syarat batas jam. Dihitung dalam CHP, tidak masuk Sisa TM, masuk Pasien Keluar.</div>
+        <div class="odc-pesan-item" style="margin-top:.3rem;"><strong>Untuk praktik RS:</strong> One day care memiliki kriteria klinis (&lt;24 jam, minimum 4–8 jam) yang diatur kebijakan masing-masing RS.</div>
+        <div class="op-highlight">💡 Jika soal menyebutkan <strong>"pasien masuk dan pulang hari yang sama"</strong> tanpa menyebut jam — itu one-day patient. Hitung sebagai <strong>CHP</strong>, tidak masuk Sisa TM.</div>
+      </div>
+
+    </div>
+    ` : ''}
+
     <div class="modul-cta">
       <div class="modul-cta-text">Sudah memahami materi <strong>${m.kode}</strong>?<br>Sekarang uji pemahaman Anda dengan latihan soal kompetensi ini.</div>
       <button class="btn-mulai-latihan" onclick="mulaiDariBelajar('${kompId}')">✏️ Latihan Soal ${m.kode} →</button>
     </div>`;
   document.getElementById('belajar-pilih').style.display='none';
   document.getElementById('belajar-modul').style.display='block';
-  // Init Barber-Johnson jika statistik_faskes
-  if(kompId==='statistik_faskes'){
-    setTimeout(bjUpdate, 100);
-  }
+
 }
 
 // ── MULAI LATIHAN DARI BELAJAR ──────────────────────────────────────────
@@ -1342,11 +1454,15 @@ function exportSoalPDF(){
       Portal Latihan UKOM D4 MIK — Politeknik Kesehatan Kartini Bali
     </div>`;
 
-  // Trigger print
+  // Trigger print: tambah class ke body agar hanya print-soal-container terlihat
   setTimeout(()=>{
+    document.body.classList.add('mode-print-soal');
     window.print();
-    // Bersihkan container setelah print dialog ditutup
-    setTimeout(()=>{ container.innerHTML = ''; }, 1000);
+    // Bersihkan setelah print dialog ditutup
+    setTimeout(()=>{
+      document.body.classList.remove('mode-print-soal');
+      container.innerHTML = '';
+    }, 1500);
   }, 200);
 }
 
@@ -1437,6 +1553,8 @@ function renderPohonRumus(){
     <button class="pr-tab" onclick="prTab(this,'pr-mortalitas')">💀 Mortalitas & KIA</button>
     <button class="pr-tab" onclick="prTab(this,'pr-sensus')">📋 Sensus Harian</button>
     <button class="pr-tab" onclick="prTab(this,'pr-jembatan')">🔑 Jembatan Keledai</button>
+    <button class="pr-tab" onclick="prTab(this,'pr-bj');initBJ()">📈 Barber-Johnson</button>
+    <button class="pr-tab" onclick="prTab(this,'pr-kalkulator');initKalk()">🧮 Kalkulator Sensus</button>
   </div>
 
   <!-- TAB 1: UTILISASI TT ─────────────────────────────────────────────── -->
@@ -1709,6 +1827,301 @@ function renderPohonRumus(){
     </table>
     </div>
   </div>
+
+  <!-- TAB 5: BARBER-JOHNSON INTERAKTIF -->
+  <div class="pr-panel" id="pr-bj">
+    <div class="bj-wrap">
+        <div class="bj-title">Grafik <em>Barber-Johnson</em> — Simulasi Interaktif</div>
+        <div class="bj-desc">Geser slider TOI dan AvLOS untuk melihat posisi titik RS pada grafik. BOR dan BTO dihitung otomatis. Titik biru adalah posisi RS Anda saat ini.</div>
+        <div class="bj-inputs">
+          <div class="bj-field">
+            <label>TOI — Turn Over Interval (hari)</label>
+            <input type="range" class="bj-slider" min="0.5" max="10" step="0.1" value="2" id="bj-toi" oninput="bjUpdate()">
+            <span class="bj-val" id="bj-vtoi">2.0</span> <span class="bj-unit">hari &nbsp;|&nbsp; Standar: 1–3 hari</span>
+          </div>
+          <div class="bj-field">
+            <label>AvLOS — Average Length of Stay (hari)</label>
+            <input type="range" class="bj-slider" min="1" max="20" step="0.1" value="7" id="bj-avlos" oninput="bjUpdate()">
+            <span class="bj-val" id="bj-vavlos">7.0</span> <span class="bj-unit">hari &nbsp;|&nbsp; Standar: 3–12 hari (RS umum: 6–9 hari)</span>
+          </div>
+          <div class="bj-field" style="background:rgba(201,162,39,.05);border-color:rgba(201,162,39,.2);">
+            <label style="color:var(--gold);">BOR — Bed Occupancy Rate (dihitung otomatis)</label>
+            <span class="bj-val" id="bj-vbor">77.8</span> <span class="bj-unit">% &nbsp;|&nbsp; Standar: 60–85%</span>
+          </div>
+          <div class="bj-field" style="background:rgba(201,162,39,.05);border-color:rgba(201,162,39,.2);">
+            <label style="color:var(--gold);">BTO — Bed Turn Over (dihitung otomatis)</label>
+            <span class="bj-val" id="bj-vbto">40.6</span> <span class="bj-unit">kali/thn &nbsp;|&nbsp; Standar: 40–50 kali/thn</span>
+          </div>
+        </div>
+        <div class="bj-status" id="bj-badges"></div>
+        <div class="bj-chart-wrap">
+          <svg viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg" role="img">
+            <!-- Defs: clip path -->
+            <defs>
+              <clipPath id="chart-clip"><rect x="70" y="30" width="460" height="390"/></clipPath>
+            </defs>
+
+            <!-- Chart background -->
+            <rect x="70" y="30" width="460" height="390" fill="rgba(13,43,78,0.4)" rx="3"/>
+
+            <!-- Grid lines vertical (TOI: 1–10) -->
+            <g stroke="rgba(168,203,232,0.1)" stroke-width="0.8" clip-path="url(#chart-clip)">
+              <line x1="116" y1="30" x2="116" y2="420"/>
+              <line x1="162" y1="30" x2="162" y2="420"/>
+              <line x1="208" y1="30" x2="208" y2="420"/>
+              <line x1="254" y1="30" x2="254" y2="420"/>
+              <line x1="300" y1="30" x2="300" y2="420"/>
+              <line x1="346" y1="30" x2="346" y2="420"/>
+              <line x1="392" y1="30" x2="392" y2="420"/>
+              <line x1="438" y1="30" x2="438" y2="420"/>
+              <line x1="484" y1="30" x2="484" y2="420"/>
+              <line x1="530" y1="30" x2="530" y2="420"/>
+            </g>
+            <!-- Grid lines horizontal (AvLOS: 2,4,6,8,10,12,14,16,18,20) -->
+            <g stroke="rgba(168,203,232,0.1)" stroke-width="0.8" clip-path="url(#chart-clip)">
+              <line x1="70" y1="382" x2="530" y2="382"/>
+              <line x1="70" y1="344" x2="530" y2="344"/>
+              <line x1="70" y1="306" x2="530" y2="306"/>
+              <line x1="70" y1="268" x2="530" y2="268"/>
+              <line x1="70" y1="230" x2="530" y2="230"/>
+              <line x1="70" y1="192" x2="530" y2="192"/>
+              <line x1="70" y1="154" x2="530" y2="154"/>
+              <line x1="70" y1="116" x2="530" y2="116"/>
+              <line x1="70" y1="78" x2="530" y2="78"/>
+              <line x1="70" y1="40" x2="530" y2="40"/>
+            </g>
+
+            <!-- ZONA EFISIENSI: TOI 1–3 hari, AvLOS 3–12 hari -->
+            <!-- x: 70+1*46=116 to 70+3*46=208 | y: 420-12*19=192 to 420-3*19=363 -->
+            <rect x="116" y="192" width="92" height="171" fill="rgba(22,163,74,0.12)" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5 3" rx="2" clip-path="url(#chart-clip)"/>
+            <text font-size="9" fill="#4ade80" x="162" y="186" text-anchor="middle" font-family="'DM Mono',monospace" letter-spacing="0.05em">ZONA EFISIENSI</text>
+
+            <!-- BOR diagonal lines: BOR = AvLOS/(AvLOS+TOI)
+                 BOR 60%: TOI = AvLOS*(1-0.6)/0.6 = AvLOS*2/3
+                   At AvLOS=0: TOI=0 → (70,420); At AvLOS=20: TOI=13.3 (off chart); At TOI=10: AvLOS=15 → (530,135)
+                 BOR 85%: TOI = AvLOS*(1-0.85)/0.85 = AvLOS*0.176
+                   At AvLOS=0: (70,420); At AvLOS=20: TOI=3.53 → (232,40)
+                 BOR 70%: TOI = AvLOS*0.3/0.7 = AvLOS*0.429
+                   At AvLOS=20: TOI=8.57 → (464,40)
+                 BOR 75%: TOI = AvLOS*0.25/0.75 = AvLOS/3
+                   At AvLOS=20: TOI=6.67 → (376,40)
+            -->
+            <!-- BOR=60% line: from (70,420) to (530,135) -->
+            <line x1="70" y1="420" x2="530" y2="135" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="7 4" clip-path="url(#chart-clip)"/>
+            <text font-size="10" fill="#ef4444" x="534" y="133" font-family="'DM Mono',monospace" font-weight="500">60%</text>
+
+            <!-- BOR=85% line: from (70,420) to (232,40) -->
+            <line x1="70" y1="420" x2="232" y2="40" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="7 4" clip-path="url(#chart-clip)"/>
+            <text font-size="10" fill="#3b82f6" x="218" y="35" font-family="'DM Mono',monospace" font-weight="500">85%</text>
+
+            <!-- BOR=75% reference line: from (70,420) to (376,40) -->
+            <line x1="70" y1="420" x2="376" y2="40" stroke="rgba(168,203,232,0.35)" stroke-width="0.8" stroke-dasharray="4 5" clip-path="url(#chart-clip)"/>
+            <text font-size="9" fill="rgba(168,203,232,0.5)" x="379" y="37" font-family="'DM Mono',monospace">75%</text>
+
+            <!-- BOR=70% reference line: from (70,420) to (464,40) -->
+            <line x1="70" y1="420" x2="464" y2="40" stroke="rgba(168,203,232,0.2)" stroke-width="0.7" stroke-dasharray="3 5" clip-path="url(#chart-clip)"/>
+            <text font-size="9" fill="rgba(168,203,232,0.35)" x="467" y="37" font-family="'DM Mono',monospace">70%</text>
+
+            <!-- Axes (drawn last to be on top of grid) -->
+            <!-- X axis -->
+            <line x1="70" y1="420" x2="535" y2="420" stroke="rgba(168,203,232,0.6)" stroke-width="2"/>
+            <!-- Y axis -->
+            <line x1="70" y1="420" x2="70" y2="25" stroke="rgba(168,203,232,0.6)" stroke-width="2"/>
+            <!-- Tick marks X -->
+            <g stroke="rgba(168,203,232,0.5)" stroke-width="1.2">
+              <line x1="116" y1="420" x2="116" y2="426"/>
+              <line x1="162" y1="420" x2="162" y2="426"/>
+              <line x1="208" y1="420" x2="208" y2="426"/>
+              <line x1="254" y1="420" x2="254" y2="426"/>
+              <line x1="300" y1="420" x2="300" y2="426"/>
+              <line x1="346" y1="420" x2="346" y2="426"/>
+              <line x1="392" y1="420" x2="392" y2="426"/>
+              <line x1="438" y1="420" x2="438" y2="426"/>
+              <line x1="484" y1="420" x2="484" y2="426"/>
+              <line x1="530" y1="420" x2="530" y2="426"/>
+            </g>
+            <!-- Tick marks Y -->
+            <g stroke="rgba(168,203,232,0.5)" stroke-width="1.2">
+              <line x1="64" y1="382" x2="70" y2="382"/>
+              <line x1="64" y1="344" x2="70" y2="344"/>
+              <line x1="64" y1="306" x2="70" y2="306"/>
+              <line x1="64" y1="268" x2="70" y2="268"/>
+              <line x1="64" y1="230" x2="70" y2="230"/>
+              <line x1="64" y1="192" x2="70" y2="192"/>
+              <line x1="64" y1="154" x2="70" y2="154"/>
+              <line x1="64" y1="116" x2="70" y2="116"/>
+              <line x1="64" y1="78" x2="70" y2="78"/>
+              <line x1="64" y1="40" x2="70" y2="40"/>
+            </g>
+
+            <!-- X axis labels (TOI 1–10) -->
+            <g font-size="10" text-anchor="middle" fill="rgba(168,203,232,0.8)" font-family="'DM Mono',monospace">
+              <text x="116" y="438">1</text>
+              <text x="162" y="438">2</text>
+              <text x="208" y="438">3</text>
+              <text x="254" y="438">4</text>
+              <text x="300" y="438">5</text>
+              <text x="346" y="438">6</text>
+              <text x="392" y="438">7</text>
+              <text x="438" y="438">8</text>
+              <text x="484" y="438">9</text>
+              <text x="530" y="438">10</text>
+            </g>
+            <!-- X axis title -->
+            <text font-size="11" text-anchor="middle" fill="rgba(168,203,232,0.9)" x="300" y="453" font-family="'DM Sans',sans-serif" font-weight="600">TOI — Turn Over Interval (hari)</text>
+
+            <!-- Y axis labels (AvLOS 2–20, step 2) -->
+            <g font-size="10" text-anchor="end" fill="rgba(168,203,232,0.8)" font-family="'DM Mono',monospace">
+              <text x="60" y="385">2</text>
+              <text x="60" y="347">4</text>
+              <text x="60" y="309">6</text>
+              <text x="60" y="271">8</text>
+              <text x="60" y="233">10</text>
+              <text x="60" y="195">12</text>
+              <text x="60" y="157">14</text>
+              <text x="60" y="119">16</text>
+              <text x="60" y="81">18</text>
+              <text x="60" y="43">20</text>
+            </g>
+            <!-- Y axis title (rotated) -->
+            <text font-size="11" text-anchor="middle" fill="rgba(168,203,232,0.9)" x="14" y="225" font-family="'DM Sans',sans-serif" font-weight="600" transform="rotate(-90,14,225)">AvLOS — Average Length of Stay (hari)</text>
+
+            <!-- BOR label area (between lines) -->
+            <text font-size="9" fill="rgba(34,197,94,0.7)" x="145" y="290" text-anchor="middle" font-family="'DM Mono',monospace" transform="rotate(-72,145,290)">BOR IDEAL</text>
+
+            <!-- Fixed case points -->
+            <!-- Kasus A: BOR rendah TOI=5, AvLOS=4 → x=300, y=344 -->
+            <circle cx="300" cy="344" r="6" fill="#f97316" opacity="0.85"/>
+            <text font-size="9" fill="#f97316" x="310" y="340" font-family="'DM Mono',monospace">A</text>
+            <!-- Kasus B: AvLOS tinggi TOI=2, AvLOS=16 → x=162, y=116 -->
+            <circle cx="162" cy="116" r="6" fill="#a855f7" opacity="0.85"/>
+            <text font-size="9" fill="#a855f7" x="172" y="112" font-family="'DM Mono',monospace">B</text>
+            <!-- Kasus C: ideal TOI=2, AvLOS=7 → x=162, y=287 -->
+            <circle cx="162" cy="287" r="6" fill="#22c55e" opacity="0.85"/>
+            <text font-size="9" fill="#22c55e" x="172" y="283" font-family="'DM Mono',monospace">C</text>
+            <!-- Kasus D: TOI pendek TOI=0.5, AvLOS=7 → x=93, y=287 -->
+            <circle cx="93" cy="287" r="6" fill="#ef4444" opacity="0.8"/>
+            <text font-size="9" fill="#ef4444" x="98" y="282" font-family="'DM Mono',monospace">D</text>
+
+            <!-- User point (dynamic) -->
+            <circle id="bj-user-pt" cx="162" cy="287" r="9" fill="#38bdf8" stroke="white" stroke-width="2.5" opacity="0.95"/>
+            <text id="bj-user-lbl" font-size="9" fill="white" x="173" y="279" font-family="'DM Mono',monospace" font-weight="700">RS Anda</text>
+          </svg>
+        </div>
+
+        <!-- Legend -->
+        <div class="bj-legend">
+          <span><span class="bj-dot" style="background:#38bdf8;border:1px solid white;"></span>RS Anda (dinamis)</span>
+          <span><span class="bj-dot" style="background:#22c55e;"></span>A: Ideal</span>
+          <span><span class="bj-dot" style="background:#f97316;"></span>B: BOR rendah</span>
+          <span><span class="bj-dot" style="background:#a855f7;"></span>C: AvLOS tinggi</span>
+          <span><span class="bj-dot" style="background:#ef4444;"></span>D: TOI terlalu pendek</span>
+          <span style="color:rgba(168,203,232,0.6);font-size:.7rem;">— — BOR 60% (merah) &nbsp;|&nbsp; — — BOR 85% (biru) &nbsp;|&nbsp; kotak hijau = zona efisiensi</span>
+        </div>
+
+        <!-- Kasus contoh -->
+        <p style="font-size:.74rem;color:var(--sl);margin:.8rem 0 .4rem;font-family:'DM Mono',monospace;letter-spacing:.05em;text-transform:uppercase;">Pilih kasus contoh:</p>
+        <div class="bj-cases">
+          <button class="bj-case-btn" onclick="bjLoadCase(2,7)"><strong>Ideal — RS Sehat</strong>TOI=2, AvLOS=7<br><span class="ok-txt">Dalam zona efisiensi</span></button>
+          <button class="bj-case-btn" onclick="bjLoadCase(5,4)"><strong>BOR rendah — A</strong>TOI=5, AvLOS=4<br><span class="danger-txt">TT banyak kosong</span></button>
+          <button class="bj-case-btn" onclick="bjLoadCase(2,16)"><strong>AvLOS tinggi — B</strong>TOI=2, AvLOS=16<br><span class="danger-txt">Rawat inap terlalu lama</span></button>
+          <button class="bj-case-btn" onclick="bjLoadCase(0.5,7)"><strong>TOI pendek — D</strong>TOI=0.5, AvLOS=7<br><span class="danger-txt">Risiko HAIs nosokomial</span></button>
+          <button class="bj-case-btn" onclick="bjLoadCase(1.5,9)"><strong>Batas atas AvLOS</strong>TOI=1.5, AvLOS=9<br><span class="ok-txt">Masih dalam zona</span></button>
+          <button class="bj-case-btn" onclick="bjLoadCase(3,6)"><strong>Batas kanan zona</strong>TOI=3, AvLOS=6<br><span class="ok-txt">Tepat di tepi zona</span></button>
+        </div>
+
+        <div class="bj-interp" id="bj-interp">Geser slider untuk melihat interpretasi...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 6: KALKULATOR SENSUS HARIAN -->
+  <div class="pr-panel" id="pr-kalkulator">
+    <div class="kalk-wrap">
+      <div class="kalk-info">
+        <strong>Rumus CHP:</strong> Sisa TM + Semua Pasien Masuk (termasuk one-day patient)<br>
+        <strong>Ingat:</strong> One-day patient <strong>DIHITUNG</strong> dalam CHP tetapi <strong>TIDAK MASUK</strong> Sisa TM berikutnya.
+      </div>
+      <div class="kalk-presets">
+        <span class="kalk-preset-label">Contoh soal:</span>
+        <button class="kalk-preset-btn kpactive" id="kp0" onclick="kalkPreset(0,180,45,12,3,28,2,5)">Soal 1 — RSU Sehat Bersama</button>
+        <button class="kalk-preset-btn" id="kp1" onclick="kalkPreset(1,150,30,8,5,20,1,3)">Skenario B</button>
+        <button class="kalk-preset-btn" id="kp2" onclick="kalkPreset(2,95,18,4,0,15,0,2)">Skenario C</button>
+        <button class="kalk-preset-btn" id="kp3" onclick="kalkPreset(3,200,60,15,10,40,3,8)">Skenario D — Sibuk</button>
+      </div>
+      <div class="kalk-sec blue">Awal Hari — Titik Awal Sensus</div>
+      <div class="kalk-grid2">
+        <div class="kalk-inp">
+          <span class="ki-tag ki-tag-start">Titik Awal</span>
+          <label>Sisa Tengah Malam (Sisa TM)<br>Pasien masih dirawat pukul 00.00 hari sebelumnya</label>
+          <input type="number" id="kstm" value="180" min="0" oninput="kalkCalc()">
+        </div>
+        <div class="kalk-inp" style="display:flex;align-items:center;justify-content:center;">
+          <div style="font-size:.73rem;color:var(--sl);text-align:center;line-height:1.7;">
+            Sisa TM menjadi <strong style="color:var(--white);">basis</strong><br>
+            perhitungan CHP maupun Sisa TM baru
+          </div>
+        </div>
+      </div>
+      <div class="kalk-sec green">Komponen Masuk — Semua Dihitung ke CHP</div>
+      <div class="kalk-grid3">
+        <div class="kalk-inp">
+          <span class="ki-tag ki-tag-in">Masuk</span>
+          <label>Admission — Pasien baru masuk</label>
+          <input type="number" id="kadm" value="45" min="0" oninput="kalkCalc()">
+        </div>
+        <div class="kalk-inp">
+          <span class="ki-tag ki-tag-in">Masuk</span>
+          <label>Transfer Masuk — Dari bangsal lain</label>
+          <input type="number" id="ktin" value="12" min="0" oninput="kalkCalc()">
+        </div>
+        <div class="kalk-inp">
+          <span class="ki-tag ki-tag-special">Khusus</span>
+          <label>One-Day Patient — Masuk &amp; pulang hari sama</label>
+          <input type="number" id="kodp" value="3" min="0" oninput="kalkCalc()">
+          <div class="ki-hint">Masuk CHP ✓ — tidak masuk Sisa TM ✗</div>
+        </div>
+      </div>
+      <div class="kalk-sec red">Komponen Keluar — Untuk Menghitung Sisa TM Baru</div>
+      <div class="kalk-grid3">
+        <div class="kalk-inp">
+          <span class="ki-tag ki-tag-out">Keluar</span>
+          <label>Pulang — Sembuh / atas permintaan</label>
+          <input type="number" id="kpulang" value="28" min="0" oninput="kalkCalc()">
+        </div>
+        <div class="kalk-inp">
+          <span class="ki-tag ki-tag-out">Keluar</span>
+          <label>Meninggal — Selama periode</label>
+          <input type="number" id="kmati" value="2" min="0" oninput="kalkCalc()">
+        </div>
+        <div class="kalk-inp">
+          <span class="ki-tag ki-tag-out">Keluar</span>
+          <label>Transfer Keluar — Ke bangsal lain</label>
+          <input type="number" id="ktout" value="5" min="0" oninput="kalkCalc()">
+        </div>
+      </div>
+      <hr class="kalk-divider"/>
+      <div class="kalk-result">
+        <h4>📊 Langkah Perhitungan CHP (Inpatient Service Days)</h4>
+        <div id="ksteps-chp"></div>
+      </div>
+      <div class="kalk-result">
+        <h4>🌙 Langkah Perhitungan Sisa Tengah Malam Baru</h4>
+        <div id="ksteps-tm"></div>
+      </div>
+      <div class="kalk-metrics" id="kmetrics"></div>
+      <div class="kalk-comp">
+        <h4>⚠️ Perbandingan Kritis: CHP vs Sisa TM — paling sering keliru di soal UKOM</h4>
+        <div class="kcomp-row"><span class="kcomp-key"></span><span class="kcomp-hdr">CHP</span><span class="kcomp-hdr">Sisa TM</span></div>
+        <div class="kcomp-row"><span class="kcomp-key">Admission (pasien baru masuk)</span><span class="kcomp-y">✓ Masuk</span><span class="kcomp-y">✓ Masuk</span></div>
+        <div class="kcomp-row"><span class="kcomp-key">Transfer masuk (dari bangsal lain)</span><span class="kcomp-y">✓ Masuk</span><span class="kcomp-y">✓ Masuk</span></div>
+        <div class="kcomp-row kcomp-hl"><span class="kcomp-key">One-day patient ⚠</span><span class="kcomp-y">✓ Masuk</span><span class="kcomp-n">✗ Tidak</span></div>
+        <div class="kcomp-row"><span class="kcomp-key">Pulang / Meninggal / Transfer keluar</span><span style="color:var(--muted);font-size:.7rem;min-width:60px;text-align:center;">— tidak dipotong</span><span class="kcomp-n">✗ Dipotong</span></div>
+      </div>
+      <div class="kalk-interp" id="kinterp">Masukkan data atau pilih contoh soal untuk melihat interpretasi...</div>
+    </div>
+  </div>
+
 `;
 }
 
@@ -1718,6 +2131,93 @@ function prTab(btn, panelId){
   btn.classList.add('active');
   const panel = document.getElementById(panelId);
   if(panel) panel.classList.add('active');
+}
+
+
+// ══ KALKULATOR SENSUS HARIAN ═════════════════════════════════════════════════
+function kalkVal(id){ return Math.max(0, parseInt(document.getElementById(id).value)||0); }
+
+function kalkCalc(){
+  const stm    = kalkVal('kstm');
+  const adm    = kalkVal('kadm');
+  const tin    = kalkVal('ktin');
+  const odp    = kalkVal('kodp');
+  const pulang = kalkVal('kpulang');
+  const mati   = kalkVal('kmati');
+  const tout   = kalkVal('ktout');
+
+  const chp     = stm + adm + tin + odp;
+  const stmBaru = Math.max(0, stm + adm + tin - pulang - mati - tout);
+  const pk      = pulang + mati;
+
+  // Steps CHP
+  const stepsChp = document.getElementById('ksteps-chp');
+  if(stepsChp) stepsChp.innerHTML =
+    `<div class="kf-step"><span class="kfl">Sisa Tengah Malam</span><span class="kfr">${stm}</span></div>
+     <div class="kf-step"><span class="kfl">+ Admission</span><span class="kfr">${adm}</span></div>
+     <div class="kf-step"><span class="kfl">+ Transfer Masuk</span><span class="kfr">${tin}</span></div>
+     <div class="kf-step"><span class="kfl">+ One-Day Patient</span><span class="kfr">${odp}</span></div>
+     <div class="kf-step kf-green"><span class="kfl">= CHP hari ini (Inpatient Service Days)</span><span class="kfr">${chp} pasien</span></div>`;
+
+  // Steps Sisa TM
+  const stepsTm = document.getElementById('ksteps-tm');
+  if(stepsTm) stepsTm.innerHTML =
+    `<div class="kf-step"><span class="kfl">Sisa TM + Admission + Transfer Masuk</span><span class="kfr">${stm}+${adm}+${tin} = ${stm+adm+tin}</span></div>
+     <div class="kf-step"><span class="kfl">− Pulang</span><span class="kfr">−${pulang}</span></div>
+     <div class="kf-step"><span class="kfl">− Meninggal</span><span class="kfr">−${mati}</span></div>
+     <div class="kf-step"><span class="kfl">− Transfer Keluar</span><span class="kfr">−${tout}</span></div>
+     <div class="kf-step kf-warn"><span class="kfl">⚠ One-day patient — sudah pulang sebelum tengah malam</span><span class="kfr">tidak dihitung</span></div>
+     <div class="kf-step kf-blue"><span class="kfl">= Sisa TM baru (tengah malam hari ini)</span><span class="kfr">${stmBaru} pasien</span></div>`;
+
+  // Metrik
+  const metrics = document.getElementById('kmetrics');
+  if(metrics) metrics.innerHTML =
+    `<div class="kalk-metric"><div class="km-label">CHP hari ini</div><div class="km-val km-green">${chp}</div><div class="km-sub">→ Inpatient Service Days → BOR</div></div>
+     <div class="kalk-metric"><div class="km-label">Sisa TM baru</div><div class="km-val km-blue">${stmBaru}</div><div class="km-sub">→ titik awal sensus hari berikutnya</div></div>
+     <div class="kalk-metric"><div class="km-label">Pasien Keluar (PK)</div><div class="km-val km-gray">${pk}</div><div class="km-sub">pulang+meninggal → AvLOS, NDR, GDR</div></div>
+     <div class="kalk-metric"><div class="km-label">One-Day Patient</div><div class="km-val km-amber">${odp}</div><div class="km-sub">masuk CHP, tidak masuk Sisa TM</div></div>`;
+
+  // Interpretasi
+  let interp = `<strong>Interpretasi:</strong> Pada hari ini RS mencatat <strong>${chp} pasien</strong> yang menggunakan fasilitas rawat inap (CHP / IP Service Days). `;
+  interp += `Pasien Keluar (PK) sebanyak <strong>${pk} pasien</strong> (${pulang} pulang + ${mati} meninggal). `;
+  interp += `Sisa TM baru <strong>${stmBaru} pasien</strong> menjadi titik awal sensus hari berikutnya.`;
+  if(odp>0) interp += ` One-day patient <strong>${odp} orang</strong> dihitung dalam CHP, tetapi <strong>tidak masuk Sisa TM</strong> karena sudah pulang sebelum tengah malam.`;
+  const interp_el = document.getElementById('kinterp');
+  if(interp_el) interp_el.innerHTML = interp;
+}
+
+function kalkPreset(idx, stm, adm, tin, odp, pulang, mati, tout){
+  const fields = {kstm:stm, kadm:adm, ktin:tin, kodp:odp, kpulang:pulang, kmati:mati, ktout:tout};
+  Object.entries(fields).forEach(([id,val])=>{
+    const el = document.getElementById(id);
+    if(el) el.value = val;
+  });
+  document.querySelectorAll('.kalk-preset-btn').forEach((b,i)=>
+    b.classList.toggle('kpactive', i===idx));
+  kalkCalc();
+}
+
+
+// ── MODUL TAB (Poin/Tips/Jebakan) ──────────────────────────────────────────
+function modulTab(btn, panelId){
+  // Nonaktifkan semua tab dan panel dalam kontainer yang sama
+  const container = btn.closest('.modul-tabs');
+  if(!container) return;
+  const wrap = container.parentElement;
+  wrap.querySelectorAll('.modul-tab').forEach(t => t.classList.remove('active'));
+  wrap.querySelectorAll('.modul-tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = document.getElementById(panelId);
+  if(panel) panel.classList.add('active');
+}
+
+function initBJ(){
+  setTimeout(bjUpdate, 80);
+}
+
+function initKalk(){
+  // Inisialisasi kalkulasi saat tab dibuka pertama kali
+  setTimeout(kalkCalc, 80);
 }
 
 function updateHub(){
